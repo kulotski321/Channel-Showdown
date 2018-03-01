@@ -1,13 +1,19 @@
 <resources>
     <string name="app_name">ChannelSD</string>
+    <!-- ACTIVITIES-->
+    <string name="register">RegisterActivity</string>
 
-    <!-- LOGIN -->
+    <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
 
-    <!-- REGISTER -->
+    <!-- REGISTER LAYOUT -->
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
     <string name="here"> Sign up now</string>
     <string name="sign_up_here">Don\'t have an Account?&#160;</string>
+    <string name="ent_pass">Enter Password</string>
+    <string name="ent_email">Enter Email</string>
 </resources>
