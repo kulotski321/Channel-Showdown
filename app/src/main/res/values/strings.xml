@@ -2,18 +2,27 @@
     <string name="app_name">ChannelSD</string>
     <!-- ACTIVITIES-->
     <string name="register">RegisterActivity</string>
+    <string name="main">MainActivity</string>
+    <string name="dashboard">Dashboard</string>
 
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
+    <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
-
+    <string name="logo">Logo</string>
     <!-- REGISTER LAYOUT -->
-    <string name="fname">First Name</string>
-    <string name="lname">Last Name</string>
-    <string name="here"> Sign up now</string>
-    <string name="sign_up_here">Don\'t have an Account?&#160;</string>
-    <string name="ent_pass">Enter Password</string>
-    <string name="ent_email">Enter Email</string>
+    <string name="sign_up_now"> Sign up now</string>
+    <string name="dont_have_account">Don\'t have an Account?&#160;</string>
+    <string name="register_now">Register Now</string>
+    <string name="sign_up_for_free">Sign up for free</string>
+    <string name="commentator_account">Commentator Account</string>
+    <!-- FOR TESTING-->
+    <string name="test">Test</string>
+    <string name="this_is_live">This is Live</string>
+    <string name="this_is_episodes">this is Episodes</string>
+    <string name="this_is_upcoming">This is Upcoming</string>
+    <string name="this_is_my_events">This is My Events</string>
+
 </resources>

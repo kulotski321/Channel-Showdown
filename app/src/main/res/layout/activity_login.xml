@@ -15,14 +15,11 @@
         android:layout_marginTop="270dp"
         android:orientation="vertical"
         android:id="@+id/linearLayout">
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
+            android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/input_email_user"
+                android:id="@+id/input_username_user"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
@@ -31,21 +28,16 @@
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center"
                 android:ems="16"
-                android:hint="@string/email"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/mail_icon"
                 android:drawableLeft="@drawable/mail_icon"
-                android:drawablePadding="10dp"
-
-                />
+                android:drawablePadding="10dp" />
         </android.support.design.widget.TextInputLayout>
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true">
-
-
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/input_password_user"
                 android:layout_width="match_parent"
@@ -63,7 +55,6 @@
                 android:drawablePadding="10dp"
                  />
         </android.support.design.widget.TextInputLayout>
-
         <Button
             android:id="@+id/sign_in_btn"
             android:layout_width="match_parent"
@@ -71,7 +62,7 @@
             android:layout_gravity="center"
             android:text="@string/sign_in"
             android:textSize="16sp"
-            android:background="#ffe716">
+            android:background="@color/color_yellow_primary">
         </Button>
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,46 +71,33 @@
             android:id="@+id/sign_up_layout"
             android:weightSum="1"
             android:gravity="center_horizontal"
-            android:layout_marginTop="14dp"
-            >
-
+            android:layout_marginTop="14dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_up_here"
-
-
-                />
+                android:text="@string/dont_have_account" />
             <TextView
-                android:id="@+id/sign_up_btn"
+                android:id="@+id/sign_up_now_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/here"
-                android:textColor="#d6150e"
+                android:text="@string/sign_up_now"
+                android:textColor="@color/color_red"
                 android:clickable="true"
-
-                />
+                android:focusable="true" />
         </LinearLayout>
-
-
-
-
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="115dp"
-        >
-
+        android:layout_marginBottom="115dp">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:contentDescription="@string/logo"
             app:srcCompat="@drawable/logo" />
-
     </LinearLayout>
 
 </RelativeLayout>

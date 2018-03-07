@@ -11,13 +11,18 @@
         android:gravity="center_vertical"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="26sp"
+            android:text="@string/sign_up_for_free" />
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_marginTop="24dp">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/input_fname_register"
+                android:id="@+id/input_fullname_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -29,35 +34,12 @@
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/user_icon"
                 android:ems="16"
-                android:hint="@string/fname"
+                android:hint="@string/username"
                 android:inputType="textCapWords" />
         </android.support.design.widget.TextInputLayout>
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/input_lname_register"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/user_icon"
-                android:drawablePadding="10dp"
-                android:drawableStart="@drawable/user_icon"
-                android:ems="16"
-                android:hint="@string/lname"
-                android:inputType="textCapWords" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/input_email_register"
                 android:layout_width="match_parent"
@@ -71,15 +53,13 @@
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/mail_icon"
                 android:ems="16"
-                android:hint="@string/ent_email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
-            >
+            app:passwordToggleEnabled="true">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/input_password_register"
                 android:layout_width="match_parent"
@@ -90,24 +70,27 @@
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center"
                 android:ems="16"
-                android:hint="@string/ent_pass"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:drawableStart="@drawable/key_icon"
                 android:drawableLeft="@drawable/key_icon"
-                android:drawablePadding="10dp"
-                />
+                android:drawablePadding="10dp" />
         </android.support.design.widget.TextInputLayout>
-
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/input_commentator_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/commentator_account"
+            android:nextFocusForward="@id/sign_up_btn"/>
         <Button
-            android:id="@+id/sign_in_btn"
+            android:id="@+id/sign_up_btn"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_gravity="center"
             android:text="@string/sign_up"
             android:textSize="16sp"
-            android:background="#ffe716">
+            android:background="@color/color_yellow_primary"
+            android:layout_marginTop="40dp">
         </Button>
-
     </LinearLayout>
-
 </RelativeLayout>

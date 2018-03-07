@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cf.channelsd">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,18 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"
-            android:label="@string/register"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Activities.MainActivity"
+            android:label="@string/main"
+            android:parentActivityName=".Activities.SplashActivity">
         </activity>
-
+        <activity android:name=".Activities.RegisterActivity"
+            android:label="@string/register"
+            android:parentActivityName=".Activities.MainActivity">
+        </activity>
+        <activity android:name=".Activities.TestActivity"
+            android:label="TEST"
+            android:parentActivityName=".Activities.MainActivity">
+        </activity>
+        <activity android:name=".Activities.DashboardActivity"
+            android:label="@string/dashboard"
+            android:parentActivityName=".Activities.MainActivity">
+        </activity>
     </application>
-
 </manifest>
