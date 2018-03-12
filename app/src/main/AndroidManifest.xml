@@ -31,5 +31,8 @@
             android:label="@string/dashboard"
             android:parentActivityName=".Activities.MainActivity">
         </activity>
+        <activity android:name=".Activities.ProfileActivity"
+            android:label="@string/profile"
+            android:parentActivityName=".Activities.DashboardActivity"></activity>
     </application>
 </manifest>

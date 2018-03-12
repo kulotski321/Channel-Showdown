@@ -1,8 +1,5 @@
 package com.example.cf.channelsd.Retrofit
 
-/**
- * Created by CF on 3/5/2018.
- */
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

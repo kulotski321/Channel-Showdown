@@ -8,6 +8,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/toolbar_main">
     </android.support.v7.widget.Toolbar>
-
-
 </android.support.design.widget.AppBarLayout>

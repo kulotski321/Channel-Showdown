@@ -4,6 +4,8 @@
     <string name="register">RegisterActivity</string>
     <string name="main">MainActivity</string>
     <string name="dashboard">Dashboard</string>
+    <string name="splash">Splash</string>
+    <string name="profile">Profile</string>
 
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
@@ -24,5 +26,12 @@
     <string name="this_is_episodes">this is Episodes</string>
     <string name="this_is_upcoming">This is Upcoming</string>
     <string name="this_is_my_events">This is My Events</string>
+    <string name="angelo">Angelo</string>
+    <string name="angelo_montil">Angelo Montil</string>
+    <string name="username_sample">kulotski321</string>
+    <string name="bio">This is my Bio. I am very handsome and cool. Please date me because I'm very lonely.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

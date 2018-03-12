@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/input_fullname_register"
+                android:id="@+id/input_username_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
@@ -52,8 +51,7 @@
                 android:inputType="textPassword"
                 android:drawableStart="@drawable/lock_icon"
                 android:drawableLeft="@drawable/lock_icon"
-                android:drawablePadding="10dp"
-                 />
+                android:drawablePadding="10dp" />
         </android.support.design.widget.TextInputLayout>
         <Button
             android:id="@+id/sign_in_btn"
@@ -99,5 +97,4 @@
             android:contentDescription="@string/logo"
             app:srcCompat="@drawable/logo" />
     </LinearLayout>
-
 </RelativeLayout>

@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:text="@string/this_is_episodes"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:id="@+id/episode_tv"/>
 
 </FrameLayout>
