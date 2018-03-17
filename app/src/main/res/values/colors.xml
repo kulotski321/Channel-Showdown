@@ -6,6 +6,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="color_red">#d6150e</color>
-    <color name="color_yellow_primary">#ffe716</color>
-    <color name="color_yellow_primaryDark">#d6c213</color>
+    <color name="color_yellow_primary">#ffeb3b</color>
+    <color name="color_yellow_primaryDark">#c8b900</color>
+    <color name="color_yellow_primaryLight">#ffff72</color>
+    <color name="color_yellow_fade">#fffde7</color>
+    <color name="color_blue_primary">#00e5ff</color>
+    <color name="color_blue_primaryDark">#00b2cc</color>
+    <color name="color_blue_primaryLight">#6effff</color>
+    <color name="color_orange_primary">#ff6f00</color>
+    <color name="color_orange_primaryDark">#c43e00</color>
+    <color name="color_orange_primaryLight">#ffa040</color>
 </resources>

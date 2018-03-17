@@ -9,30 +9,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SplashActivity">
+        <activity android:name=".Activities.SplashActivity"
+            android:noHistory="true"
+            android:label="@string/channel_showdown">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MainActivity"
+        <activity
+            android:name=".Activities.MainActivity"
             android:label="@string/main"
-            android:parentActivityName=".Activities.SplashActivity">
-        </activity>
-        <activity android:name=".Activities.RegisterActivity"
+            android:parentActivityName=".Activities.SplashActivity" />
+        <activity
+            android:name=".Activities.RegisterActivity"
             android:label="@string/register"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
-        <activity android:name=".Activities.TestActivity"
-            android:label="TEST"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
-        <activity android:name=".Activities.DashboardActivity"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.InfoActivity"
+            android:label="@string/info"
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.DashboardActivity"
             android:label="@string/dashboard"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
-        <activity android:name=".Activities.ProfileActivity"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.ProfileActivity"
             android:label="@string/profile"
-            android:parentActivityName=".Activities.DashboardActivity"></activity>
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.CreateEventActivity"
+            android:label="@string/create_event"
+            android:parentActivityName=".Activities.DashboardActivity" />
     </application>
 </manifest>

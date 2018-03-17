@@ -70,17 +70,17 @@ class RegisterActivity : AppCompatActivity() {
         if(editTextLength(input_username_register) > 0){
             checked++
         }else{
-            popUpError("This field cannot be blank",input_username_register)
+            popUpError("This field cannot be blank.",input_username_register)
         }
         if(editTextLength(input_email_register) > 0){
             checked++
         }else{
-            popUpError("This field cannot be blank",input_email_register)
+            popUpError("This field cannot be blank.",input_email_register)
         }
         if(editTextLength(input_password_register) > 0){
             checked++
         }else{
-            popUpError("This field cannot be blank",input_password_register)
+            popUpError("This field cannot be blank.",input_password_register)
         }
         return checked
     }

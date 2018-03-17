@@ -1,7 +1,17 @@
 package com.example.cf.channelsd.Interfaces
 
-/**
- * Created by CF on 3/11/2018.
- */
+import com.example.cf.channelsd.Data.User
+import retrofit2.Call
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
+
 interface ProfileInterface {
+
+    @POST("/user/edituser/")
+    @FormUrlEncoded
+    fun sendAdditionalInfo(@Field("username")username: String,
+                           @Field("firstName")firstName: String,
+                           @Field("lastName")lastName: String,
+                           @Field("bio")bio:String): Call<User>
 }

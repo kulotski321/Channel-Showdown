@@ -6,7 +6,8 @@
     <string name="dashboard">Dashboard</string>
     <string name="splash">Splash</string>
     <string name="profile">Profile</string>
-
+    <string name="info">Info</string>
+    <string name="create_event">Create Event</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -20,6 +21,26 @@
     <string name="register_now">Register Now</string>
     <string name="sign_up_for_free">Sign up for free</string>
     <string name="commentator_account">Commentator Account</string>
+    <!-- ADDITIONAL INFO LAYOUT-->
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="bio">Describe yourself</string>
+    <string name="confirm">Confirm</string>
+    <string name="full_name">Full name</string>
+    <!-- PROFILE LAYOUT -->
+    <string name="edit_profile">Edit Profile</string>
+    <!-- CREATE EVENT LAYOUT -->
+    <string name="create_your_own_event">Create your own event</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_date">Event Date YYYY-MM-DD</string>
+    <string name="event_time">Event Time HH:MM:SS</string>
+    <string name="event_prize">Event Prize</string>
+    <!-- APP NAME -->
+    <string name="channel_showdown">ChannelShowdown</string>
+    <!-- EVENT FRAGMENT -->
+    <string name="create_an_event">Create an event</string>
+    <string name="upcoming_event">Upcoming events</string>
     <!-- FOR TESTING-->
     <string name="test">Test</string>
     <string name="this_is_live">This is Live</string>
@@ -27,11 +48,8 @@
     <string name="this_is_upcoming">This is Upcoming</string>
     <string name="this_is_my_events">This is My Events</string>
     <string name="angelo">Angelo</string>
+    <string name="test_email">angelocool177@yahoo.com</string>
     <string name="angelo_montil">Angelo Montil</string>
     <string name="username_sample">kulotski321</string>
-    <string name="bio">This is my Bio. I am very handsome and cool. Please date me because I'm very lonely.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="test_bio">This is my Bio. I am very handsome and cool. Please date me because I\'m very lonely.</string>
 </resources>
