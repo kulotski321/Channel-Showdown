@@ -11,7 +11,7 @@ import retrofit2.http.POST
  * Created by CF on 3/15/2018.
  */
 interface EventInterface {
-    @POST("/text/")
+    @POST("/event/createevent/")
     @FormUrlEncoded
     fun createEvent(@Field("username")username: String,
                     @Field("eventName")eventName: String,

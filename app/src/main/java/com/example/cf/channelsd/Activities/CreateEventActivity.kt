@@ -32,7 +32,7 @@ class CreateEventActivity:AppCompatActivity() {
                 val eventDate = input_event_date.text.toString()
                 val eventTime = input_event_time.text.toString()
                 val eventPrize = input_event_prize.text.toString()
-                val eventDateFinal = "$eventDate $eventPrize"
+                val eventDateFinal = "$eventDate $eventTime"
                 val eventDescription = input_event_description.text.toString()
                 val username = preferences.getString("username_pref","")
                 sendEvent(username,eventName,eventDescription,eventDateFinal,eventPrize)
