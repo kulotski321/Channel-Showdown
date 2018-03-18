@@ -1,25 +1,22 @@
 package com.example.cf.channelsd.Data
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import org.parceler.Parcel
 
-
-@Parcel
 data class Event(
         val username: String,
         val eventName: String,
         val eventDescription: String,
         val prize: String,
-        val eventDate: String,
-        val eventStatus: Int
+        val eventDate: String
 ) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString(),
-            parcel.readInt()) {
+            parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: android.os.Parcel, flags: Int) {
@@ -28,7 +25,6 @@ data class Event(
         parcel.writeString(eventDescription)
         parcel.writeString(prize)
         parcel.writeString(eventDate)
-        parcel.writeInt(eventStatus)
     }
 
     override fun describeContents(): Int {

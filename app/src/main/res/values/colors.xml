@@ -16,4 +16,7 @@
     <color name="color_orange_primary">#ff6f00</color>
     <color name="color_orange_primaryDark">#c43e00</color>
     <color name="color_orange_primaryLight">#ffa040</color>
+    <color name="color_green_primary">#00c853</color>
+    <color name="color_green_primaryLight">#5efc82</color>
+    <color name="color_green_primaryDark">#009624</color>
 </resources>

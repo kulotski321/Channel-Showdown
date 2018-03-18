@@ -1,67 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_orange_primaryLight">
+    android:background="@color/color_blue_primary">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="438dp"
+        android:layout_height="407dp"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="208dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
-        android:layout_margin="20dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_picture"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/user_profile_pic"
-            android:id="@+id/profile_picture"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/user_profile_pic"
             app:civ_border_color="@color/color_yellow_primary"
-            app:civ_border_width="5dp" />
+            app:civ_border_width="3dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
             <TextView
                 android:id="@+id/profile_full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/full_name"
-                android:textSize="22sp"
-                android:layout_gravity="center"/>
+                android:textSize="22sp" />
+
             <TextView
                 android:id="@+id/profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/email"
-                android:textSize="12sp"
-                android:layout_gravity="center"/>
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/profile_bio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="18dp"
-                android:maxLength="120"
-                android:text="@string/bio"
                 android:lines="4"
+                android:maxLength="120"
                 android:maxLines="4"
-                />
+                android:text="@string/bio"
+                android:textSize="14sp" />
         </LinearLayout>
-    </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
     <Button
         android:id="@+id/edit_profile_btn"
-        android:layout_width="match_parent"
+        android:layout_width="353dp"
         android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/color_yellow_primary"
         android:text="@string/edit_profile"
         android:textSize="16sp"
-        android:background="@color/color_yellow_primary"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentBottom="true">
-    </Button>
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+</android.support.constraint.ConstraintLayout>

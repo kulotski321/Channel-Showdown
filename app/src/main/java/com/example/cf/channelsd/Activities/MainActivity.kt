@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 //        editor.clear()
 //        editor.apply()
         val usernamePref: String = preferences.getString("username_pref","")
+
         if(usernamePref.isEmpty()){
             toastMessage("go log in")
             sign_in_btn.setOnClickListener(){

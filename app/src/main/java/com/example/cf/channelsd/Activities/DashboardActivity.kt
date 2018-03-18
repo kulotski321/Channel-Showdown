@@ -22,16 +22,15 @@ import kotlinx.android.synthetic.main.extension_header.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
-import org.parceler.Parcels
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DashboardActivity: AppCompatActivity(){
 
-    private var logoutInterface: LogoutInterface ?= null
-    private var pagerAdapter: PageViewerAdapter ?= null
-    private var user: User ?= null
+    private var logoutInterface: LogoutInterface = ApiUtils.apiLogout
+    private var pagerAdapter: PageViewerAdapter =  PageViewerAdapter(supportFragmentManager)
+    private lateinit var user: User
     private var doubleBackToExitPressedOnce = false
     private var delayHandler: Handler? = null
     private val DELAY: Long = 2000 // 2 seconds
@@ -53,20 +52,17 @@ class DashboardActivity: AppCompatActivity(){
                 preferences.getString("lastName_pref",""),
                 preferences.getString("bio_pref","")
         )
-        profile_name.text = user?.username
-        logoutInterface = ApiUtils.apiLogout
-        pagerAdapter = PageViewerAdapter(supportFragmentManager)
-
+        profile_name.text = user.username
         when {
-            user?.userType == "normal" -> {
-                pagerAdapter!!.addFragments(LiveFragment(),"Live")
-                pagerAdapter!!.addFragments(EpisodesFragment(),"Episodes")
-                pagerAdapter!!.addFragments(UpcomingFragment(),"Upcoming")
-                pagerAdapter!!.addFragments(MyEventsFragment(),"Events")
+            user.userType == "normal" -> {
+                pagerAdapter.addFragments(LiveFragment(),"Live")
+                pagerAdapter.addFragments(EpisodesFragment(),"Episodes")
+                pagerAdapter.addFragments(UpcomingFragment(),"Upcoming")
+                pagerAdapter.addFragments(MyEventsFragment(),"Events")
             }
-            user?.userType == "commentator" -> {
-                pagerAdapter!!.addFragments(EventCommentatorFragment(),"Event")
-                pagerAdapter!!.addFragments(HistoryCommentatorFragment(),"History")
+            user.userType == "commentator" -> {
+                pagerAdapter.addFragments(EventCommentatorFragment(),"Event")
+                pagerAdapter.addFragments(HistoryCommentatorFragment(),"History")
             }
             else -> finish()
         }
@@ -97,7 +93,7 @@ class DashboardActivity: AppCompatActivity(){
         Toast.makeText(this@DashboardActivity, message, Toast.LENGTH_LONG).show();
     }
     private fun logout(session_key: String){
-        logoutInterface?.logout(session_key)?.enqueue(object: Callback<String>{
+        logoutInterface.logout(session_key).enqueue(object: Callback<String>{
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
             }

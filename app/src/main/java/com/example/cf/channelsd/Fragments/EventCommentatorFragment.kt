@@ -24,5 +24,8 @@ class EventCommentatorFragment : Fragment() {
             val i = Intent(activity,CreateEventActivity::class.java)
             startActivity(i)
         }
+        upcoming_event_btn.setOnClickListener {
+
+        }
     }
 }// Required empty public constructor

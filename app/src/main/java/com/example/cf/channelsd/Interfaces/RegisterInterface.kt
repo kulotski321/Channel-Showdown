@@ -6,8 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.*
 
 interface RegisterInterface {
-    @POST("/user/registration/")
     @FormUrlEncoded
+    @POST("/user/registration/")
     fun createUserInfo(@Field("username") username: String,
                        @Field("email")email: String,
                        @Field("password")password: String,

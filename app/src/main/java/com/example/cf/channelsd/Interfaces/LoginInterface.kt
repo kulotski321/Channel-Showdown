@@ -5,8 +5,8 @@ import retrofit2.Call;
 import retrofit2.http.*
 
 interface LoginInterface {
-    @POST("/user/login/")
     @FormUrlEncoded
+    @POST("/user/login/")
     fun sendUserInfo(@Field("username") username: String,
                      @Field("password") password: String): Call<User>
 }

@@ -31,7 +31,7 @@ class InfoActivity: AppCompatActivity(){
 
         profileInterface = ApiUtils.apiProfile
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = preferences.edit()
+        //val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
                 preferences.getString("session_key_pref",""),
                 preferences.getString("username_pref",""),

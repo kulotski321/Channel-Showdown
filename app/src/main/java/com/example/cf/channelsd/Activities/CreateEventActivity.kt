@@ -13,6 +13,8 @@ import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
 import kotlinx.android.synthetic.main.acitivity_create_event.*
+
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +27,7 @@ class CreateEventActivity:AppCompatActivity() {
 
         eventInterface = ApiUtils.apiEvent
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = preferences.edit()
+        //val editor: SharedPreferences.Editor = preferences.edit()
         confirm_event_btn.setOnClickListener {
             if(checkTextFields() == 5){
                 val eventName = input_event_name.text.toString()
@@ -35,7 +37,7 @@ class CreateEventActivity:AppCompatActivity() {
                 val eventDateFinal = "$eventDate $eventTime"
                 val eventDescription = input_event_description.text.toString()
                 val username = preferences.getString("username_pref","")
-                sendEvent(username,eventName,eventDescription,eventDateFinal,eventPrize)
+                sendEvent(username,eventName,eventDescription,eventPrize,eventDateFinal)
             }
         }
     }
@@ -77,14 +79,16 @@ class CreateEventActivity:AppCompatActivity() {
         }
         return checked
     }
-    private fun sendEvent(eventName: String, eventDate: String, eventTime: String,eventPrize: String, eventDescription: String){
-        eventInterface?.createEvent(eventName,eventDate,eventTime,eventPrize,eventDescription)?.enqueue(object : Callback<Event> {
+    private fun sendEvent(username: String, eventName: String, eventDescription: String,eventPrize: String, eventDate: String){
+        eventInterface?.createEvent(username,eventName,eventDescription,eventPrize,eventDate)?.enqueue(object : Callback<Event> {
             override fun onFailure(call: Call<Event>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
             }
             override fun onResponse(call: Call<Event>?, response: Response<Event>?) {
                 if(response!!.isSuccessful){
-
+                    toastMessage("Create Successful")
+                    finish()
+                    overridePendingTransition(0,0)
                 }
             }
         })

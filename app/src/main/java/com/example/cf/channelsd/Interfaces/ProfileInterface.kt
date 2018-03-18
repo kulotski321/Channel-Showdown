@@ -7,9 +7,8 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface ProfileInterface {
-
-    @POST("/user/edituser/")
     @FormUrlEncoded
+    @POST("/user/edituser/")
     fun sendAdditionalInfo(@Field("username")username: String,
                            @Field("firstName")firstName: String,
                            @Field("lastName")lastName: String,
