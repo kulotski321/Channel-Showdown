@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/event_name_upcoming_commentator"
+        android:layout_width="386dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/event_name"
+        android:textColor="@color/color_black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="EVENT TITLE" />
+
+    <TextView
+        android:id="@+id/event_date_upcoming_commentator"
+        android:layout_width="275dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/event_date"
+        android:textColor="@color/color_red"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator"
+        tools:text="DATE EVENT" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/event_date_start"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator"
+        tools:text="Event Date :" />
+
+    <TextView
+        android:id="@+id/event_description_upcoming_commentator"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/event_description"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="121dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/contestant1"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="121dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/contestant2"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/event_contestant2_upcoming_commentator"
+        android:layout_width="248dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/angelo_montil"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/event_contestant1_upcoming_commentator" />
+
+    <TextView
+        android:id="@+id/event_contestant1_upcoming_commentator"
+        android:layout_width="248dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/angelo_montil"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/event_date_upcoming_commentator" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="58dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/prize"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_description_upcoming_commentator"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/event_prize_upcoming_commentator"
+        android:layout_width="306dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/event_prize"
+        android:textColor="@color/color_green_primary"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/event_description_upcoming_commentator"
+        android:layout_marginLeft="12dp" />
+
+    <Button
+        android:id="@+id/start_event_btn"
+        android:layout_width="180dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/color_yellow_primary"
+        android:text="Start Event"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view_entries_btn" />
+
+    <Button
+        android:id="@+id/view_entries_btn"
+        android:layout_width="180dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/color_yellow_primary"
+        android:text="View Entries"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

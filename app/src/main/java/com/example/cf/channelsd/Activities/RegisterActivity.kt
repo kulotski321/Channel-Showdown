@@ -2,8 +2,8 @@ package com.example.cf.channelsd.Activities
 
 import android.content.ContentValues
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
@@ -26,61 +26,70 @@ class RegisterActivity : AppCompatActivity() {
 
         registerInterface = ApiUtils.apiRegister
         sign_up_btn.setOnClickListener {
-            if(checkTextFields() == 3){
-                val username:String = input_username_register.text.toString()
-                val email:String = input_email_register.text.toString()
-                val password:String = input_password_register.text.toString()
-                val userType: String = if(input_commentator_Btn.isChecked){
+            if (checkTextFields() == 3) {
+                val username: String = input_username_register.text.toString()
+                val email: String = input_email_register.text.toString()
+                val password: String = input_password_register.text.toString()
+                val userType: String = if (input_commentator_Btn.isChecked) {
                     "commentator"
-                }else{
+                } else {
                     "normal"
                 }
-                sendPost(username,email,password,userType)
+                sendPost(username, email, password, userType)
             }
         }
     }
-    private fun editTextLength(editText: EditText): Int{
+
+    private fun editTextLength(editText: EditText): Int {
         return editText.text.toString().length
     }
-    private fun popUpError(message: String, editText: EditText){
+
+    private fun popUpError(message: String, editText: EditText) {
         editText.error = message
     }
-    fun toastMessage(message: String){
+
+    fun toastMessage(message: String) {
         Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_LONG).show();
     }
-    private fun sendPost(username: String, email: String, password: String, userType: String){
-        registerInterface?.createUserInfo(username,email,password,userType)?.enqueue(object: Callback<User>{
+
+    private fun sendPost(username: String, email: String, password: String, userType: String) {
+        registerInterface?.createUserInfo(username, email, password, userType)?.enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>?, t: Throwable?) {
-                Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
+                Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
+                if (t?.message == "unexpected end of stream") {
+                    sendPost(username, email, password, userType)
+                }
             }
+
             override fun onResponse(call: Call<User>?, response: Response<User>?) {
-                if(response!!.isSuccessful){
+                if (response!!.isSuccessful) {
                     toastMessage("Register successful")
-                    val i = Intent(this@RegisterActivity,MainActivity::class.java)
+                    val i = Intent(this@RegisterActivity, MainActivity::class.java)
                     startActivity(i)
                     finish()
-                }else{
+                } else {
                     toastMessage("Register failed")
                 }
             }
         })
     }
-    private fun checkTextFields(): Int{
+
+    private fun checkTextFields(): Int {
         var checked = 0
-        if(editTextLength(input_username_register) > 0){
+        if (editTextLength(input_username_register) > 0) {
             checked++
-        }else{
-            popUpError("This field cannot be blank.",input_username_register)
+        } else {
+            popUpError("This field cannot be blank.", input_username_register)
         }
-        if(editTextLength(input_email_register) > 0){
+        if (editTextLength(input_email_register) > 0) {
             checked++
-        }else{
-            popUpError("This field cannot be blank.",input_email_register)
+        } else {
+            popUpError("This field cannot be blank.", input_email_register)
         }
-        if(editTextLength(input_password_register) > 0){
+        if (editTextLength(input_password_register) > 0) {
             checked++
-        }else{
-            popUpError("This field cannot be blank.",input_password_register)
+        } else {
+            popUpError("This field cannot be blank.", input_password_register)
         }
         return checked
     }

@@ -8,6 +8,8 @@
     <string name="profile">Profile</string>
     <string name="info">Info</string>
     <string name="create_event">Create Event</string>
+    <string name="upcoming_event_activity">Upcoming Event</string>
+    <string name="my_event_activity">My Event</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -36,11 +38,17 @@
     <string name="event_date">Event Date YYYY-MM-DD</string>
     <string name="event_time">Event Time HH:MM:SS</string>
     <string name="event_prize">Event Prize</string>
+    <!-- UPCOMING EVENT LAYOUT -->
+    <string name="event_date_start">Event Date :</string>
+    <string name="commentator">Commentator :</string>
+    <string name="prize">Prize :</string>
+    <string name="contestant1">Contestant 1 :</string>
+    <string name="contestant2">Contestant 2 :</string>
     <!-- APP NAME -->
     <string name="channel_showdown">ChannelShowdown</string>
     <!-- EVENT FRAGMENT -->
     <string name="create_an_event">Create an event</string>
-    <string name="upcoming_event">Upcoming events</string>
+    <string name="my_event">My Event</string>
     <!-- FOR TESTING-->
     <string name="test">Test</string>
     <string name="this_is_live">This is Live</string>

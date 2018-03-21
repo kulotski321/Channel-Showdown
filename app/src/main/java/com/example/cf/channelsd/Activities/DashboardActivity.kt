@@ -26,10 +26,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DashboardActivity: AppCompatActivity(){
+class DashboardActivity : AppCompatActivity() {
 
     private var logoutInterface: LogoutInterface = ApiUtils.apiLogout
-    private var pagerAdapter: PageViewerAdapter =  PageViewerAdapter(supportFragmentManager)
+    private var pagerAdapter: PageViewerAdapter = PageViewerAdapter(supportFragmentManager)
     private lateinit var user: User
     private var doubleBackToExitPressedOnce = false
     private var delayHandler: Handler? = null
@@ -44,25 +44,25 @@ class DashboardActivity: AppCompatActivity(){
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
-                preferences.getString("session_key_pref",""),
-                preferences.getString("username_pref",""),
-                preferences.getString("email_pref",""),
-                preferences.getString("userType_pref",""),
-                preferences.getString("firstName_pref",""),
-                preferences.getString("lastName_pref",""),
-                preferences.getString("bio_pref","")
+                preferences.getString("session_key_pref", ""),
+                preferences.getString("username_pref", ""),
+                preferences.getString("email_pref", ""),
+                preferences.getString("userType_pref", ""),
+                preferences.getString("firstName_pref", ""),
+                preferences.getString("lastName_pref", ""),
+                preferences.getString("bio_pref", "")
         )
         profile_name.text = user.username
         when {
-            user.userType == "normal" -> {
-                pagerAdapter.addFragments(LiveFragment(),"Live")
-                pagerAdapter.addFragments(EpisodesFragment(),"Episodes")
-                pagerAdapter.addFragments(UpcomingFragment(),"Upcoming")
-                pagerAdapter.addFragments(MyEventsFragment(),"Events")
+            user.userType == "0" -> {
+                pagerAdapter.addFragments(LiveFragment(), "Live")
+                pagerAdapter.addFragments(EpisodesFragment(), "Episodes")
+                pagerAdapter.addFragments(UpcomingFragment(), "Upcoming")
+                pagerAdapter.addFragments(MyEventsFragment(), "Events")
             }
-            user.userType == "commentator" -> {
-                pagerAdapter.addFragments(EventCommentatorFragment(),"Event")
-                pagerAdapter.addFragments(HistoryCommentatorFragment(),"History")
+            user.userType == "1" -> {
+                pagerAdapter.addFragments(EventCommentatorFragment(), "Event")
+                pagerAdapter.addFragments(HistoryCommentatorFragment(), "History")
             }
             else -> finish()
         }
@@ -70,16 +70,16 @@ class DashboardActivity: AppCompatActivity(){
         custom_tabLayout.setupWithViewPager(custom_viewPager)
 
         profile_picture.setOnClickListener {
-            val i = Intent(this,ProfileActivity::class.java)
+            val i = Intent(this, ProfileActivity::class.java)
             // i.putExtra("user",Parcels.wrap(user))
             startActivity(i)
             finish()
         }
         logout_icon.setOnClickListener {
-            alert ("Do you really want to logout?"){
+            alert("Do you really want to logout?") {
                 yesButton {
-                    logout(preferences.getString("session_key_pref",""))
-                    val i = Intent(this@DashboardActivity,MainActivity::class.java)
+                    logout(preferences.getString("session_key_pref", ""))
+                    val i = Intent(this@DashboardActivity, MainActivity::class.java)
                     editor.clear()
                     editor.apply()
                     startActivity(i)
@@ -89,25 +89,30 @@ class DashboardActivity: AppCompatActivity(){
             }.show()
         }
     }
-    fun toastMessage(message: String){
+
+    fun toastMessage(message: String) {
         Toast.makeText(this@DashboardActivity, message, Toast.LENGTH_LONG).show();
     }
-    private fun logout(session_key: String){
-        logoutInterface.logout(session_key).enqueue(object: Callback<String>{
+
+    private fun logout(session_key: String) {
+        logoutInterface.logout(session_key).enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
-                Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
+                Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
             }
+
             override fun onResponse(call: Call<String>?, response: Response<String>?) {
-                if(response!!.isSuccessful){
+                if (response!!.isSuccessful) {
                 }
             }
         })
     }
+
     private val runnable: Runnable = Runnable {
         kotlin.run({
             doubleBackToExitPressedOnce = false
         })
     }
+
     override fun onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
@@ -115,8 +120,9 @@ class DashboardActivity: AppCompatActivity(){
         }
         this.doubleBackToExitPressedOnce = true
         toastMessage("Press BACK again to exit")
-        delayHandler?.postDelayed(runnable,DELAY)
+        delayHandler?.postDelayed(runnable, DELAY)
     }
+
     public override fun onDestroy() {
         if (delayHandler != null) {
             delayHandler!!.removeCallbacks(runnable)

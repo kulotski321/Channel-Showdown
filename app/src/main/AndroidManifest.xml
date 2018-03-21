@@ -41,5 +41,12 @@
             android:name=".Activities.CreateEventActivity"
             android:label="@string/create_event"
             android:parentActivityName=".Activities.DashboardActivity" />
+        <activity android:name=".Activities.UpcomingEventActivity"
+            android:label="@string/upcoming_event_activity"
+            android:parentActivityName=".Activities.DashboardActivity"/>
+        <activity
+            android:name=".Activities.MyEventActivity"
+            android:label="@string/my_event_activity"
+            android:parentActivityName=".Activities.DashboardActivity" />
     </application>
 </manifest>

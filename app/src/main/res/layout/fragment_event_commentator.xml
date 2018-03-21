@@ -1,30 +1,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.cf.channelsd.Fragments.EventCommentatorFragment"
     android:background="@color/color_yellow_fade">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="25dp"
-        android:gravity="center">
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/create_event_btn"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:text="@string/create_an_event"
-            android:textSize="30sp"
-            android:background="@color/color_blue_primary" />
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/upcoming_event_btn"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:text="@string/upcoming_event"
-            android:textSize="30sp"
-            android:background="@color/color_blue_primary"
-            android:layout_marginTop="20dp"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/create_event_btn"
+                android:layout_width="match_parent"
+                android:layout_height="321dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/createanevent_img"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/my_event_btn"
+                android:layout_width="match_parent"
+                android:layout_height="321dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/myevent_img"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/create_event_btn"
+                app:layout_constraintVertical_bias="0.0" />
+        </LinearLayout>
+
+
+    </ScrollView>
 </RelativeLayout>

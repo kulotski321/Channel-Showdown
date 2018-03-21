@@ -10,29 +10,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:id="@+id/upcoming_event_item"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
                 android:id="@+id/event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="EVENT TITLE"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:background="@color/color_yellow_primaryDark"/>
+                android:textColor="@color/color_black"/>
             <TextView
                 android:id="@+id/event_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DATE SCHEDULE"
-                android:textSize="10sp"
-                android:background="@color/color_yellow_primaryDark"/>
+                android:textSize="12sp"
+                android:textColor="@color/color_black"/>
             <TextView
                 android:layout_marginTop="10dp"
                 android:id="@+id/event_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="THIS IS THE EVENT DESCRIPTION"
-                android:background="@color/color_yellow_primaryDark"/>
+                android:visibility="gone" />
             <TextView
                 android:layout_marginTop="12dp"
                 android:id="@+id/event_prize"
@@ -41,17 +44,29 @@
                 android:text="Prize : Php 1000"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:background="@color/color_green_primary" />
-            <Button
-                android:id="@+id/join_btn"
+                android:background="@color/color_green_primaryLight"
+                android:textColor="@color/color_black"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/event_contestant1"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_gravity="center"
-                android:text="JOIN"
-                android:textSize="20sp"
-                android:background="@color/color_yellow_primary"
-                android:layout_marginTop="10dp">
-            </Button>
+                android:layout_height="wrap_content"
+                android:text="Empty"
+                android:visibility="gone" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/event_contestant2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Empty"
+                android:visibility="gone" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/event_commentator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/commentator"
+                android:visibility="gone" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

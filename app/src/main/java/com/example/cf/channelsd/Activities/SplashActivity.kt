@@ -6,7 +6,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.example.cf.channelsd.R
 
-class SplashActivity:AppCompatActivity(){
+class SplashActivity : AppCompatActivity() {
 
     private var delayHandler: Handler? = null
     private val DELAY: Long = 3000 //3 seconds
@@ -18,6 +18,7 @@ class SplashActivity:AppCompatActivity(){
             finish()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -27,6 +28,7 @@ class SplashActivity:AppCompatActivity(){
         // Navigate with delay
         delayHandler!!.postDelayed(runnable, DELAY)
     }
+
     public override fun onDestroy() {
         if (delayHandler != null) {
             delayHandler!!.removeCallbacks(runnable)

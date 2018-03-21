@@ -1,13 +1,10 @@
 package com.example.cf.channelsd.Interfaces
 
-import android.util.EventLog
 import com.example.cf.channelsd.Data.Event
+import com.example.cf.channelsd.Data.UpcomingEvent
 import com.example.cf.channelsd.Data.UpcomingEventList
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface EventInterface {
     @FormUrlEncoded
@@ -21,6 +18,10 @@ interface EventInterface {
     @GET("/event/upcomingevents/")
     fun getUpcomingEventList() : Call<UpcomingEventList>
 
-    /*@GET("/event/upcomingevents/")
-    fun getEvents(): Call<List<Event>>*/
+    @FormUrlEncoded
+    @POST("/event/creatoreventprofile/")
+    fun getMyEvent(@Field("username")username:String):Call<UpcomingEvent>
+
+    /*@GET("/text/")
+    fun getEntries(): Call<>*/
 }
