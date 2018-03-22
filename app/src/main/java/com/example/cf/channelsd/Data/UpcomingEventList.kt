@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 class UpcomingEventList {
 
-    @SerializedName("event")
+    @SerializedName("events")
     val events : ArrayList<Event> ?= null
 
 }

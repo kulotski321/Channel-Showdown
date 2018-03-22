@@ -1,5 +1,6 @@
 package com.example.cf.channelsd.Interfaces
 
+import com.example.cf.channelsd.Data.Entry
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Data.UpcomingEvent
 import com.example.cf.channelsd.Data.UpcomingEventList
@@ -24,4 +25,9 @@ interface EventInterface {
 
     /*@GET("/text/")
     fun getEntries(): Call<>*/
+    @FormUrlEncoded
+    @POST("/event/sendentry/")
+    fun sendEntry(@Field("username") username: String,
+                  @Field("event_id") eventId: Int): Call<Entry>
+
 }

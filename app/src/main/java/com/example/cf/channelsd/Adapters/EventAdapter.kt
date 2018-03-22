@@ -37,6 +37,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         holder.eventConstant1.text = eventList[position].eventContestant1
         holder.eventConstant2.text = eventList[position].eventContestant2
         holder.eventCommentor.text = eventList[position].eventCommentator
+        holder.eventId.text = eventList[position].eventId.toString()
         var contestant1 = holder.eventConstant1.text.toString()
         var contestant2 = holder.eventConstant2.text.toString()
         if (contestant1 == "") {
@@ -56,7 +57,8 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
                     holder.eventDate.text.toString(),
                     contestant1,
                     contestant2,
-                    holder.eventCommentor.text.toString()
+                    holder.eventCommentor.text.toString(),
+                    holder.eventId.text.toString().toInt()
             )
             i.putExtra("eventDetails", Parcels.wrap(event))
             holder.item.context.startActivity(i)
@@ -73,6 +75,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         val eventConstant1 = itemView.findViewById<TextView>(R.id.event_contestant1)!!
         val eventConstant2 = itemView.findViewById<TextView>(R.id.event_contestant2)!!
         val eventCommentor = itemView.findViewById<TextView>(R.id.event_commentator)!!
+        val eventId = itemView.findViewById<TextView>(R.id.event_id)!!
     }
 
 }

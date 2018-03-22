@@ -20,12 +20,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CreateEventActivity: AppCompatActivity() {
-    private var eventInterface: EventInterface ?= null
+    private var eventInterface: EventInterface = ApiUtils.apiEvent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_create_event)
 
-        eventInterface = ApiUtils.apiEvent
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         //val editor: SharedPreferences.Editor = preferences.edit()
         confirm_event_btn.setOnClickListener {

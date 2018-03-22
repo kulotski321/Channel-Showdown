@@ -19,7 +19,9 @@ data class Event(
         @SerializedName("contestant2_name")
         val eventContestant2: String,
         @SerializedName("creator_name")
-        val eventCommentator: String
+        val eventCommentator: String,
+        @SerializedName("id")
+        val eventId : Int
 ) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
             parcel.readString(),
@@ -29,8 +31,10 @@ data class Event(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString()) {
+            parcel.readString(),
+            parcel.readInt()) {
     }
+
     override fun writeToParcel(parcel: android.os.Parcel, flags: Int) {
         parcel.writeString(username)
         parcel.writeString(eventName)
@@ -40,6 +44,7 @@ data class Event(
         parcel.writeString(eventContestant1)
         parcel.writeString(eventContestant2)
         parcel.writeString(eventCommentator)
+        parcel.writeInt(eventId)
     }
 
     override fun describeContents(): Int {
@@ -55,4 +60,5 @@ data class Event(
             return arrayOfNulls(size)
         }
     }
+
 }

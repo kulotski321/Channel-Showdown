@@ -96,9 +96,10 @@ class MainActivity : AppCompatActivity() {
         loginInterface?.sendUserInfo(username, password)?.enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
-                toastMessage("Check your internet connection")
                 if (t?.message == "unexpected end of stream") {
                     sendPost(username, password)
+                }else{
+                    toastMessage("Check your internet connection")
                 }
             }
 
@@ -122,12 +123,12 @@ class MainActivity : AppCompatActivity() {
                         editor.putString("lastName_pref", lastName.toString())
                         editor.putString("bio_pref", bio.toString())
                         editor.apply()
-                        Log.e(ContentValues.TAG, userType)
+                        //Log.e(ContentValues.TAG, userType)
                         val i = Intent(this@MainActivity, DashboardActivity::class.java)
                         startActivity(i)
                         finish()
                     } else {
-                        popUpError(response.message(), input_username_user)
+                        popUpError("Invalid username or password", input_username_user)
                     }
         })
     }
