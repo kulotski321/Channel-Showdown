@@ -4,9 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-/**
- * Created by CF on 3/22/2018.
- */
 class Entry (
         val username: String,
         @SerializedName("entry_id")

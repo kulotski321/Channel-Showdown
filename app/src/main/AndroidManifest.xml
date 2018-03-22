@@ -48,5 +48,9 @@
             android:name=".Activities.MyEventActivity"
             android:label="@string/my_event_activity"
             android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.EntriesActivity"
+            android:label="@string/entries"
+            android:parentActivityName=".Activities.MyEventActivity"/>
     </application>
 </manifest>

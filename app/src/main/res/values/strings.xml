@@ -10,6 +10,7 @@
     <string name="create_event">Create Event</string>
     <string name="upcoming_event_activity">Upcoming Event</string>
     <string name="my_event_activity">My Event</string>
+    <string name="entries">Entries</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>

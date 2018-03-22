@@ -1,11 +1,15 @@
 package com.example.cf.channelsd.Activities
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Window
+import android.widget.Toast
 import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Data.EntryList
+import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Data.UpcomingEvent
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
@@ -17,6 +21,7 @@ import retrofit2.Response
 
 class MyEventActivity : AppCompatActivity() {
     private val eventInterface: EventInterface = ApiUtils.apiEvent
+    private lateinit var myEventMain: Event
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -24,6 +29,13 @@ class MyEventActivity : AppCompatActivity() {
 
         val username = intent.getStringExtra("username")
         getMyEvent(username)
+
+        view_entries_btn.setOnClickListener {
+            val i = Intent(this,EntriesActivity::class.java)
+            toastMessage(myEventMain.eventId.toString())
+            i.putExtra("eventId",myEventMain.eventId.toString())
+            startActivity(i)
+        }
     }
 
     private fun getMyEvent(username: String) {
@@ -41,6 +53,7 @@ class MyEventActivity : AppCompatActivity() {
                     val event : UpcomingEvent ?= response.body()
                     if(event != null){
                         val myEvent = event.myEvent
+                        myEventMain = myEvent!!
                         Log.e("Event Details:", myEvent.toString())
                         event_name_upcoming_commentator.text = myEvent?.eventName
                         var contestant1 : String = myEvent!!.eventContestant1
@@ -51,7 +64,6 @@ class MyEventActivity : AppCompatActivity() {
                         if(contestant2 == ""){
                             contestant2 = "Empty Slot"
                         }
-                        //Log.e("contestant",myEvent.eventContestant1)
                         event_contestant1_upcoming_commentator.text = contestant1
                         event_contestant2_upcoming_commentator.text = contestant2
                         event_description_upcoming_commentator.text =myEvent.eventDescription
@@ -61,5 +73,8 @@ class MyEventActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+    fun toastMessage(message: String){
+        Toast.makeText(this@MyEventActivity, message, Toast.LENGTH_LONG).show();
     }
 }

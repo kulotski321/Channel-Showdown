@@ -9,13 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EventAdapter
 import com.example.cf.channelsd.Data.ApiUtils
-import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Data.UpcomingEventList
 import com.example.cf.channelsd.Interfaces.EventInterface
-
 import com.example.cf.channelsd.R
 import kotlinx.android.synthetic.main.fragment_upcoming.*
 import retrofit2.Call

@@ -1,9 +1,6 @@
 package com.example.cf.channelsd.Interfaces
 
-import com.example.cf.channelsd.Data.Entry
-import com.example.cf.channelsd.Data.Event
-import com.example.cf.channelsd.Data.UpcomingEvent
-import com.example.cf.channelsd.Data.UpcomingEventList
+import com.example.cf.channelsd.Data.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -23,11 +20,12 @@ interface EventInterface {
     @POST("/event/creatoreventprofile/")
     fun getMyEvent(@Field("username")username:String):Call<UpcomingEvent>
 
-    /*@GET("/text/")
-    fun getEntries(): Call<>*/
     @FormUrlEncoded
     @POST("/event/sendentry/")
     fun sendEntry(@Field("username") username: String,
                   @Field("event_id") eventId: Int): Call<Entry>
 
+    @FormUrlEncoded
+    @POST("/event/allentries/")
+    fun getEntries(@Field("event_id")eventId: Int): Call<EntryList>
 }
