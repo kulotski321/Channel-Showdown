@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
 
 class Entry (
         val username: String,
-        @SerializedName("entry_id")
-        val eventId: Int,
+        @SerializedName("id")
+        val entryId: Int,
         @SerializedName("entry_status")
         val status: Int
 ) : Parcelable {
@@ -19,7 +19,7 @@ class Entry (
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(username)
-        parcel.writeInt(eventId)
+        parcel.writeInt(entryId)
         parcel.writeInt(status)
     }
 
@@ -36,5 +36,4 @@ class Entry (
             return arrayOfNulls(size)
         }
     }
-
 }

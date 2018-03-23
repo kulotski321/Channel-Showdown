@@ -13,4 +13,8 @@ interface ProfileInterface {
                            @Field("firstName")firstName: String,
                            @Field("lastName")lastName: String,
                            @Field("bio")bio:String): Call<User>
+
+    @FormUrlEncoded
+    @POST("/user/userprofile/")
+    fun viewProfileApplicant(@Field("username")username: String): Call<User>
 }

@@ -28,4 +28,15 @@ interface EventInterface {
     @FormUrlEncoded
     @POST("/event/allentries/")
     fun getEntries(@Field("event_id")eventId: Int): Call<EntryList>
+
+    @FormUrlEncoded
+    @POST("/event/approveentry/")
+    fun acceptApplicant(@Field("username")username: String,
+                        @Field("entry_id")eventId: Int): Call<Reply>
+
+    @FormUrlEncoded
+    @POST("/event/rejectentry/")
+    fun rejectApplicant(@Field("username")username: String,
+                        @Field("entry_id")eventId: Int): Call<Reply>
+
 }

@@ -54,6 +54,9 @@ class UpcomingEventActivity : AppCompatActivity() {
         eventInterface.sendEntry(username,eventId).enqueue(object: Callback<Entry>{
             override fun onFailure(call: Call<Entry>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
+                if(t?.message == "unexpected end of stream"){
+                    sendEntry(username,eventId)
+                }
             }
 
             override fun onResponse(call: Call<Entry>?, response: Response<Entry>?) {

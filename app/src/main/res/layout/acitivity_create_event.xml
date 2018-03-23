@@ -114,7 +114,7 @@
         </android.support.design.widget.TextInputLayout>
         <Button
             android:id="@+id/confirm_event_btn"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="46dp"
             android:layout_gravity="center"
             android:text="@string/confirm"

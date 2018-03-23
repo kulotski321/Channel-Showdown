@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         val usernamePref: String = preferences.getString("username_pref", "")
 
         if (usernamePref.isEmpty()) {
-            toastMessage("go log in")
             sign_in_btn.setOnClickListener() {
                 if (checkTextFields() == 2) {
                     val username = input_username_user.text.toString()
@@ -45,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } else {
-            toastMessage("logged in")
             val userInfo = User(
                     preferences.getString("session_key_pref", ""),
                     preferences.getString("username_pref", ""),

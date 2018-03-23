@@ -55,9 +55,10 @@
         </android.support.design.widget.TextInputLayout>
         <Button
             android:id="@+id/sign_in_btn"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="46dp"
             android:layout_gravity="center"
+            android:layout_marginTop="15dp"
             android:text="@string/sign_in"
             android:textSize="16sp"
             android:background="@color/color_yellow_primary">

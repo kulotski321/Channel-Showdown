@@ -88,7 +88,7 @@
             android:nextFocusForward="@id/sign_up_btn"/>
         <Button
             android:id="@+id/sign_up_btn"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="46dp"
             android:layout_gravity="center"
             android:text="@string/sign_up"

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture"
+            android:id="@+id/view_profile_picture"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/profile_full_name"
+            android:id="@+id/view_profile_full_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -45,10 +45,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+            app:layout_constraintTop_toBottomOf="@+id/view_profile_picture" />
 
         <TextView
-            android:id="@+id/profile_email"
+            android:id="@+id/view_profile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -58,10 +58,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_full_name" />
+            app:layout_constraintTop_toBottomOf="@+id/view_profile_full_name" />
 
         <TextView
-            android:id="@+id/profile_bio"
+            android:id="@+id/view_profile_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -74,7 +74,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_email" />
+            app:layout_constraintTop_toBottomOf="@+id/view_profile_email" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline5"
@@ -86,22 +86,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <Button
-        android:id="@+id/edit_profile_btn"
-        android:layout_width="181dp"
-        android:layout_height="46dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/color_yellow_primary"
-        android:text="@string/edit_profile"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -130,4 +114,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="16dp" />
+
+    <Button
+        android:id="@+id/reject_btn"
+        android:layout_width="150dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/color_yellow_primary"
+        android:text="REJECT"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/accept_btn" />
+
+    <Button
+        android:id="@+id/accept_btn"
+        android:layout_width="150dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/color_yellow_primary"
+        android:text="ACCEPT"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/reject_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="16dp" />
 </android.support.constraint.ConstraintLayout>

@@ -52,5 +52,9 @@
             android:name=".Activities.EntriesActivity"
             android:label="@string/entries"
             android:parentActivityName=".Activities.MyEventActivity"/>
+        <activity
+            android:name=".Activities.ViewProfileActivity"
+            android:label="@string/view_profile"
+            android:parentActivityName=".Activities.EntriesActivity" />
     </application>
 </manifest>

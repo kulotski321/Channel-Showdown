@@ -11,6 +11,7 @@
     <string name="upcoming_event_activity">Upcoming Event</string>
     <string name="my_event_activity">My Event</string>
     <string name="entries">Entries</string>
+    <string name="view_profile">View Profile</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
