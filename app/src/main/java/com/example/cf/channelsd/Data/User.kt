@@ -1,6 +1,7 @@
 package com.example.cf.channelsd.Data
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import org.parceler.Parcel
 
 @Parcel
@@ -42,5 +43,4 @@ data class User(
             return arrayOfNulls(size)
         }
     }
-
 }

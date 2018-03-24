@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="15dp">
 
     <TextView
         android:id="@+id/event_name_upcoming_commentator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:text="@string/event_name"
         android:textColor="@color/color_black"
         android:textSize="30sp"
@@ -22,7 +23,6 @@
         android:id="@+id/event_date_upcoming_commentator"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
         android:text="@string/event_date"
         android:textColor="@color/color_red"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
+        android:layout_width="98dp"
         android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/event_description_upcoming_commentator"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
@@ -56,7 +56,7 @@
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="121dp"
+        android:layout_width="115dp"
         android:layout_height="28dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
@@ -67,7 +67,7 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="121dp"
+        android:layout_width="115dp"
         android:layout_height="28dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
@@ -80,10 +80,12 @@
         android:id="@+id/event_contestant2_upcoming_commentator"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:text="@string/angelo_montil"
+        android:text="@string/empty"
+        android:textColor="@color/color_black"
         android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/event_contestant1_upcoming_commentator" />
 
@@ -91,10 +93,12 @@
         android:id="@+id/event_contestant1_upcoming_commentator"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="@string/angelo_montil"
+        android:text="@string/empty"
         android:textSize="18sp"
+        android:textColor="@color/color_black"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/event_date_upcoming_commentator" />
 
@@ -114,8 +118,6 @@
         android:id="@+id/event_prize_upcoming_commentator"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:text="@string/event_prize"
         android:textColor="@color/color_green_primary"
@@ -125,11 +127,10 @@
 
     <Button
         android:id="@+id/start_event_btn"
-        android:layout_width="150dp"
+        android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
         android:layout_marginBottom="40dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:background="@color/color_yellow_primary"
         android:text="Start Event"
@@ -141,11 +142,10 @@
 
     <Button
         android:id="@+id/view_entries_btn"
-        android:layout_width="150dp"
+        android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
         android:layout_marginBottom="40dp"
-        android:layout_marginStart="16dp"
         android:background="@color/color_yellow_primary"
         android:text="View Entries"
         android:textSize="16sp"

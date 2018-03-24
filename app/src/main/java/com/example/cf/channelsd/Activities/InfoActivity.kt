@@ -1,10 +1,13 @@
 package com.example.cf.channelsd.Activities
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.EditText
@@ -15,14 +18,24 @@ import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.ProfileInterface
 import com.example.cf.channelsd.R
 import kotlinx.android.synthetic.main.activity_additional_info.*
+import kotlinx.android.synthetic.main.activity_profile.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.net.URI
+
 
 class InfoActivity : AppCompatActivity() {
 
     private var profileInterface: ProfileInterface? = null
     private var user: User? = null
+    private val RESULT_LOAD_IMAGE = 1
+    private lateinit var filePart: RequestBody
+    private var file : MultipartBody.Part ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_additional_info)
@@ -53,7 +66,16 @@ class InfoActivity : AppCompatActivity() {
                 val lastName: String = input_last_name.text.toString()
                 val bio: String = input_bio.text.toString()
                 sendPost(username, firstName, lastName, bio)
+                if(file != null){
+                    Log.e("path",file.toString())
+                    uploadPhoto(file!!)
+                }
             }
+        }
+        upload_btn.setOnClickListener {
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            galleryIntent.type = "image/*"
+            startActivityForResult(galleryIntent,RESULT_LOAD_IMAGE)
         }
     }
 
@@ -120,6 +142,17 @@ class InfoActivity : AppCompatActivity() {
             }
         })
     }
+    private fun uploadPhoto(image: MultipartBody.Part){
+        profileInterface?.uploadPhoto(image)?.enqueue( object: Callback<RequestBody>{
+            override fun onFailure(call: Call<RequestBody>?, t: Throwable?) {
+                Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
+            }
+
+            override fun onResponse(call: Call<RequestBody>?, response: Response<RequestBody>?) {
+
+            }
+        })
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -128,5 +161,16 @@ class InfoActivity : AppCompatActivity() {
         overridePendingTransition(0, 0)
         finish()
         overridePendingTransition(0, 0)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null){
+            val selectedImage: Uri = data.data
+            val originalFile = File(selectedImage.path)
+            upload_profile_pic.setImageURI(selectedImage)
+            filePart = RequestBody.create(
+                    MediaType.parse(contentResolver.getType(selectedImage)),originalFile)
+            file = MultipartBody.Part.createFormData("image",originalFile.name,filePart)
+        }
     }
 }

@@ -2,14 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.cf.channelsd.Fragments.EventCommentatorFragment"
     android:background="@color/color_yellow_fade">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/create_event_btn"
                 android:layout_width="match_parent"
-                android:layout_height="321dp"
+                android:layout_height="250dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
@@ -32,8 +32,7 @@
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/my_event_btn"
                 android:layout_width="match_parent"
-                android:layout_height="321dp"
-                android:layout_marginBottom="32dp"
+                android:layout_height="250dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"

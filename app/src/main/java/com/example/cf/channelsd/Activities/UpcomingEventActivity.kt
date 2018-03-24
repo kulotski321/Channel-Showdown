@@ -2,6 +2,7 @@ package com.example.cf.channelsd.Activities
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -48,6 +49,35 @@ class UpcomingEventActivity : AppCompatActivity() {
                 yesButton { sendEntry(preferences.getString("username_pref", ""), event.eventId)}
                 noButton { }
             }.show()
+        }
+        event_contestant1_upcoming.setOnClickListener {
+            val username = event_contestant1_upcoming.text
+            val i = Intent(this,ViewProfileActivity::class.java)
+            i.putExtra("username",username)
+            i.putExtra("from_link","true")
+            startActivity(i)
+        }
+        event_contestant2_upcoming.setOnClickListener {
+            val username = event_contestant2_upcoming.text
+            if(username != "Empty Slot"){
+                val i = Intent(this,ViewProfileActivity::class.java)
+                i.putExtra("username",username)
+                i.putExtra("from_link","true")
+                startActivity(i)
+            }else{
+                toastMessage("No contestant yet")
+            }
+        }
+        event_commentator_upcoming.setOnClickListener {
+            val username = event_commentator_upcoming.text
+            if(username != "Empty Slot"){
+                val i = Intent(this,ViewProfileActivity::class.java)
+                i.putExtra("username",username)
+                i.putExtra("from_link","true")
+                startActivity(i)
+            }else{
+                toastMessage("No contestant yet")
+            }
         }
     }
     private fun sendEntry(username: String, eventId: Int){

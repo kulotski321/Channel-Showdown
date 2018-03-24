@@ -21,7 +21,6 @@ import retrofit2.Response
 
 class EntriesActivity: AppCompatActivity() {
     private val eventInterface: EventInterface = ApiUtils.apiEvent
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entries)
@@ -56,5 +55,11 @@ class EntriesActivity: AppCompatActivity() {
     }
     fun toastMessage(message: String){
         Toast.makeText(this@EntriesActivity, message, Toast.LENGTH_LONG).show();
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val eventId : String = intent.getStringExtra("eventId")
+        getEntries(eventId.toInt())
     }
 }

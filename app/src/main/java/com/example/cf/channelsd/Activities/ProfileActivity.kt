@@ -1,9 +1,12 @@
 package com.example.cf.channelsd.Activities
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import com.example.cf.channelsd.Data.User
 //import com.example.cf.channelsd.Data.UserInfo
@@ -14,7 +17,6 @@ import org.parceler.Parcels
 class ProfileActivity : AppCompatActivity() {
 
     private var user: User? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -63,4 +65,5 @@ class ProfileActivity : AppCompatActivity() {
         finish()
         overridePendingTransition(0, 0)
     }
+
 }

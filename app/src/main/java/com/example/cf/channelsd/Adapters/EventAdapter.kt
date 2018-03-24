@@ -41,10 +41,10 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         var contestant1 = holder.eventConstant1.text.toString()
         var contestant2 = holder.eventConstant2.text.toString()
         if (contestant1 == "") {
-            contestant1 = "Empty slot"
+            contestant1 = "Empty Slot"
         }
         if (contestant2 == "") {
-            contestant2 = "Empty slot"
+            contestant2 = "Empty Slot"
         }
         Log.e(ContentValues.TAG, holder.eventConstant1.text.toString())
         holder.item?.setOnClickListener {

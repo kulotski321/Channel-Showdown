@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.cf.channelsd.Data.ApiUtils
 import com.example.cf.channelsd.Data.Reply
@@ -29,15 +30,19 @@ class ViewProfileActivity : AppCompatActivity(){
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val username = intent.getStringExtra("username")
         val entryId = intent.getStringExtra("entry_id")
+        val fromLink = intent.getStringExtra("from_link")
         viewProfileApplicant(username)
-
-        accept_btn.setOnClickListener {
-            acceptApplicant(username,entryId.toInt())
+        if(fromLink != "true"){
+            accept_btn.setOnClickListener {
+                acceptApplicant(username,entryId.toInt())
+            }
+            reject_btn.setOnClickListener {
+                rejectApplicant(username,entryId.toInt())
+            }
+        }else{
+            accept_btn.visibility = View.INVISIBLE
+            reject_btn.visibility = View.INVISIBLE
         }
-        reject_btn.setOnClickListener {
-            rejectApplicant(username,entryId.toInt())
-        }
-
     }
     private fun viewProfileApplicant(username: String){
         profileInterface.viewProfileApplicant(username).enqueue(object: Callback<User>{
@@ -51,6 +56,7 @@ class ViewProfileActivity : AppCompatActivity(){
             override fun onResponse(call: Call<User>?, response: Response<User>?) {
                 if(response!!.isSuccessful){
                     val user: User = response.body()!!
+                    Log.e("USER", user.toString())
                     val firstName = user.firstName
                     val lastName = user.lastName
                     val fullName = "$firstName $lastName"
@@ -78,7 +84,6 @@ class ViewProfileActivity : AppCompatActivity(){
                     toastMessage("User already accepted")
                 }
             }
-
         })
     }
     private fun rejectApplicant(username: String, entryId: Int){

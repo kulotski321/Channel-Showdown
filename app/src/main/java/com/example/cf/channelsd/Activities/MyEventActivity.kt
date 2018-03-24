@@ -36,6 +36,28 @@ class MyEventActivity : AppCompatActivity() {
             i.putExtra("eventId",myEventMain.eventId.toString())
             startActivity(i)
         }
+        event_contestant1_upcoming_commentator.setOnClickListener {
+            val usernameContestant = event_contestant1_upcoming_commentator.text
+            if(usernameContestant != "Empty Slot"){
+                val i = Intent(this,ViewProfileActivity::class.java)
+                i.putExtra("username",usernameContestant)
+                i.putExtra("from_link","true")
+                startActivity(i)
+            }else{
+                toastMessage("No contestant yet")
+            }
+        }
+        event_contestant2_upcoming_commentator.setOnClickListener {
+            val usernameContestant = event_contestant2_upcoming_commentator.text
+            if(usernameContestant != "Empty Slot"){
+                val i = Intent(this,ViewProfileActivity::class.java)
+                i.putExtra("username",usernameContestant)
+                i.putExtra("from_link","true")
+                startActivity(i)
+            }else{
+                toastMessage("No contestant yet")
+            }
+        }
     }
 
     private fun getMyEvent(username: String) {
@@ -55,8 +77,8 @@ class MyEventActivity : AppCompatActivity() {
                         val myEvent = event.myEvent
                         myEventMain = myEvent!!
                         Log.e("Event Details:", myEvent.toString())
-                        event_name_upcoming_commentator.text = myEvent?.eventName
-                        var contestant1 : String = myEvent!!.eventContestant1
+                        event_name_upcoming_commentator.text = myEvent.eventName
+                        var contestant1 : String = myEvent.eventContestant1
                         var contestant2 : String = myEvent.eventContestant2
                         if(contestant1 == ""){
                             contestant1 = "Empty Slot"
@@ -76,5 +98,11 @@ class MyEventActivity : AppCompatActivity() {
     }
     fun toastMessage(message: String){
         Toast.makeText(this@MyEventActivity, message, Toast.LENGTH_LONG).show();
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val username = intent.getStringExtra("username")
+        getMyEvent(username)
     }
 }

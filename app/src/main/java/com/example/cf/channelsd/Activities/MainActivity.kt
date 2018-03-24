@@ -6,7 +6,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Html
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.example.cf.channelsd.Data.ApiUtils
@@ -68,7 +70,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+        val toast: Toast
+        Toast.makeText(this@MainActivity,message, Toast.LENGTH_LONG).show()
     }
 
     private fun editTextLength(editText: EditText): Int {

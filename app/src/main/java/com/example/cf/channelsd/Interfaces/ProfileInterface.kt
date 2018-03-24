@@ -1,10 +1,10 @@
 package com.example.cf.channelsd.Interfaces
 
 import com.example.cf.channelsd.Data.User
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ProfileInterface {
     @FormUrlEncoded
@@ -17,4 +17,10 @@ interface ProfileInterface {
     @FormUrlEncoded
     @POST("/user/userprofile/")
     fun viewProfileApplicant(@Field("username")username: String): Call<User>
+
+    @Multipart
+    @POST("/")
+    fun uploadPhoto(@Part image: MultipartBody.Part): Call<RequestBody>
+
+
 }

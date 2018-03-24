@@ -63,5 +63,6 @@
     <string name="angelo_montil">Angelo Montil</string>
     <string name="username_sample">kulotski321</string>
     <string name="test_bio">This is my Bio. I am very handsome and cool. Please date me because I\'m very lonely.</string>\
-    <string name="empty">Empty</string>
+    <string name="empty">Empty Slot</string>
+    <string name="loading">Loading</string>
 </resources>
