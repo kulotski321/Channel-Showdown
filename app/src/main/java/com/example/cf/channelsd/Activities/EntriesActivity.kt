@@ -10,7 +10,7 @@ import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EntriesAdapter
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.EntryList
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R

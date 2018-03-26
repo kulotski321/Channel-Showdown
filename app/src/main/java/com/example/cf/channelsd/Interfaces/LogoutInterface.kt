@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface LogoutInterface {
     @POST("/user/logout/")
-    fun logout(@Header("session_key")session_key: String): Call<String>
+    fun logout(@Header("session_key") session_key: String): Call<String>
 }

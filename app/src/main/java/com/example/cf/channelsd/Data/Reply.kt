@@ -1,18 +1,32 @@
 package com.example.cf.channelsd.Data
 
-import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import org.parceler.Parcel
 
-class Reply (
+@Parcel
+data class Reply (
         @SerializedName("status")
-        val status: String
+        val status: String,
+        @SerializedName("profile_pic")
+        val profilePic: String,
+        @SerializedName("profile_video")
+        val profileVideo: String,
+        @SerializedName("thumb_nail")
+        val thumbNail: String
 ) : Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readString()) {
+    constructor(parcel: android.os.Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()) {
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(parcel: android.os.Parcel, flags: Int) {
         parcel.writeString(status)
+        parcel.writeString(profilePic)
+        parcel.writeString(profileVideo)
+        parcel.writeString(thumbNail)
     }
 
     override fun describeContents(): Int {
@@ -20,7 +34,7 @@ class Reply (
     }
 
     companion object CREATOR : Parcelable.Creator<Reply> {
-        override fun createFromParcel(parcel: Parcel): Reply {
+        override fun createFromParcel(parcel: android.os.Parcel): Reply {
             return Reply(parcel)
         }
 

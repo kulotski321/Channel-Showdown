@@ -1,11 +1,11 @@
-package com.example.cf.channelsd.Data
+package com.example.cf.channelsd.Utils
 
 import com.example.cf.channelsd.Interfaces.*
 import com.example.cf.channelsd.Retrofit.RetrofitClient
 
 object ApiUtils {
 
-    val BASE_URL = "http://192.168.254.52:8000/"
+    val BASE_URL = "http://192.168.254.52:8000"
 
     val apiRegister: RegisterInterface
         get() = RetrofitClient.getClient(BASE_URL)!!.create(RegisterInterface::class.java)

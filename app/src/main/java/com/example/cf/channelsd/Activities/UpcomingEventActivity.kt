@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Window
 import android.widget.Toast
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Entry
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Interfaces.EventInterface

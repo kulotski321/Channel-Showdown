@@ -1,6 +1,7 @@
 package com.example.cf.channelsd.Activities
 
 import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -13,12 +14,13 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Data.Reply
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.ProfileInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.picasso
 import kotlinx.android.synthetic.main.activity_additional_info.*
-import kotlinx.android.synthetic.main.activity_profile.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -26,23 +28,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import java.net.URI
+import com.example.cf.channelsd.Utils.ImageFilePath
 
 
 class InfoActivity : AppCompatActivity() {
 
-    private var profileInterface: ProfileInterface? = null
+    private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private var user: User? = null
     private val RESULT_LOAD_IMAGE = 1
-    private lateinit var filePart: RequestBody
-    private var file : MultipartBody.Part ?= null
+    private val RESULT_LOAD_VIDEO = 1
+    private lateinit var filePartImage: RequestBody
+    private var fileImage : MultipartBody.Part ?= null
+    private lateinit var filePartVideo: RequestBody
+    private var fileVideo : MultipartBody.Part ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_additional_info)
 
-        profileInterface = ApiUtils.apiProfile
+        setContentView(R.layout.activity_additional_info)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        //val editor: SharedPreferences.Editor = preferences.edit()
+        val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
                 preferences.getString("session_key_pref", ""),
                 preferences.getString("username_pref", ""),
@@ -50,7 +54,9 @@ class InfoActivity : AppCompatActivity() {
                 preferences.getString("userType_pref", ""),
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
-                preferences.getString("bio_pref", "")
+                preferences.getString("bio_pref", ""),
+                preferences.getString("profile_pic_pref",""),
+                preferences.getString("profile_vid_pref","")
         )
         val firstNameInput: EditText = input_first_name
         val lastNameInput: EditText = input_last_name
@@ -59,6 +65,7 @@ class InfoActivity : AppCompatActivity() {
         firstNameInput.setText(user?.firstName, TextView.BufferType.EDITABLE)
         lastNameInput.setText(user?.lastName, TextView.BufferType.EDITABLE)
         bioInput.setText(user?.bio, TextView.BufferType.EDITABLE)
+        picasso.load(ApiUtils.BASE_URL+ user!!.profilePicture).into(upload_profile_pic)
         confirm_btn.setOnClickListener {
             if (checkTextFields() == 3) {
                 val username: String = preferences.getString("username_pref", "")
@@ -66,16 +73,32 @@ class InfoActivity : AppCompatActivity() {
                 val lastName: String = input_last_name.text.toString()
                 val bio: String = input_bio.text.toString()
                 sendPost(username, firstName, lastName, bio)
-                if(file != null){
-                    Log.e("path",file.toString())
-                    uploadPhoto(file!!)
+                if(fileImage != null){
+                    //Log.e("path",filePart.toString())
+                    val usernameRB : RequestBody = RequestBody.create(MediaType.parse("text/plain"),username)
+                    uploadPhoto(usernameRB,fileImage!!)
                 }
+                if(fileVideo != null){
+                    //Log.e("path",filePart.toString())
+                    val usernameRB : RequestBody = RequestBody.create(MediaType.parse("text/plain"),username)
+                    uploadVideo(usernameRB,fileVideo!!)
+                }
+                val i = Intent(this, ProfileActivity::class.java)
+                startActivity(i)
+                overridePendingTransition(0, 0)
+                finish()
+                overridePendingTransition(0, 0)
             }
         }
-        upload_btn.setOnClickListener {
+        upload_pic_btn.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             galleryIntent.type = "image/*"
             startActivityForResult(galleryIntent,RESULT_LOAD_IMAGE)
+        }
+        upload_video_btn.setOnClickListener {
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            galleryIntent.type = "video/*"
+            startActivityForResult(galleryIntent,RESULT_LOAD_VIDEO)
         }
     }
 
@@ -142,14 +165,47 @@ class InfoActivity : AppCompatActivity() {
             }
         })
     }
-    private fun uploadPhoto(image: MultipartBody.Part){
-        profileInterface?.uploadPhoto(image)?.enqueue( object: Callback<RequestBody>{
-            override fun onFailure(call: Call<RequestBody>?, t: Throwable?) {
+    private fun uploadPhoto(username: RequestBody,image: MultipartBody.Part){
+        profileInterface?.uploadPhoto(username,image)?.enqueue(object: Callback<Reply>{
+            override fun onFailure(call: Call<Reply>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
+                if (t?.message == "unexpected end of steam") {
+                    uploadPhoto(username,image)
+                }
             }
 
-            override fun onResponse(call: Call<RequestBody>?, response: Response<RequestBody>?) {
+            override fun onResponse(call: Call<Reply>?, response: Response<Reply>?) {
+                if(response!!.isSuccessful){
+                    val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
+                    val editor: SharedPreferences.Editor = preferences.edit()
+                    val replyRespone = response.body()
+                    val profilePic = replyRespone?.profilePic
+                    Log.e("profile response",replyRespone.toString())
+                    editor.putString("profile_pic_pref",profilePic.toString())
+                    editor.apply()
+                }
+            }
+        })
+    }
+    private fun uploadVideo(username:RequestBody,video: MultipartBody.Part){
+        profileInterface?.uploadVideo(username,video)?.enqueue(object: Callback<Reply>{
+            override fun onFailure(call: Call<Reply>?, t: Throwable?) {
+                Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
+                if (t?.message == "unexpected end of steam") {
+                    uploadVideo(username,video)
+                }
+            }
 
+            override fun onResponse(call: Call<Reply>?, response: Response<Reply>?) {
+                if(response!!.isSuccessful){
+                    val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
+                    val editor: SharedPreferences.Editor = preferences.edit()
+                    val replyRespone = response.body()
+                    val profileVideo = replyRespone?.profileVideo
+                    Log.e("profile response",replyRespone.toString())
+                    editor.putString("profile_video_pref",profileVideo.toString())
+                    editor.apply()
+                }
             }
         })
     }
@@ -166,11 +222,30 @@ class InfoActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null){
             val selectedImage: Uri = data.data
-            val originalFile = File(selectedImage.path)
-            upload_profile_pic.setImageURI(selectedImage)
-            filePart = RequestBody.create(
+
+            val realPath = ImageFilePath.getPath(this@InfoActivity,data.data)
+            val originalFile = File(realPath)
+
+            Log.e("image path:",realPath)
+
+            upload_profile_pic.setImageURI(selectedImage) // Set
+
+            filePartImage = RequestBody.create(
                     MediaType.parse(contentResolver.getType(selectedImage)),originalFile)
-            file = MultipartBody.Part.createFormData("image",originalFile.name,filePart)
+            fileImage = MultipartBody.Part.createFormData("image",originalFile.name,filePartImage)
+        }
+        if(requestCode == RESULT_LOAD_VIDEO && resultCode == Activity.RESULT_OK && data != null){
+            val selectedVideo: Uri = data.data
+
+            val realPath = ImageFilePath.getPath(this@InfoActivity,data.data)
+            val originalFile = File(realPath)
+
+            Log.e("video path:",realPath)
+
+            upload_profile_pic.setImageURI(selectedVideo)
+            filePartVideo = RequestBody.create(
+                    MediaType.parse(contentResolver.getType(selectedVideo)),originalFile)
+            fileVideo = MultipartBody.Part.createFormData("video",originalFile.name,filePartVideo)
         }
     }
 }

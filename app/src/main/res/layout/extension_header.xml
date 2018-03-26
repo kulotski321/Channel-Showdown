@@ -13,7 +13,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/user_profile_pic"
-            android:id="@+id/profile_picture"
+            android:id="@+id/profile_picture_dashboard"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"

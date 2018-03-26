@@ -8,12 +8,13 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Reply
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.Interfaces.ProfileInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.picasso
 import kotlinx.android.synthetic.main.activity_view_profile.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,6 +64,7 @@ class ViewProfileActivity : AppCompatActivity(){
                     view_profile_full_name.text = fullName
                     view_profile_email.text = user.email
                     view_profile_bio.text = user.bio
+                    picasso.load(ApiUtils.BASE_URL+user.profilePicture).into(view_profile_picture)
                 }
             }
         })

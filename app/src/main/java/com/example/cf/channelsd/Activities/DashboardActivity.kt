@@ -11,11 +11,12 @@ import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.PageViewerAdapter
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Fragments.*
 import com.example.cf.channelsd.Interfaces.LogoutInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.picasso
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.appbar_main.*
 import kotlinx.android.synthetic.main.extension_header.*
@@ -50,9 +51,12 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.getString("userType_pref", ""),
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
-                preferences.getString("bio_pref", "")
+                preferences.getString("bio_pref", ""),
+                preferences.getString("profile_pic_pref",""),
+                preferences.getString("profile_vid_pref","")
         )
         profile_name.text = user.username
+        picasso.load(ApiUtils.BASE_URL+user.profilePicture).into(profile_picture_dashboard)
         when {
             user.userType == "0" -> {
                 pagerAdapter.addFragments(LiveFragment(), "Live")
@@ -69,7 +73,7 @@ class DashboardActivity : AppCompatActivity() {
         custom_viewPager.adapter = pagerAdapter
         custom_tabLayout.setupWithViewPager(custom_viewPager)
 
-        profile_picture.setOnClickListener {
+        profile_picture_dashboard.setOnClickListener {
             val i = Intent(this, ProfileActivity::class.java)
             // i.putExtra("user",Parcels.wrap(user))
             startActivity(i)

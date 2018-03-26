@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.RegisterInterface
 import com.example.cf.channelsd.R

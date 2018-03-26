@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
@@ -79,7 +79,7 @@ class CreateEventActivity: AppCompatActivity() {
         return checked
     }
     private fun sendEvent(username: String, eventName: String, eventDescription: String,eventPrize: String, eventDate: String){
-        eventInterface?.createEvent(username,eventName,eventDescription,eventPrize,eventDate)?.enqueue(object : Callback<Event> {
+        eventInterface.createEvent(username,eventName,eventDescription,eventPrize,eventDate).enqueue(object : Callback<Event> {
             override fun onFailure(call: Call<Event>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
             }
@@ -88,6 +88,8 @@ class CreateEventActivity: AppCompatActivity() {
                     toastMessage("Create Successful")
                     finish()
                     overridePendingTransition(0,0)
+                }else{
+                    toastMessage("You already have an upcoming event")
                 }
             }
         })

@@ -12,8 +12,14 @@ data class User(
         val userType: String,
         val firstName: String,
         val lastName: String,
-        val bio: String) : Parcelable {
+        val bio: String,
+        @SerializedName("profile_pic")
+        val profilePicture: String,
+        @SerializedName("user_video")
+        val profileVideo: String) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -22,6 +28,7 @@ data class User(
             parcel.readString(),
             parcel.readString()) {
     }
+
     override fun writeToParcel(parcel: android.os.Parcel, flags: Int) {
         parcel.writeString(session_key)
         parcel.writeString(username)
@@ -30,10 +37,14 @@ data class User(
         parcel.writeString(firstName)
         parcel.writeString(lastName)
         parcel.writeString(bio)
+        parcel.writeString(profilePicture)
+        parcel.writeString(profileVideo)
     }
+
     override fun describeContents(): Int {
         return 0
     }
+
     companion object CREATOR : Parcelable.Creator<User> {
         override fun createFromParcel(parcel: android.os.Parcel): User {
             return User(parcel)

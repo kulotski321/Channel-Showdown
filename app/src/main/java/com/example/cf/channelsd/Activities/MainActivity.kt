@@ -6,12 +6,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Html
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.example.cf.channelsd.Data.ApiUtils
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.LoginInterface
 import com.example.cf.channelsd.R
@@ -24,19 +22,17 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private var user: User? = null
-    private var loginInterface: LoginInterface? = null
+    private var loginInterface: LoginInterface  = ApiUtils.apiLogin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        loginInterface = ApiUtils.apiLogin
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.clear()
         editor.apply()
         val usernamePref: String = preferences.getString("username_pref", "")
-
         if (usernamePref.isEmpty()) {
             sign_in_btn.setOnClickListener() {
                 if (checkTextFields() == 2) {
@@ -53,7 +49,10 @@ class MainActivity : AppCompatActivity() {
                     preferences.getString("userType_pref", ""),
                     preferences.getString("firstName_pref", ""),
                     preferences.getString("lastName_pref", ""),
-                    preferences.getString("bio_pref", "")
+                    preferences.getString("bio_pref", ""),
+                    preferences.getString("profile_pic_pref",""),
+                    preferences.getString("profile_vid_pref","")
+
             )
             val i = Intent(this, DashboardActivity::class.java)
             i.putExtra("user", Parcels.wrap(userInfo))
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        val toast: Toast
         Toast.makeText(this@MainActivity,message, Toast.LENGTH_LONG).show()
     }
 
@@ -94,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendPost(username: String, password: String) {
-        loginInterface?.sendUserInfo(username, password)?.enqueue(object : Callback<User> {
+        loginInterface.sendUserInfo(username, password).enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
                 if (t?.message == "unexpected end of stream") {
@@ -104,33 +102,39 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onResponse(call: Call<User>?, response: Response<User>?) =
-                    if (response!!.isSuccessful) {
-                        val userResponse = response.body()
-                        val username = userResponse?.username
-                        val session_key = userResponse?.session_key
-                        val email = userResponse?.email
-                        val userType = userResponse?.userType
-                        val firstName = userResponse?.firstName
-                        val lastName = userResponse?.lastName
-                        val bio = userResponse?.bio
-                        val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-                        val editor: SharedPreferences.Editor = preferences.edit()
-                        editor.putString("session_key_pref", session_key.toString())
-                        editor.putString("username_pref", username.toString())
-                        editor.putString("email_pref", email.toString())
-                        editor.putString("userType_pref", userType.toString())
-                        editor.putString("firstName_pref", firstName.toString())
-                        editor.putString("lastName_pref", lastName.toString())
-                        editor.putString("bio_pref", bio.toString())
-                        editor.apply()
-                        //Log.e(ContentValues.TAG, userType)
-                        val i = Intent(this@MainActivity, DashboardActivity::class.java)
-                        startActivity(i)
-                        finish()
-                    } else {
-                        popUpError("Invalid username or password", input_username_user)
-                    }
+            override fun onResponse(call: Call<User>?, response: Response<User>?){
+                if (response!!.isSuccessful) {
+                    val userResponse = response.body()
+                    Log.e("USER:",userResponse.toString())
+                    val usernameR = userResponse?.username
+                    val sessionKey = userResponse?.session_key
+                    val email = userResponse?.email
+                    val userType = userResponse?.userType
+                    val firstName = userResponse?.firstName
+                    val lastName = userResponse?.lastName
+                    val bio = userResponse?.bio
+                    val profilePic = userResponse?.profilePicture
+                    val profileVid = userResponse?.profileVideo
+                    val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
+                    val editor: SharedPreferences.Editor = preferences.edit()
+                    editor.putString("session_key_pref", sessionKey.toString())
+                    editor.putString("username_pref", usernameR.toString())
+                    editor.putString("email_pref", email.toString())
+                    editor.putString("userType_pref", userType.toString())
+                    editor.putString("firstName_pref", firstName.toString())
+                    editor.putString("lastName_pref", lastName.toString())
+                    editor.putString("bio_pref", bio.toString())
+                    editor.putString("profile_pic_pref",profilePic.toString())
+                    editor.putString("profile_vid_pref",profileVid.toString())
+                    editor.apply()
+                    //Log.e(ContentValues.TAG, userType)
+                    val i = Intent(this@MainActivity, DashboardActivity::class.java)
+                    startActivity(i)
+                    finish()
+                } else {
+                    popUpError("Invalid username or password", input_username_user)
+                }
+            }
         })
     }
 }
