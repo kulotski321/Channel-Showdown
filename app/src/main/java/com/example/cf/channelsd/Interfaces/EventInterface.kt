@@ -39,4 +39,7 @@ interface EventInterface {
     fun rejectApplicant(@Field("username") username: String,
                         @Field("entry_id") eventId: Int): Call<Reply>
 
+    @GET("/event/acceptedevents/")
+    fun getAcceptedEventList() : Call<AcceptedEventList>
+
 }

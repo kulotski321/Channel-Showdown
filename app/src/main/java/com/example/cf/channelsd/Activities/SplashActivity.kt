@@ -35,5 +35,4 @@ class SplashActivity : AppCompatActivity() {
         }
         super.onDestroy()
     }
-
 }

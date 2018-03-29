@@ -10,9 +10,9 @@ data class Reply (
         val status: String,
         @SerializedName("profile_pic")
         val profilePic: String,
-        @SerializedName("profile_video")
+        @SerializedName("user_video")
         val profileVideo: String,
-        @SerializedName("thumb_nail")
+        @SerializedName("video_thumbnail")
         val thumbNail: String
 ) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(

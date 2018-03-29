@@ -9,9 +9,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:background="@color/color_white">
+        android:background="@color/color_white"
+        android:layout_margin="15dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

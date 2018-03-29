@@ -16,8 +16,11 @@ data class User(
         @SerializedName("profile_pic")
         val profilePicture: String,
         @SerializedName("user_video")
-        val profileVideo: String) : Parcelable {
+        val profileVideo: String,
+        @SerializedName("video_thumbnail")
+        val profileThumbNail: String) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -39,6 +42,7 @@ data class User(
         parcel.writeString(bio)
         parcel.writeString(profilePicture)
         parcel.writeString(profileVideo)
+        parcel.writeString(profileThumbNail)
     }
 
     override fun describeContents(): Int {
@@ -54,4 +58,5 @@ data class User(
             return arrayOfNulls(size)
         }
     }
+
 }

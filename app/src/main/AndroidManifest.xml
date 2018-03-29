@@ -58,5 +58,21 @@
             android:name=".Activities.ViewProfileActivity"
             android:label="@string/view_profile"
             android:parentActivityName=".Activities.EntriesActivity" />
+        <activity
+            android:name=".Activities.UploadPhotoActivity"
+            android:label="@string/upload_photo"
+            android:parentActivityName=".Activities.ProfileActivity"/>
+        <activity
+            android:name=".Activities.UploadVideoActivity"
+            android:label="@string/upload_video"
+            android:parentActivityName=".Activities.SelectEditActivity"/>
+        <activity
+            android:name=".Activities.SelectEditActivity"
+            android:label="@string/select_edit"
+            android:parentActivityName=".Activities.ProfileActivity" />
+        <activity
+            android:name=".Activities.UploadThumbnailActivity"
+            android:label="@string/upload_thumbnail"
+            android:parentActivityName=".Activities.SelectEditActivity" />
     </application>
 </manifest>

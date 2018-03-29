@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
                     preferences.getString("lastName_pref", ""),
                     preferences.getString("bio_pref", ""),
                     preferences.getString("profile_pic_pref",""),
-                    preferences.getString("profile_vid_pref","")
-
+                    preferences.getString("profile_vid_pref",""),
+                    preferences.getString("profile_thumbnail_pref","")
             )
             val i = Intent(this, DashboardActivity::class.java)
             i.putExtra("user", Parcels.wrap(userInfo))
@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity() {
                     val bio = userResponse?.bio
                     val profilePic = userResponse?.profilePicture
                     val profileVid = userResponse?.profileVideo
+                    val profileThumbNail = userResponse?.profileThumbNail
                     val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
                     val editor: SharedPreferences.Editor = preferences.edit()
                     editor.putString("session_key_pref", sessionKey.toString())
@@ -126,6 +127,7 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("bio_pref", bio.toString())
                     editor.putString("profile_pic_pref",profilePic.toString())
                     editor.putString("profile_vid_pref",profileVid.toString())
+                    editor.putString("profile_thumbnail_pref",profileThumbNail.toString())
                     editor.apply()
                     //Log.e(ContentValues.TAG, userType)
                     val i = Intent(this@MainActivity, DashboardActivity::class.java)

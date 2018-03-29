@@ -17,7 +17,8 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="EVENT TITLE" />
+        tools:text="EVENT TITLE"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/event_date_upcoming_commentator"
@@ -41,7 +42,8 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator"
-        tools:text="Event Date :" />
+        tools:text="Event Date :"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/event_description_upcoming_commentator"
@@ -52,7 +54,8 @@
         android:text="@string/event_description"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/textView14"
@@ -63,7 +66,8 @@
         android:text="@string/contestant1"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/textView15"
@@ -74,7 +78,8 @@
         android:text="@string/contestant2"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/event_contestant2_upcoming_commentator"
@@ -133,12 +138,13 @@
         android:layout_marginBottom="40dp"
         android:layout_marginStart="16dp"
         android:background="@color/color_yellow_primary"
-        android:text="Start Event"
+        android:text="@string/start_event"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view_entries_btn" />
+        app:layout_constraintStart_toEndOf="@+id/view_entries_btn"
+        android:layout_marginLeft="16dp" />
 
     <Button
         android:id="@+id/view_entries_btn"
@@ -147,7 +153,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="40dp"
         android:background="@color/color_yellow_primary"
-        android:text="View Entries"
+        android:text="@string/view_entries"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/start_event_btn"

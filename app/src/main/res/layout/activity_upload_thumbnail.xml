@@ -6,56 +6,35 @@
     android:layout_height="match_parent"
     android:background="@color/color_purple_primary">
 
+    <ImageView
+        android:id="@+id/profile_video_upload_thumbnail"
+        android:layout_width="300dp"
+        android:layout_height="175dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72dp"
+        android:background="@color/color_white"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-        android:id="@+id/select_video_btn"
+        android:id="@+id/select_thumbnail_btn"
         android:layout_width="181dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:background="@color/color_yellow_primary"
-        android:text="@string/select_video"
+        android:text="@string/select_thumbnail"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarVideo" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textviewSelectVideo"
-        android:layout_width="307dp"
-        android:layout_height="66dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
-        android:textColorHint="@color/color_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/video_path"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:drawableLeft="@drawable/video_icon"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/video_icon"
-            android:ems="100"
-            android:enabled="false"
-            android:hint="@string/select_video"
-            android:maxLines="3"
-            android:textColor="@color/color_white" />
-    </android.support.design.widget.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/progressBarThumbnail" />
 
     <Button
-        android:id="@+id/upload_video_btn"
+        android:id="@+id/upload_video_thumbnail_btn"
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
@@ -68,10 +47,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancel_upload_video_btn" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_thumbnail_upload_video_btn" />
 
     <Button
-        android:id="@+id/cancel_upload_video_btn"
+        android:id="@+id/cancel_thumbnail_upload_video_btn"
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
@@ -82,19 +61,19 @@
         android:text="@string/cancel"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/upload_video_btn"
+        app:layout_constraintEnd_toStartOf="@+id/upload_video_thumbnail_btn"
         app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progressBarVideo"
+        android:id="@+id/progressBarThumbnail"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="11dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textviewSelectVideo" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_video_upload_thumbnail" />
 
 </android.support.constraint.ConstraintLayout>

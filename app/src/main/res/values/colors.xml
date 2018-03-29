@@ -19,4 +19,7 @@
     <color name="color_green_primary">#00c853</color>
     <color name="color_green_primaryLight">#5efc82</color>
     <color name="color_green_primaryDark">#009624</color>
+    <color name="color_purple_primary">#ab47bc</color>
+    <color name="color_purple_primaryLight">#df78ef</color>
+    <color name="color_purple_primaryDark">#790e8b</color>
 </resources>

@@ -6,12 +6,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_yellow_primary"
+        android:background="@color/color_purple_primary"
         android:id="@+id/profile_header"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/user_profile_pic"
             android:id="@+id/profile_picture_dashboard"
             android:layout_marginTop="10dp"
@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
             app:civ_border_color="@color/color_white"
-            app:civ_border_width="2dp"
+            app:civ_border_width="1dp"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -29,12 +29,15 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:textSize="20sp"
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
             />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp">
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="50dp"
@@ -43,7 +46,5 @@
                 android:layout_alignParentEnd="true"
                 android:id="@+id/logout_icon"/>
         </RelativeLayout>
-
-
     </LinearLayout>
 </FrameLayout>

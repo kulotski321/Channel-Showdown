@@ -17,6 +17,8 @@ import com.example.cf.channelsd.Fragments.*
 import com.example.cf.channelsd.Interfaces.LogoutInterface
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.appbar_main.*
 import kotlinx.android.synthetic.main.extension_header.*
@@ -53,10 +55,11 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.getString("lastName_pref", ""),
                 preferences.getString("bio_pref", ""),
                 preferences.getString("profile_pic_pref",""),
-                preferences.getString("profile_vid_pref","")
+                preferences.getString("profile_vid_pref",""),
+                preferences.getString("profile_thumbnail_pref","")
         )
         profile_name.text = user.username
-        picasso.load(ApiUtils.BASE_URL+user.profilePicture).into(profile_picture_dashboard)
+        picasso.load(ApiUtils.BASE_URL+user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
         when {
             user.userType == "0" -> {
                 pagerAdapter.addFragments(LiveFragment(), "Live")
@@ -65,6 +68,8 @@ class DashboardActivity : AppCompatActivity() {
                 pagerAdapter.addFragments(MyEventsFragment(), "Events")
             }
             user.userType == "1" -> {
+                pagerAdapter.addFragments(LiveFragment(), "Live")
+                pagerAdapter.addFragments(EpisodesFragment(), "Episodes")
                 pagerAdapter.addFragments(EventCommentatorFragment(), "Event")
                 pagerAdapter.addFragments(HistoryCommentatorFragment(), "History")
             }

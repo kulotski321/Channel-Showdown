@@ -12,6 +12,10 @@
     <string name="my_event_activity">My Event</string>
     <string name="entries">Entries</string>
     <string name="view_profile">View Profile</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="upload_video">Upload Video</string>
+    <string name="select_edit">Select Edit</string>
+    <string name="upload_thumbnail">Upload Thumbnail</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -31,8 +35,19 @@
     <string name="bio">Describe yourself</string>
     <string name="confirm">Confirm</string>
     <string name="full_name">Full name</string>
+    <string name="select_video">Select Video</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="upload">Upload</string>
+    <string name="select_thumbnail">Select Thumbnail</string>
+    <string name="edit_personal_info">Edit Personal Information</string>
+    <string name="upload_profile_video">Upload Profile Video</string>
+    <string name="upload_thumbnail_video">Upload video thumbnail</string>
     <!-- PROFILE LAYOUT -->
     <string name="edit_profile">Edit Profile</string>
+    <string name="profile_video">Profile Video</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="back">Back</string>
     <!-- CREATE EVENT LAYOUT -->
     <string name="create_your_own_event">Create your own event</string>
     <string name="event_name">Event Name</string>
@@ -47,6 +62,8 @@
     <string name="contestant1">Contestant 1 :</string>
     <string name="contestant2">Contestant 2 :</string>
     <string name="join_event">Join Event</string>
+    <string name="view_entries">View Entries</string>
+    <string name="start_event">Start Event</string>
     <!-- APP NAME -->
     <string name="channel_showdown">ChannelShowdown</string>
     <!-- EVENT FRAGMENT -->
@@ -65,4 +82,6 @@
     <string name="test_bio">This is my Bio. I am very handsome and cool. Please date me because I\'m very lonely.</string>\
     <string name="empty">Empty Slot</string>
     <string name="loading">Loading</string>
+    <string name ="cancel">Cancel</string>
+    <string name="no_description">No description</string>
 </resources>
