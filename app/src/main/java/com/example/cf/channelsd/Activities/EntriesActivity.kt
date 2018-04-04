@@ -49,6 +49,8 @@ class EntriesActivity: AppCompatActivity() {
                         val adapter = EntriesAdapter(entries!!)
                         entryRecyclerviwer.adapter = adapter
                     }
+                }else{
+                    toastMessage("There are no entries yet")
                 }
             }
         })

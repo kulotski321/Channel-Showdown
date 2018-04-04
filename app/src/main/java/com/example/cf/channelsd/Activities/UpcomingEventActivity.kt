@@ -14,6 +14,7 @@ import com.example.cf.channelsd.Data.Entry
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.picasso
 import kotlinx.android.synthetic.main.activity_upcoming_details.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
@@ -35,6 +36,7 @@ class UpcomingEventActivity : AppCompatActivity() {
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val event: Event = unwrap(intent.getParcelableExtra("eventDetails"))
+        picasso.load(ApiUtils.BASE_URL + event.eventImage).into(event_image_upcoming)
         event_name_upcoming.text = event.eventName
         event_date_upcoming.text = event.eventDate
         event_description_upcoming.text = event.eventDescription

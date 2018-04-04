@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_upcoming.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class UpcomingFragment : Fragment() {
     private val eventInterface: EventInterface = ApiUtils.apiEvent
@@ -28,15 +29,15 @@ class UpcomingFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        getUpcomingEventList()
+        val timeZone : String = TimeZone.getDefault().id
+        getUpcomingEventList(timeZone)
     }
-    private fun getUpcomingEventList(){
-        eventInterface.getUpcomingEventList().enqueue(object: Callback<UpcomingEventList>{
+    private fun getUpcomingEventList(timeZone: String){
+        eventInterface.getUpcomingEventList(timeZone).enqueue(object: Callback<UpcomingEventList>{
             override fun onFailure(call: Call<UpcomingEventList>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
                 if (t?.message == "unexpected end of stream"){
-                    getUpcomingEventList()
+                    getUpcomingEventList(timeZone)
                 }
             }
 

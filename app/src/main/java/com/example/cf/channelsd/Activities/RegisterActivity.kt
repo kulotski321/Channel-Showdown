@@ -29,13 +29,18 @@ class RegisterActivity : AppCompatActivity() {
             if (checkTextFields() == 3) {
                 val username: String = input_username_register.text.toString()
                 val email: String = input_email_register.text.toString()
-                val password: String = input_password_register.text.toString()
+                val password1: String = input_password_register.text.toString()
+                val password2 = password1;
                 val userType: String = if (input_commentator_Btn.isChecked) {
                     "commentator"
                 } else {
                     "normal"
                 }
-                sendPost(username, email, password, userType)
+                if (editTextLength(input_password_register) < 8) {
+                    popUpError("password must be at least 8 characters", input_password_register)
+                } else {
+                    sendPost(username, email, password1,password2, userType)
+                }
             }
         }
     }
@@ -52,22 +57,27 @@ class RegisterActivity : AppCompatActivity() {
         Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_LONG).show();
     }
 
-    private fun sendPost(username: String, email: String, password: String, userType: String) {
-        registerInterface?.createUserInfo(username, email, password, userType)?.enqueue(object : Callback<User> {
+    private fun sendPost(username: String, email: String, password1: String,password2:String, userType: String) {
+        registerInterface?.createUserInfo(username, email, password1,password2, userType)?.enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
                 if (t?.message == "unexpected end of stream") {
-                    sendPost(username, email, password, userType)
+                    sendPost(username, email, password1,password2, userType)
                 }
             }
 
             override fun onResponse(call: Call<User>?, response: Response<User>?) {
+                //Log.e("response errorbody", response!!.errorBody()?.string())
+
                 if (response!!.isSuccessful) {
+                    val user = response.body()
+                    Log.e("response body", user.toString())
                     toastMessage("Register successful")
                     val i = Intent(this@RegisterActivity, MainActivity::class.java)
                     startActivity(i)
                     finish()
                 } else {
+                    val user = response.body()
                     toastMessage("Register failed")
                 }
             }

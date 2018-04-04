@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -35,7 +36,7 @@ class InfoActivity : AppCompatActivity() {
 
     private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private var user: User? = null
-
+    private var isNew = false;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,6 +59,11 @@ class InfoActivity : AppCompatActivity() {
         val lastNameInput: EditText = input_last_name
         val bioInput: EditText = input_bio
 
+        if(user!!.firstName == "" && user!!.lastName == "" && user!!.bio == ""){
+            complete_profile_info.visibility = View.INVISIBLE
+        }else{
+            complete_profile_info.visibility = View.VISIBLE
+        }
         firstNameInput.setText(user?.firstName, TextView.BufferType.EDITABLE)
         lastNameInput.setText(user?.lastName, TextView.BufferType.EDITABLE)
         bioInput.setText(user?.bio, TextView.BufferType.EDITABLE)
@@ -134,13 +140,19 @@ class InfoActivity : AppCompatActivity() {
                     editor.putString("lastName_pref", lastNameNew)
                     editor.putString("bio_pref", bioNew)
                     editor.apply()
-                    val i = Intent(this@InfoActivity, ProfileActivity::class.java)
-                    startActivity(i)
-                    overridePendingTransition(0, 0)
-                    finish()
-                    overridePendingTransition(0, 0)
+                    if(isNew){
+                        val i = Intent(this@InfoActivity, ProfileActivity::class.java)
+                        startActivity(i)
+                        overridePendingTransition(0, 0)
+                        finish()
+                        overridePendingTransition(0, 0)
+                    }
                 }
             }
         })
     }
+    override fun onBackPressed() {
+
+    }
+
 }

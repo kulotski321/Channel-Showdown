@@ -39,6 +39,7 @@ class UploadPhotoActivity : AppCompatActivity() , UploadCallbacks{
     private val RESULT_LOAD_IMAGE = 1
     private lateinit var filePartImage: RequestBody
     private var fileImage : MultipartBody.Part ?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_photo)
@@ -49,7 +50,7 @@ class UploadPhotoActivity : AppCompatActivity() , UploadCallbacks{
         //val editor: SharedPreferences.Editor = preferences.edit()
         val profilePic = preferences.getString("profile_pic_pref","")
         picasso.load(ApiUtils.BASE_URL + profilePic).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(upload_profile_pic)
-        toastMessage(profilePic)
+
         confirm_upload_btn.setOnClickListener {
             val username: String = preferences.getString("username_pref", "")
             if(fileImage != null){
@@ -68,7 +69,11 @@ class UploadPhotoActivity : AppCompatActivity() , UploadCallbacks{
             startActivityForResult(galleryIntent,RESULT_LOAD_IMAGE)
         }
         cancel_upload_btn.setOnClickListener {
+            val i = Intent(this, DashboardActivity::class.java)
+            startActivity(i)
+            overridePendingTransition(0, 0)
             finish()
+            overridePendingTransition(0, 0)
         }
     }
     private fun uploadPhoto(username: RequestBody,image: MultipartBody.Part){

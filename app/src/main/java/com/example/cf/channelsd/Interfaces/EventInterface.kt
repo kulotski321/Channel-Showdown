@@ -1,6 +1,8 @@
 package com.example.cf.channelsd.Interfaces
 
 import com.example.cf.channelsd.Data.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -11,14 +13,17 @@ interface EventInterface {
                     @Field("eventName") eventName: String,
                     @Field("eventDescription") eventDescription: String,
                     @Field("prize") prize: String,
-                    @Field("eventDate") eventDate: String): Call<Event>
+                    @Field("eventDate") eventDate: String,
+                    @Field("timezone")timeZone: String): Call<Event>
 
-    @GET("/event/upcomingevents/")
-    fun getUpcomingEventList() : Call<UpcomingEventList>
+    @FormUrlEncoded
+    @POST("/event/upcomingevents/")
+    fun getUpcomingEventList(@Field("timezone")timezone: String) : Call<UpcomingEventList>
 
     @FormUrlEncoded
     @POST("/event/creatoreventprofile/")
-    fun getMyEvent(@Field("username") username:String):Call<UpcomingEvent>
+    fun getMyEvent(@Field("username") username:String,
+                   @Field("timezone") timezone: String) : Call<UpcomingEvent>
 
     @FormUrlEncoded
     @POST("/event/sendentry/")
@@ -39,6 +44,10 @@ interface EventInterface {
     fun rejectApplicant(@Field("username") username: String,
                         @Field("entry_id") eventId: Int): Call<Reply>
 
+    @Multipart
+    @POST("/event/uploadeventpic/")
+    fun uploadEventPicture(@Part("event_id") eventId: RequestBody,
+                           @Part profileVideo: MultipartBody.Part): Call<Reply>
     @GET("/event/acceptedevents/")
     fun getAcceptedEventList() : Call<AcceptedEventList>
 

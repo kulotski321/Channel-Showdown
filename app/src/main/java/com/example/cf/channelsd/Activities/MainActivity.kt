@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
-        editor.clear()
-        editor.apply()
+        //editor.clear()
+        //editor.apply()
         val usernamePref: String = preferences.getString("username_pref", "")
         if (usernamePref.isEmpty()) {
             sign_in_btn.setOnClickListener() {

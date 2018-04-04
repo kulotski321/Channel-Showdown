@@ -10,6 +10,7 @@ interface RegisterInterface {
     @POST("/user/registration/")
     fun createUserInfo(@Field("username") username: String,
                        @Field("email")email: String,
-                       @Field("password")password: String,
+                       @Field("password1")password1: String,
+                       @Field("password2")password2: String,
                        @Field("userType")userType: String): Call<User>
 }

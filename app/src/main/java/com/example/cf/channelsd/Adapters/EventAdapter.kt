@@ -7,13 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.cf.channelsd.Activities.UpcomingEventActivity
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
 import org.parceler.Parcels
-
+import com.example.cf.channelsd.Utils.picasso
 class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
     companion object {
 
@@ -38,6 +40,8 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         holder.eventConstant2.text = eventList[position].eventContestant2
         holder.eventCommentor.text = eventList[position].eventCommentator
         holder.eventId.text = eventList[position].eventId.toString()
+        holder.eventURL.text = eventList[position].eventImage
+        holder.context.picasso.load(ApiUtils.BASE_URL + holder.eventURL.text).into(holder.eventImage)
         var contestant1 = holder.eventConstant1.text.toString()
         var contestant2 = holder.eventConstant2.text.toString()
         if (contestant1 == "") {
@@ -58,7 +62,9 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
                     contestant1,
                     contestant2,
                     holder.eventCommentor.text.toString(),
-                    holder.eventId.text.toString().toInt()
+                    holder.eventId.text.toString().toInt(),
+                    holder.eventURL.text.toString()
+
             )
             i.putExtra("eventDetails", Parcels.wrap(event))
             holder.item.context.startActivity(i)
@@ -76,6 +82,8 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         val eventConstant2 = itemView.findViewById<TextView>(R.id.event_contestant2)!!
         val eventCommentor = itemView.findViewById<TextView>(R.id.event_commentator)!!
         val eventId = itemView.findViewById<TextView>(R.id.event_id)!!
+        val eventImage = itemView.findViewById<ImageView>(R.id.event_image)!!
+        val eventURL = itemView.findViewById<TextView>(R.id.event_url)!!
     }
 
 }

@@ -1,39 +1,21 @@
 package com.example.cf.channelsd.Activities
 
-import android.app.Activity
+//import com.example.cf.channelsd.Data.UserInfo
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import com.example.cf.channelsd.Data.User
-//import com.example.cf.channelsd.Data.UserInfo
-import com.example.cf.channelsd.R
-import kotlinx.android.synthetic.main.activity_profile.*
-import org.parceler.Parcels
-import java.io.File
-import java.io.InputStream
-import java.net.URL
-import android.graphics.drawable.Drawable
-import android.media.ThumbnailUtils
-import android.widget.MediaController
-import com.example.cf.channelsd.Utils.ApiUtils
-import com.example.cf.channelsd.Utils.picasso
-import com.squareup.picasso.Picasso
-import org.jetbrains.anko.ctx
-import android.media.MediaMetadataRetriever
-import android.os.Build
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import com.example.cf.channelsd.Utils.ImageUtil
+import com.example.cf.channelsd.Data.User
+import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
+import com.example.cf.channelsd.Utils.picasso
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
-import java.io.ByteArrayOutputStream
+import kotlinx.android.synthetic.main.activity_profile.*
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -53,18 +35,18 @@ class ProfileActivity : AppCompatActivity() {
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
                 preferences.getString("bio_pref", ""),
-                preferences.getString("profile_pic_pref",""),
-                preferences.getString("profile_vid_pref",""),
-                preferences.getString("profile_thumbnail_pref","")
+                preferences.getString("profile_pic_pref", ""),
+                preferences.getString("profile_vid_pref", ""),
+                preferences.getString("profile_thumbnail_pref", "")
 
         )
         // set profile picture
-        Log.e("profpic url:",ApiUtils.BASE_URL + user.profilePicture)
-        picasso.load(ApiUtils.BASE_URL+ user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture)
+        Log.e("profpic url:", ApiUtils.BASE_URL + user.profilePicture)
+        picasso.load(ApiUtils.BASE_URL + user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture)
         // set profile full name
         val fullName: String = user.firstName + " " + user.lastName
         // set profile video
-        Log.e("thumbnail url:",ApiUtils.BASE_URL + user.profileThumbNail)
+        Log.e("thumbnail url:", ApiUtils.BASE_URL + user.profileThumbNail)
         picasso.load(ApiUtils.BASE_URL + user.profileThumbNail).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_video_thumbnail)
 
         if (user.firstName.isEmpty() || user.lastName.isEmpty()) {
@@ -85,13 +67,13 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(i)
         }
         profile_picture.setOnClickListener {
-            val i = Intent(this,UploadPhotoActivity::class.java)
+            val i = Intent(this, UploadPhotoActivity::class.java)
             startActivity(i)
         }
         profile_video_thumbnail.setOnClickListener {
-            val videoUri: Uri = Uri.parse(ApiUtils.BASE_URL+user.profileVideo)
-            val i = Intent(Intent.ACTION_VIEW,videoUri)
-            i.setDataAndType(videoUri,"video/*")
+            val videoUri: Uri = Uri.parse(ApiUtils.BASE_URL + user.profileVideo)
+            val i = Intent(Intent.ACTION_VIEW, videoUri)
+            i.setDataAndType(videoUri, "video/*")
             i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             i.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             startActivity(i)
@@ -99,7 +81,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        Toast.makeText(this@ProfileActivity,message, Toast.LENGTH_LONG).show()
+        Toast.makeText(this@ProfileActivity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onBackPressed() {

@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="@string/create_event_now"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"/>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +37,52 @@
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/title_icon"/>
         </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        <TextView
+            android:id="@+id/textDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/datetime"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/datePicker_btn"
+                android:layout_width="125dp"
+                android:layout_height="46dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="26dp"
+                android:background="@color/color_yellow_primary"
+                android:text="@string/date"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dp" />
+
+            <Button
+                android:id="@+id/timePicker_btn"
+                android:layout_width="125dp"
+                android:layout_height="46dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="26dp"
+                android:background="@color/color_yellow_primary"
+                android:text="@string/time"
+                android:textSize="16sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp" />
+        </RelativeLayout>
+
+
+
+        <!--<android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp">
@@ -67,7 +121,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"/>
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout> -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,15 +166,17 @@
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/bio_icon" />
         </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/confirm_event_btn"
             android:layout_width="150dp"
             android:layout_height="46dp"
             android:layout_gravity="center"
-            android:text="@string/confirm"
+            android:text="@string/create"
             android:textSize="16sp"
             android:background="@color/color_yellow_primary"
             android:layout_marginTop="40dp">
         </Button>
+
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>

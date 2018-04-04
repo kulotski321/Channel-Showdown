@@ -58,6 +58,7 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.getString("profile_vid_pref",""),
                 preferences.getString("profile_thumbnail_pref","")
         )
+
         profile_name.text = user.username
         picasso.load(ApiUtils.BASE_URL+user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
         when {
@@ -80,9 +81,8 @@ class DashboardActivity : AppCompatActivity() {
 
         profile_picture_dashboard.setOnClickListener {
             val i = Intent(this, ProfileActivity::class.java)
-            // i.putExtra("user",Parcels.wrap(user))
             startActivity(i)
-            finish()
+
         }
         logout_icon.setOnClickListener {
             alert("Do you really want to logout?") {

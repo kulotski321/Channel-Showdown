@@ -6,19 +6,32 @@
     android:layout_height="match_parent"
     android:layout_margin="15dp">
 
+    <ImageView
+        android:id="@+id/event_picture"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/event_name_upcoming_commentator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="@string/event_name"
         android:textColor="@color/color_black"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="EVENT TITLE"
-        android:layout_marginLeft="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/event_picture"
+        tools:text="EVENT TITLE" />
 
     <TextView
         android:id="@+id/event_date_upcoming_commentator"
@@ -135,28 +148,27 @@
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:background="@color/color_yellow_primary"
         android:text="@string/start_event"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view_entries_btn"
-        android:layout_marginLeft="16dp" />
+        tools:layout_editor_absoluteY="433dp" />
 
     <Button
         android:id="@+id/view_entries_btn"
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="84dp"
         android:background="@color/color_yellow_primary"
         android:text="@string/view_entries"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/start_event_btn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 </android.support.constraint.ConstraintLayout>

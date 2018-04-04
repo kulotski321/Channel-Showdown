@@ -74,5 +74,9 @@
             android:name=".Activities.UploadThumbnailActivity"
             android:label="@string/upload_thumbnail"
             android:parentActivityName=".Activities.SelectEditActivity" />
+        <activity
+            android:name=".Activities.UploadEventPictureActivity"
+            android:label="@string/upload_event_photo"
+            android:parentActivityName=".Activities.MyEventActivity" />
     </application>
 </manifest>
