@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.example.cf.channelsd.Activities.CreateEventActivity
 import com.example.cf.channelsd.Activities.MyEventActivity
 import com.example.cf.channelsd.Data.UpcomingEvent
+import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
@@ -34,11 +35,26 @@ class EventCommentatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val preferences: SharedPreferences = this.activity!!.getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        val username = preferences.getString("username_pref", "")!!
-        userName = username
+        val userInfo = User(
+                preferences.getString("session_key_pref", ""),
+                preferences.getString("username_pref", ""),
+                preferences.getString("email_pref", ""),
+                preferences.getString("userType_pref", ""),
+                preferences.getString("firstName_pref", ""),
+                preferences.getString("lastName_pref", ""),
+                preferences.getString("bio_pref", ""),
+                preferences.getString("profile_pic_pref",""),
+                preferences.getString("profile_vid_pref",""),
+                preferences.getString("profile_thumbnail_pref","")
+        )
+        userName = userInfo.username
         create_event_btn.setOnClickListener {
-            val i = Intent(activity, CreateEventActivity::class.java)
-            startActivity(i)
+            if(userInfo.firstName == "" && userInfo.lastName == "" && userInfo.bio == ""){
+                toastMessage("Please fill out your basic info first before creating an event")
+            }else{
+                val i = Intent(activity, CreateEventActivity::class.java)
+                startActivity(i)
+            }
         }
         my_event_btn.setOnClickListener {
             getMyEvent(userName,timeZone)

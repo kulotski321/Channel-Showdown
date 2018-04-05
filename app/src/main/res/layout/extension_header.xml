@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_purple_primary"
+        android:background="@color/color_purple_primaryDark"
         android:id="@+id/profile_header"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView

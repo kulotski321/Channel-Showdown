@@ -103,9 +103,9 @@ class UploadPhotoActivity : AppCompatActivity() , UploadCallbacks{
                     overridePendingTransition(0, 0)
                     finish()
                     overridePendingTransition(0, 0)
-                    toastMessage("Profile picture updated")
+                    toastMessage("Profile picture uploaded")
                 }else{
-                    toastMessage("Server is down")
+                    toastMessage("Upload failed")
                 }
             }
         })

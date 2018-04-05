@@ -23,7 +23,6 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var user: User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
@@ -40,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
                 preferences.getString("profile_thumbnail_pref", "")
 
         )
+        setContentView(R.layout.activity_profile)
         // set profile picture
         Log.e("profpic url:", ApiUtils.BASE_URL + user.profilePicture)
         picasso.load(ApiUtils.BASE_URL + user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture)
@@ -48,7 +48,6 @@ class ProfileActivity : AppCompatActivity() {
         // set profile video
         Log.e("thumbnail url:", ApiUtils.BASE_URL + user.profileThumbNail)
         picasso.load(ApiUtils.BASE_URL + user.profileThumbNail).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_video_thumbnail)
-
         if (user.firstName.isEmpty() || user.lastName.isEmpty()) {
             val default = "Full Name"
             profile_full_name.text = default

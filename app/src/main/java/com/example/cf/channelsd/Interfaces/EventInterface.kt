@@ -4,6 +4,7 @@ import com.example.cf.channelsd.Data.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface EventInterface {
@@ -45,10 +46,11 @@ interface EventInterface {
                         @Field("entry_id") eventId: Int): Call<Reply>
 
     @Multipart
-    @POST("/event/uploadeventpic/")
+    @POST("/event/uploadeventimage/")
     fun uploadEventPicture(@Part("event_id") eventId: RequestBody,
                            @Part profileVideo: MultipartBody.Part): Call<Reply>
-    @GET("/event/acceptedevents/")
-    fun getAcceptedEventList() : Call<AcceptedEventList>
 
+    @FormUrlEncoded
+    @POST("/event/myevent/")
+    fun getAcceptedEvent(@Field("username") username: String) : Callback<UpcomingEvent>
 }

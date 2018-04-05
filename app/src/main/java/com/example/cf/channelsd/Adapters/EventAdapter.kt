@@ -16,6 +16,9 @@ import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import org.parceler.Parcels
 import com.example.cf.channelsd.Utils.picasso
+import java.text.DateFormat
+import java.util.*
+
 class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
     companion object {
 
@@ -32,8 +35,21 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var dateFormat = DateFormat.getDateTimeInstance()
+        var dateTime = Calendar.getInstance()!!
+        val year : String = eventList[position].eventDate.substring(0,4)
+        val month : String = eventList[position].eventDate.substring(5,7)
+        val day : String = eventList[position].eventDate.substring(8,10)
+        val hour : String = eventList[position].eventDate.substring(11,13)
+        val minute : String = eventList[position].eventDate.substring(14,16)
+        dateTime.set(Calendar.YEAR,year.toInt())
+        dateTime.set(Calendar.MONTH,month.toInt()-1)
+        dateTime.set(Calendar.DAY_OF_MONTH,day.toInt())
+        dateTime.set(Calendar.HOUR_OF_DAY,hour.toInt())
+        dateTime.set(Calendar.MINUTE,minute.toInt())
+        val realTime : String = dateFormat.format(dateTime.time)
         holder.eventName.text = eventList[position].eventName
-        holder.eventDate.text = eventList[position].eventDate
+        holder.eventDate.text = realTime// eventList[position].eventDate
         holder.eventDescription.text = eventList[position].eventDescription
         holder.eventPrize.text = eventList[position].prize
         holder.eventConstant1.text = eventList[position].eventContestant1

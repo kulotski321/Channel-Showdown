@@ -29,6 +29,8 @@ class MyEventActivity : AppCompatActivity() {
     private lateinit var myEventMain: Event
     var dateFormat = DateFormat.getDateTimeInstance()
     var dateTime = Calendar.getInstance()!!
+    private lateinit var eventId : String
+    private lateinit var eventPic: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -67,6 +69,12 @@ class MyEventActivity : AppCompatActivity() {
                 toastMessage("No contestant yet")
             }
         }
+        upload_myevent_pic_btn.setOnClickListener {
+            val i = Intent(this, UploadEventPictureActivity::class.java)
+            i.putExtra("event_id",eventId)
+            i.putExtra("event_image",eventPic)
+            startActivity(i)
+        }
     }
 
     private fun getMyEvent(username: String,timeZone: String) {
@@ -85,6 +93,8 @@ class MyEventActivity : AppCompatActivity() {
                     if(event != null){
                         val myEvent = event.myEvent
                         myEventMain = myEvent!!
+                        eventId = myEvent.eventId.toString()
+                        eventPic = myEvent.eventImage
                         Log.e("Event Details:", myEvent.toString())
                         event_name_upcoming_commentator.text = myEvent.eventName
                         var contestant1 : String = myEvent.eventContestant1
@@ -105,6 +115,7 @@ class MyEventActivity : AppCompatActivity() {
                         val day : String = myEvent.eventDate.substring(8,10)
                         val hour : String = myEvent.eventDate.substring(11,13)
                         val minute : String = myEvent.eventDate.substring(14,16)
+
                         Log.e("DATE",myEvent.eventDate)
                         Log.e("DATE","$year $month $day $hour $minute")
                         dateTime.set(Calendar.YEAR,year.toInt())

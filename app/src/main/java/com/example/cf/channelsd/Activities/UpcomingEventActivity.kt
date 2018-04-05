@@ -54,10 +54,14 @@ class UpcomingEventActivity : AppCompatActivity() {
         }
         event_contestant1_upcoming.setOnClickListener {
             val username = event_contestant1_upcoming.text
-            val i = Intent(this,ViewProfileActivity::class.java)
-            i.putExtra("username",username)
-            i.putExtra("from_link","true")
-            startActivity(i)
+            if(username != "Empty Slot"){
+                val i = Intent(this,ViewProfileActivity::class.java)
+                i.putExtra("username",username)
+                i.putExtra("from_link","true")
+                startActivity(i)
+            }else{
+                toastMessage("No contestant yet")
+            }
         }
         event_contestant2_upcoming.setOnClickListener {
             val username = event_contestant2_upcoming.text
@@ -72,14 +76,10 @@ class UpcomingEventActivity : AppCompatActivity() {
         }
         event_commentator_upcoming.setOnClickListener {
             val username = event_commentator_upcoming.text
-            if(username != "Empty Slot"){
-                val i = Intent(this,ViewProfileActivity::class.java)
-                i.putExtra("username",username)
-                i.putExtra("from_link","true")
-                startActivity(i)
-            }else{
-                toastMessage("No contestant yet")
-            }
+            val i = Intent(this,ViewProfileActivity::class.java)
+            i.putExtra("username",username)
+            i.putExtra("from_link","true")
+            startActivity(i)
         }
     }
     private fun sendEntry(username: String, eventId: Int){

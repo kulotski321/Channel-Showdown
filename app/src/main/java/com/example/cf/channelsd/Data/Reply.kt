@@ -13,9 +13,13 @@ data class Reply (
         @SerializedName("user_video")
         val profileVideo: String,
         @SerializedName("video_thumbnail")
-        val thumbNail: String
+        val thumbNail: String,
+        @SerializedName("event_image")
+        val eventImage: String
+
 ) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -27,6 +31,7 @@ data class Reply (
         parcel.writeString(profilePic)
         parcel.writeString(profileVideo)
         parcel.writeString(thumbNail)
+        parcel.writeString(eventImage)
     }
 
     override fun describeContents(): Int {
@@ -42,4 +47,5 @@ data class Reply (
             return arrayOfNulls(size)
         }
     }
+
 }

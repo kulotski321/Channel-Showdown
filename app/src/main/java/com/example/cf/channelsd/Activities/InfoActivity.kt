@@ -36,11 +36,10 @@ class InfoActivity : AppCompatActivity() {
 
     private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private var user: User? = null
-    private var isNew = false;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_additional_info)
+
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
@@ -55,14 +54,14 @@ class InfoActivity : AppCompatActivity() {
                 preferences.getString("profile_vid_pref",""),
                 preferences.getString("profile_thumbnail_pref","")
         )
-        val firstNameInput: EditText = input_first_name
+        val firstNameInput: EditText = this.input_first_name
         val lastNameInput: EditText = input_last_name
         val bioInput: EditText = input_bio
 
         if(user!!.firstName == "" && user!!.lastName == "" && user!!.bio == ""){
-            complete_profile_info.visibility = View.INVISIBLE
-        }else{
             complete_profile_info.visibility = View.VISIBLE
+        }else{
+            complete_profile_info.visibility = View.INVISIBLE
         }
         firstNameInput.setText(user?.firstName, TextView.BufferType.EDITABLE)
         lastNameInput.setText(user?.lastName, TextView.BufferType.EDITABLE)
@@ -74,11 +73,6 @@ class InfoActivity : AppCompatActivity() {
                 val lastName: String = input_last_name.text.toString()
                 val bio: String = input_bio.text.toString()
                 sendPost(username, firstName, lastName, bio)
-                val i = Intent(this, ProfileActivity::class.java)
-                startActivity(i)
-                overridePendingTransition(0, 0)
-                finish()
-                overridePendingTransition(0, 0)
             }
         }
         cancel_btn.setOnClickListener {
@@ -140,13 +134,12 @@ class InfoActivity : AppCompatActivity() {
                     editor.putString("lastName_pref", lastNameNew)
                     editor.putString("bio_pref", bioNew)
                     editor.apply()
-                    if(isNew){
-                        val i = Intent(this@InfoActivity, ProfileActivity::class.java)
-                        startActivity(i)
-                        overridePendingTransition(0, 0)
-                        finish()
-                        overridePendingTransition(0, 0)
-                    }
+                    val i = Intent(this@InfoActivity, ProfileActivity::class.java)
+
+                    startActivity(i)
+                    overridePendingTransition(0, 0)
+                    finish()
+                    overridePendingTransition(0, 0)
                 }
             }
         })

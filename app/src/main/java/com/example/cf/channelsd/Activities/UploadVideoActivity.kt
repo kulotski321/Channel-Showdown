@@ -142,6 +142,8 @@ class UploadVideoActivity : AppCompatActivity(),ProgressRequestBody.UploadCallba
                     editor.apply()
                     finish()
                     toastMessage("Video Uploaded")
+                }else{
+                    toastMessage("Upload failed")
                 }
             }
         })
