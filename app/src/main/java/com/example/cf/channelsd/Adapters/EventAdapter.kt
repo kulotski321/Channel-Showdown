@@ -47,6 +47,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         dateTime.set(Calendar.DAY_OF_MONTH,day.toInt())
         dateTime.set(Calendar.HOUR_OF_DAY,hour.toInt())
         dateTime.set(Calendar.MINUTE,minute.toInt())
+        dateTime.set(Calendar.SECOND,0)
         val realTime : String = dateFormat.format(dateTime.time)
         holder.eventName.text = eventList[position].eventName
         holder.eventDate.text = realTime// eventList[position].eventDate

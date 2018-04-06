@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_purple_primary">
+    android:background="@color/color_purple_primaryDark">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +46,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="5dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="6dp"
             android:gravity="left"
             android:text="@string/about_me"
             android:textColor="@color/color_white"
@@ -75,6 +76,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="5dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="6dp"
             android:gravity="left"
             android:text="@string/profile_video"
             android:textSize="14sp"
@@ -99,6 +101,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:background="@color/color_yellow_primary"
+            android:textColor="@color/color_purple_primaryDark"
             android:text="@string/edit_profile"
             android:textSize="16sp"
             android:layout_marginTop="30dp"/>

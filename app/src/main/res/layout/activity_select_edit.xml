@@ -18,6 +18,7 @@
         android:background="@color/color_yellow_primary"
         android:text="@string/edit_personal_info"
         android:textSize="16sp"
+        android:textColor="@color/color_purple_primaryDark"
         app:layout_constraintBottom_toTopOf="@+id/upload_thumbnail_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -31,6 +32,7 @@
         android:background="@color/color_yellow_primary"
         android:text="@string/upload_thumbnail_video"
         android:textSize="16sp"
+        android:textColor="@color/color_purple_primaryDark"
         app:layout_constraintBottom_toTopOf="@+id/upload_profile_video_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -48,6 +50,7 @@
         android:background="@color/color_yellow_primary"
         android:text="@string/upload_profile_video"
         android:textSize="16sp"
+        android:textColor="@color/color_purple_primaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

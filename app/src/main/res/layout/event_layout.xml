@@ -36,8 +36,9 @@
 
                 <ImageView
                     android:id="@+id/event_image"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:layout_height="125dp" />
             </LinearLayout>
             <LinearLayout
@@ -45,12 +46,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:weightSum="2"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
                 <TextView
                     android:id="@+id/event_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:background="@color/color_white"
                     android:padding="5dp"
                     android:text="EVENT TITLE"
@@ -66,7 +67,7 @@
                     android:padding="5dp"
                     android:text="DATE SCHEDULE"
                     android:textColor="@color/color_red"
-                    android:textSize="8sp" />
+                    android:textSize="10sp" />
                 <TextView
                     android:id="@+id/event_description"
                     android:layout_width="match_parent"

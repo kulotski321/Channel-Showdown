@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_purple_primary">
+    android:background="@color/color_purple_primaryDark">
 
     <Button
         android:id="@+id/select_video_btn"
@@ -15,6 +15,7 @@
         android:background="@color/color_yellow_primary"
         android:text="@string/select_video"
         android:textSize="16sp"
+        android:textColor="@color/color_purple_primaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +66,7 @@
         android:background="@color/color_yellow_primary"
         android:text="@string/upload"
         android:textSize="16sp"
+        android:textColor="@color/color_purple_primaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -81,6 +83,7 @@
         android:background="@color/color_yellow_primary"
         android:text="@string/cancel"
         android:textSize="16sp"
+        android:textColor="@color/color_purple_primaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/upload_video_btn"
         app:layout_constraintHorizontal_bias="0.294"

@@ -144,8 +144,4 @@ class InfoActivity : AppCompatActivity() {
             }
         })
     }
-    override fun onBackPressed() {
-
-    }
-
 }

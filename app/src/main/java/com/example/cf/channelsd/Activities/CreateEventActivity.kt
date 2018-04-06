@@ -41,7 +41,6 @@ class CreateEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_create_event)
         // requestWindowFeature(FEATURE_ACTION_BAR)
-
         val timezoneID : String? = TimeZone.getDefault().id
         Log.e("TIMEZONE", timezoneID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)

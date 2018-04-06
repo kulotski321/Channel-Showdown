@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.cf.channelsd.Activities.ViewProfileActivity
 import com.example.cf.channelsd.Data.Entry
@@ -53,7 +54,7 @@ class EntriesAdapter(private val entryList: ArrayList<Entry>): RecyclerView.Adap
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val username = itemView.findViewById<TextView>(R.id.entry_username_user)!!
         val status = itemView.findViewById<TextView>(R.id.entry_status_user)!!
-        val item: LinearLayout? = itemView.findViewById<LinearLayout>(R.id.entry_item)
+        val item: RelativeLayout? = itemView.findViewById<RelativeLayout>(R.id.entry_item)
         val entryId = itemView.findViewById<TextView>(R.id.entry_event_id)!!
         val context = itemView.context!!
     }

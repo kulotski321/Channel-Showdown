@@ -1,11 +1,17 @@
 package com.example.cf.channelsd.Activities
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Event
@@ -17,6 +23,7 @@ import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_my_event.*
 import kotlinx.android.synthetic.main.event_layout.*
+import kotlinx.android.synthetic.main.fragment_my_events.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,11 +38,18 @@ class MyEventActivity : AppCompatActivity() {
     var dateTime = Calendar.getInstance()!!
     private lateinit var eventId : String
     private lateinit var eventPic: String
+    private var remainingTime:Long = 999999
+    private var eventDateTime: Long = 0
+    var seconds : Long = 0
+    var minutes : Long = 0
+    var hours : Long = 0
+    lateinit var timer : TextView
+    lateinit var streamButton : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_my_event)
-
+        timer = findViewById(R.id.myevent_commentator_time)
+        streamButton = findViewById(R.id.start_event_btn)
         val username = intent.getStringExtra("username")
         val timeZone : String = TimeZone.getDefault().id
 
@@ -43,7 +57,6 @@ class MyEventActivity : AppCompatActivity() {
 
         view_entries_btn.setOnClickListener {
             val i = Intent(this,EntriesActivity::class.java)
-            toastMessage(myEventMain.eventId.toString())
             i.putExtra("eventId",myEventMain.eventId.toString())
             startActivity(i)
         }
@@ -74,6 +87,13 @@ class MyEventActivity : AppCompatActivity() {
             i.putExtra("event_id",eventId)
             i.putExtra("event_image",eventPic)
             startActivity(i)
+        }
+        start_event_btn.setOnClickListener {
+            if (remainingTime >= 0){
+                toastMessage("Event hasn't started yet")
+            }else{
+
+            }
         }
     }
 
@@ -116,16 +136,15 @@ class MyEventActivity : AppCompatActivity() {
                         val hour : String = myEvent.eventDate.substring(11,13)
                         val minute : String = myEvent.eventDate.substring(14,16)
 
-                        Log.e("DATE",myEvent.eventDate)
-                        Log.e("DATE","$year $month $day $hour $minute")
                         dateTime.set(Calendar.YEAR,year.toInt())
                         dateTime.set(Calendar.MONTH,month.toInt()-1)
                         dateTime.set(Calendar.DAY_OF_MONTH,day.toInt())
                         dateTime.set(Calendar.HOUR_OF_DAY,hour.toInt())
                         dateTime.set(Calendar.MINUTE,minute.toInt())
+                        dateTime.set(Calendar.SECOND,0)
                         picasso.load(ApiUtils.BASE_URL + myEvent.eventImage).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(event_picture)
                         event_date_upcoming_commentator.text = dateFormat.format(dateTime.time)
-                        //event_date_upcoming_commentator.text = dateFormat.format("2018-04-17 10:00:00")
+                        eventDateTime = dateTime.timeInMillis
                     }
                 }else{
 
@@ -137,10 +156,45 @@ class MyEventActivity : AppCompatActivity() {
         Toast.makeText(this@MyEventActivity, message, Toast.LENGTH_LONG).show();
     }
 
+    var h = Handler()
+    var delay = 1000 //1 second=1000 millisecond
+    var runnable: Runnable ?= null
+
     override fun onResume() {
         super.onResume()
         val username = intent.getStringExtra("username")
         val timeZone : String = TimeZone.getDefault().id
         getMyEvent(username,timeZone)
+
+        //start handler as activity become visible
+        h.postDelayed(object : Runnable {
+            @SuppressLint("SetTextI18n")
+            override fun run() {
+                //do something
+                var today = Calendar.getInstance()!!
+                remainingTime = eventDateTime - today.timeInMillis
+                if(remainingTime > 0){
+                    seconds = (remainingTime / 1000) % 60
+                    minutes = (remainingTime / (1000 * 60) % 60)
+                    hours = (remainingTime / (1000 * 60 * 60))
+                    timer.text = "$hours hrs $minutes mins $seconds secs"
+                    streamButton.setBackgroundColor(Color.RED)
+                }else{
+                    timer.text = "0hours 0mins 0secs"
+                    streamButton.setBackgroundColor(Color.GREEN)
+                }
+                remainingTime-=1000
+                runnable = this
+                h.postDelayed(runnable, delay.toLong())
+            }
+        }, delay.toLong())
+
+        super.onResume()
     }
+
+    override fun onPause() {
+        h.removeCallbacks(runnable) //stop handler when activity not visible
+        super.onPause()
+    }
+
 }

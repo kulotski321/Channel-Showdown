@@ -26,10 +26,12 @@
         <activity
             android:name=".Activities.RegisterActivity"
             android:label="@string/register"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.InfoActivity"
             android:label="@string/info"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.DashboardActivity"
@@ -38,17 +40,21 @@
         <activity
             android:name=".Activities.ProfileActivity"
             android:label="@string/profile"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.CreateEventActivity"
             android:label="@string/create_event"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity android:name=".Activities.UpcomingEventActivity"
             android:label="@string/upcoming_event_activity"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.DashboardActivity"/>
         <activity
             android:name=".Activities.MyEventActivity"
             android:label="@string/my_event_activity"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.EntriesActivity"
@@ -57,22 +63,27 @@
         <activity
             android:name=".Activities.ViewProfileActivity"
             android:label="@string/view_profile"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.EntriesActivity" />
         <activity
             android:name=".Activities.UploadPhotoActivity"
             android:label="@string/upload_photo"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.ProfileActivity"/>
         <activity
             android:name=".Activities.UploadVideoActivity"
             android:label="@string/upload_video"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.SelectEditActivity"/>
         <activity
             android:name=".Activities.SelectEditActivity"
             android:label="@string/select_edit"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.ProfileActivity" />
         <activity
             android:name=".Activities.UploadThumbnailActivity"
             android:label="@string/upload_thumbnail"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.SelectEditActivity" />
         <activity
             android:name=".Activities.UploadEventPictureActivity"

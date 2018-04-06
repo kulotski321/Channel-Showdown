@@ -35,6 +35,10 @@ class UpcomingEventActivity : AppCompatActivity() {
         setContentView(R.layout.activity_upcoming_details)
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
+        val firstName = preferences.getString("firstName_pref", "")
+        val lastName = preferences.getString("lastName_pref", "")
+        val bio = preferences.getString("bio_pref", "")
+        val profVid = preferences.getString("profile_vid_pref", "")
         val event: Event = unwrap(intent.getParcelableExtra("eventDetails"))
         picasso.load(ApiUtils.BASE_URL + event.eventImage).into(event_image_upcoming)
         event_name_upcoming.text = event.eventName
@@ -47,10 +51,19 @@ class UpcomingEventActivity : AppCompatActivity() {
         event_id_upcoming.text = event.eventId.toString()
 
         join_event_btn.setOnClickListener {
-            alert ("Are  you sure you want to join this event?"){
-                yesButton { sendEntry(preferences.getString("username_pref", ""), event.eventId)}
-                noButton { }
-            }.show()
+            if(firstName != "" && lastName != "" && bio != ""){
+                if(profVid != "/media/profile_video/default_video.mp4"){
+                    alert ("Are  you sure you want to join this event?"){
+                        yesButton { sendEntry(preferences.getString("username_pref", ""), event.eventId)}
+                        noButton { }
+                    }.show()
+                }else{
+                    toastMessage("Please upload a profile video to start joining events")
+                }
+            }else{
+                toastMessage("Please complete your personal info")
+            }
+
         }
         event_contestant1_upcoming.setOnClickListener {
             val username = event_contestant1_upcoming.text

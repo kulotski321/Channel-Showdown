@@ -52,5 +52,6 @@ interface EventInterface {
 
     @FormUrlEncoded
     @POST("/event/myevent/")
-    fun getAcceptedEvent(@Field("username") username: String) : Callback<UpcomingEvent>
+    fun getAcceptedEvent(@Field("username") username: String,
+                         @Field("timezone")timezone: String) : Call<UpcomingEvent>
 }

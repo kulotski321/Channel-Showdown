@@ -33,7 +33,7 @@
                 android:hint="@string/event_name"
                 android:inputType="textCapWords"
                 android:focusable="true"
-                android:maxLength="50"
+                android:maxLength="45"
                 android:drawableLeft="@drawable/title_icon"
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/title_icon"/>
@@ -63,6 +63,7 @@
                 android:background="@color/color_yellow_primary"
                 android:text="@string/date"
                 android:textSize="16sp"
+                android:textColor="@color/color_purple_primaryDark"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="16dp" />
 
@@ -77,6 +78,7 @@
                 android:background="@color/color_yellow_primary"
                 android:text="@string/time"
                 android:textSize="16sp"
+                android:textColor="@color/color_purple_primaryDark"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp" />
         </RelativeLayout>
@@ -138,7 +140,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="16"
                 android:hint="@string/event_prize"
-                android:maxLength="150"
+                android:maxLength="100"
                 android:inputType="textCapWords"
                 android:focusable="true"
                 android:drawableLeft="@drawable/prize_icon"
@@ -174,6 +176,7 @@
             android:layout_gravity="center"
             android:text="@string/create"
             android:textSize="16sp"
+            android:textColor="@color/color_purple_primaryDark"
             android:background="@color/color_yellow_primary"
             android:layout_marginTop="40dp">
         </Button>
