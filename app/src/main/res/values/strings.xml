@@ -17,6 +17,8 @@
     <string name="select_edit">Select Option</string>
     <string name="upload_thumbnail">Upload Thumbnail</string>
     <string name="upload_event_photo">Upload photo</string>
+    <string name="live_stream_commentator">Live Stream Commentator</string>
+    <string name="live_stream_contestant">Live Stream Contestant</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -78,6 +80,11 @@
     <!-- EVENT FRAGMENT -->
     <string name="create_an_event">Create an event</string>
     <string name="my_event">My Event</string>
+    <!-- LIVE STREAM -->
+    <string name="waiting_for_contestant">Waiting for contestant</string>
+    <string name="waiting_for_commentator">Waiting for commentator</string>
+    <string name="commentator_disconnect">Commentator disconnected</string>
+    <string name="contestant_disconnect">Contestant disconnected</string>
     <!-- FOR TESTING-->
     <string name="test">Test</string>
     <string name="this_is_live">This is Live</string>

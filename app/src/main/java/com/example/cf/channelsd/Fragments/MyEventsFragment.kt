@@ -2,6 +2,7 @@ package com.example.cf.channelsd.Fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -15,6 +16,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.cf.channelsd.Activities.LiveStreamContestantActivity
+import com.example.cf.channelsd.Activities.ViewProfileActivity
 import com.example.cf.channelsd.Data.UpcomingEvent
 import com.example.cf.channelsd.Interfaces.EventInterface
 
@@ -41,6 +44,7 @@ class MyEventsFragment : Fragment() {
     var hours : Long = 0
     lateinit var mainTimer : TextView
     lateinit var streamButton : Button
+    var canStream = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_events, container, false)
@@ -64,9 +68,17 @@ class MyEventsFragment : Fragment() {
         myevent_stream_btn.setOnClickListener {
             if (remainingTime >= 0){
                 toastMessage("Event hasn't started yet")
-            }else{
-
             }
+            if(canStream){
+                val i = Intent(context,LiveStreamContestantActivity::class.java)
+                startActivity(i)
+            }
+        }
+        myevent_commentator.setOnClickListener {
+            val i = Intent(context,ViewProfileActivity::class.java)
+            i.putExtra("username",myevent_commentator.text)
+            i.putExtra("from_link","true")
+            startActivity(i)
         }
     }
     private fun getAcceptedEvent(username : String, timezone : String){
@@ -111,7 +123,7 @@ class MyEventsFragment : Fragment() {
                     myevent_details.visibility = View.INVISIBLE
                     myevent_img.visibility = View.INVISIBLE
                     myevent_prize.visibility = View.INVISIBLE
-                    myevent_stream_btn.visibility = View.INVISIBLE
+                    myevent_stream_btn.visibility = View.VISIBLE
                     myevent_title.visibility = View.INVISIBLE
                     commentator_textview.visibility = View.INVISIBLE
                     event_date_textview.visibility = View.INVISIBLE
@@ -144,19 +156,21 @@ class MyEventsFragment : Fragment() {
                     seconds = (remainingTime / 1000) % 60
                     minutes = (remainingTime / (1000 * 60) % 60)
                     hours = (remainingTime / (1000 * 60 * 60))
-                    Log.e("SECONDS:",seconds.toString())
-                    Log.e("MINUTES:",minutes.toString())
-                    Log.e("HOURS:",hours.toString())
+                    //Log.e("SECONDS:",seconds.toString())
+                    //Log.e("MINUTES:",minutes.toString())
+                    //Log.e("HOURS:",hours.toString())
                     mainTimer.text = "$hours hrs $minutes mins $seconds secs"
                     streamButton.setBackgroundColor(Color.RED)
 
                 }else{
-                    mainTimer.text = "0"
+                    canStream = true
+                    mainTimer.text = "0 hrs 0 mins 0 secs"
                     streamButton.setBackgroundColor(Color.GREEN)
+
                 }
                 remainingTime-=1000
-                Log.e("today:",today.timeInMillis.toString())
-                Log.e("remaining time:",remainingTime.toString())
+                //Log.e("today:",today.timeInMillis.toString())
+                //Log.e("remaining time:",remainingTime.toString())
                 runnable = this
                 h.postDelayed(runnable, delay.toLong())
             }

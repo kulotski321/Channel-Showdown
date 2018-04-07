@@ -45,6 +45,7 @@ class MyEventActivity : AppCompatActivity() {
     var hours : Long = 0
     lateinit var timer : TextView
     lateinit var streamButton : Button
+    var canStream = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_event)
@@ -91,8 +92,10 @@ class MyEventActivity : AppCompatActivity() {
         start_event_btn.setOnClickListener {
             if (remainingTime >= 0){
                 toastMessage("Event hasn't started yet")
-            }else{
-
+            }
+            if(canStream){
+                val i = Intent(this,LiveStreamCommentatorActivity::class.java)
+                startActivity(i)
             }
         }
     }
@@ -180,8 +183,9 @@ class MyEventActivity : AppCompatActivity() {
                     timer.text = "$hours hrs $minutes mins $seconds secs"
                     streamButton.setBackgroundColor(Color.RED)
                 }else{
-                    timer.text = "0hours 0mins 0secs"
+                    timer.text = "0 hours 0 mins 0 secs"
                     streamButton.setBackgroundColor(Color.GREEN)
+                    canStream = true
                 }
                 remainingTime-=1000
                 runnable = this

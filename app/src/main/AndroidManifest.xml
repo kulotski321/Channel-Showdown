@@ -89,5 +89,12 @@
             android:name=".Activities.UploadEventPictureActivity"
             android:label="@string/upload_event_photo"
             android:parentActivityName=".Activities.MyEventActivity" />
+        <activity
+            android:name=".Activities.LiveStreamCommentatorActivity"
+            android:label="@string/live_stream_commentator"
+            android:parentActivityName=".Activities.MyEventActivity" />
+        <activity android:name=".Activities.LiveStreamContestantActivity"
+            android:label="@string/waiting_for_contestant"
+            android:parentActivityName=".Activities.DashboardActivity"/>
     </application>
 </manifest>
