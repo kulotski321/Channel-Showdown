@@ -62,7 +62,7 @@
             android:text="@string/sign_in"
             android:textSize="16sp"
             android:textColor="@color/color_purple_primaryDark"
-            android:background="@drawable/round_button">
+            android:background="@drawable/round_button1">
         </Button>
         <LinearLayout
             android:layout_width="match_parent"

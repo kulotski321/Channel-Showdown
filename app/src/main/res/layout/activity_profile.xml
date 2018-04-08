@@ -100,7 +100,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button1"
             android:textColor="@color/color_purple_primaryDark"
             android:text="@string/edit_profile"
             android:textSize="16sp"

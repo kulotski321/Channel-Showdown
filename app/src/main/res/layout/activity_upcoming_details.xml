@@ -194,7 +194,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button1"
             android:text="@string/join_event"
             android:textSize="16sp"
             android:textColor="@color/color_purple_primaryDark"

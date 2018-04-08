@@ -9,12 +9,14 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Event
+import com.example.cf.channelsd.Data.Key
 import com.example.cf.channelsd.Data.UpcomingEvent
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
@@ -22,8 +24,6 @@ import com.example.cf.channelsd.Utils.picasso
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_my_event.*
-import kotlinx.android.synthetic.main.event_layout.*
-import kotlinx.android.synthetic.main.fragment_my_events.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,15 +45,20 @@ class MyEventActivity : AppCompatActivity() {
     var hours : Long = 0
     lateinit var timer : TextView
     lateinit var streamButton : Button
+    lateinit var textTimer : TextView
     var canStream = false
+    // Opentok keys
+    private var apiKey: String ?= null
+    private var sessionId : String ?= null
+    private var token : String ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_event)
         timer = findViewById(R.id.myevent_commentator_time)
         streamButton = findViewById(R.id.start_event_btn)
+        textTimer = findViewById(R.id.time_remaining2)
         val username = intent.getStringExtra("username")
         val timeZone : String = TimeZone.getDefault().id
-
         getMyEvent(username,timeZone)
 
         view_entries_btn.setOnClickListener {
@@ -94,8 +99,7 @@ class MyEventActivity : AppCompatActivity() {
                 toastMessage("Event hasn't started yet")
             }
             if(canStream){
-                val i = Intent(this,LiveStreamCommentatorActivity::class.java)
-                startActivity(i)
+                getCommentatorKey(username,eventId.toInt())
             }
         }
     }
@@ -132,7 +136,6 @@ class MyEventActivity : AppCompatActivity() {
                         event_contestant2_upcoming_commentator.text = contestant2
                         event_description_upcoming_commentator.text =myEvent.eventDescription
                         event_prize_upcoming_commentator.text = myEvent.prize
-                        //event_date_upcoming_commentator.text = myEvent.eventDate
                         val year : String = myEvent.eventDate.substring(0,4)
                         val month : String = myEvent.eventDate.substring(5,7)
                         val day : String = myEvent.eventDate.substring(8,10)
@@ -151,6 +154,32 @@ class MyEventActivity : AppCompatActivity() {
                     }
                 }else{
 
+                }
+            }
+        })
+    }
+    private fun getCommentatorKey(username: String, eventId: Int){
+        eventInterface.getKeyCommentator(username,eventId).enqueue(object: Callback<Key>{
+            override fun onFailure(call: Call<Key>?, t: Throwable?) {
+                if(t?.message == "unexpected end of stream"){
+                    getCommentatorKey(username,eventId)
+                }
+            }
+
+            override fun onResponse(call: Call<Key>?, response: Response<Key>?) {
+                if(response!!.isSuccessful){
+                    val key = response.body()
+                    apiKey = key!!.apiKey
+                    sessionId = key.sessionId
+                    token = key.token
+                    toastMessage("Live stream started")
+                    val i = Intent(this@MyEventActivity,LiveStreamCommentatorActivity::class.java)
+                    i.putExtra("api_key",apiKey)
+                    i.putExtra("session_id",sessionId)
+                    i.putExtra("token",token)
+                    startActivity(i)
+                }else{
+                    toastMessage("Live stream failed to start")
                 }
             }
         })
@@ -181,11 +210,14 @@ class MyEventActivity : AppCompatActivity() {
                     minutes = (remainingTime / (1000 * 60) % 60)
                     hours = (remainingTime / (1000 * 60 * 60))
                     timer.text = "$hours hrs $minutes mins $seconds secs"
-                    streamButton.setBackgroundColor(Color.RED)
+                    textTimer.visibility = View.VISIBLE
+                    streamButton.setBackgroundResource(R.drawable.round_button2)
                 }else{
-                    timer.text = "0 hours 0 mins 0 secs"
-                    streamButton.setBackgroundColor(Color.GREEN)
+                    timer.visibility = View.INVISIBLE
+                    textTimer.visibility = View.INVISIBLE
+                    streamButton.setBackgroundResource(R.drawable.round_button3)
                     canStream = true
+                    h.removeCallbacks(runnable)
                 }
                 remainingTime-=1000
                 runnable = this

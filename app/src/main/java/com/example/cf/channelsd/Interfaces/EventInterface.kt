@@ -54,4 +54,15 @@ interface EventInterface {
     @POST("/event/myevent/")
     fun getAcceptedEvent(@Field("username") username: String,
                          @Field("timezone")timezone: String) : Call<UpcomingEvent>
+
+    @FormUrlEncoded
+    @POST("/livestream/gettokenpublisher/")
+    fun getKeyContestant(@Field("username") username: String,
+                         @Field("event_id") eventId: Int) : Call<Key>
+
+    @FormUrlEncoded
+    @POST("/livestream/startlivestream/")
+    fun getKeyCommentator(@Field("username") username: String,
+                         @Field("event_id") eventId: Int) : Call<Key>
+
 }

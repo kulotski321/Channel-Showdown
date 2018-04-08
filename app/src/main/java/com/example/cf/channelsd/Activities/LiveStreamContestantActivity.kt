@@ -8,10 +8,14 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import com.example.cf.channelsd.Data.Constants.Perms.Companion.LOG_TAG
 import com.example.cf.channelsd.Data.Constants.Perms.Companion.RC_VIDEO_APP_PERM
 import com.example.cf.channelsd.R
 import com.opentok.android.*
 import kotlinx.android.synthetic.main.activity_livestream.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.yesButton
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -20,35 +24,42 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListener , PublisherKit.PublisherListener{
 
-    var mSession: Session? = null
-    val API_KEY = "46096312"
-    val SESSION_ID = "2_MX40NjA5NjMxMn5-MTUyMzEwMjUxNzQzMH5LOVRENm9MZVdpejh1dGtRSUtMTmNyWGx-fg"
-    val TOKEN = "T1==cGFydG5lcl9pZD00NjA5NjMxMiZzaWc9ZmU2NjRhNjFmM2NjMDE5MTBhMjA4MzIyMTNkOTU5MDAzMjU1ZGMyYjpzZXNzaW9uX2lkPTJfTVg0ME5qQTVOak14TW41LU1UVXlNekV3TWpVeE56UXpNSDVMT1ZSRU5tOU1aVmRwZWpoMWRHdFJTVXRNVG1OeVdHeC1mZyZjcmVhdGVfdGltZT0xNTIzMTE5NTQzJm5vbmNlPTAuODg5NDk3NjgxNjkxNjgwMiZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTIzMjA1OTQwJmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9"
-    val LOG_TAG = LiveStreamCommentatorActivity::class.java.simpleName
-    val RC_SETTINGS_SCREEN_PERM = 123
-    //var mPublisherViewContainer: FrameLayout? = null
-    //var mSubscriberViewContainer: FrameLayout? = null
+    private var mSession: Session? = null
 
-    // FOR CONTESTANTS
-    var contestantant1PublisherView : LinearLayout?= null
-    var contestantant1Publisher: Publisher?= null
-    var contestantant2PublisherView : LinearLayout?= null
-    var contestantant2Publisher: Publisher?= null
+    // FOR CONTESTANT PUBLISHER
+    private var contestant1PublisherView : LinearLayout ?= null
+    private var contestant1Publisher: Publisher ?= null
+    private var contestant2PublisherView : LinearLayout ?= null
+    private var contestant2Publisher: Publisher ?= null
+    // FOR CONTESTANT SUBSCRIBER
+    private var contestant1SubscriberView : LinearLayout ?= null
+    private var contestant1Subscriber : Subscriber ?= null
+    private var contestant2SubscriberView : LinearLayout ?= null
+    private var contestant2Subscriber : Subscriber ?= null
+    // FOR COMMENTATOR SUBSCRIBER
+    private var commentatorSubscriberView : LinearLayout ?= null
+    private var commentatorSubscriber : Subscriber ?= null
 
-    //var mPublisher: Publisher? = null
-    //var mSubscriber: Subscriber? = null
-    // FOR COMMENTATOR
-    var commentatorSubscriberView : LinearLayout ?= null
-    var commentatorSubscriber : Subscriber ?= null
+    // FOR KEYS
+    private var apiKey : String ?= null
+    private var sessionId : String ?= null
+    private var token : String ?= null
+    private var contestant: String ?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livestream)
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         //val editor: SharedPreferences.Editor = preferences.edit()
+        contestant = intent.getStringExtra("contestant")
+        apiKey = intent.getStringExtra("api_key")
+        sessionId = intent.getStringExtra("session_id")
+        token = intent.getStringExtra("token")
         requestPermissions()
 
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -59,12 +70,20 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
         val perms = arrayOf(Manifest.permission.INTERNET, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
         if (EasyPermissions.hasPermissions(this, *perms)) {
             // initialize view objects from your layout
-            contestantant1PublisherView = findViewById(R.id.contestant1Publisher)
+            if(contestant == "contestant1"){
+                contestant1PublisherView = findViewById(R.id.contestant1Publisher)
+                contestant2SubscriberView = findViewById(R.id.contestant2Publisher)
+            }
+            if(contestant == "contestant2"){
+                contestant2PublisherView = findViewById(R.id.contestant2Publisher)
+                contestant1SubscriberView = findViewById(R.id.contestant1Publisher)
+            }
+
             commentatorSubscriberView = findViewById(R.id.commentatorPublisher)
             // initialize and connect to the session
-            mSession = Session.Builder(this, API_KEY, SESSION_ID).build()
+            mSession = Session.Builder(this, apiKey, sessionId).build()
             mSession?.setSessionListener(this)
-            mSession?.connect(TOKEN)
+            mSession?.connect(token)
 
         } else {
             EasyPermissions.requestPermissions(this, "This app needs access to your camera and mic to make video calls", RC_VIDEO_APP_PERM, *perms)
@@ -72,18 +91,28 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     }
     override fun onConnected(session: Session) {
         Log.i(LOG_TAG, "Session Connected")
-        //mPublisher = Publisher.Builder(this).build()
-        //mPublisher?.setPublisherListener(this)
-        //mPublisherViewContainer?.addView(mPublisher?.view)
-        //mSession?.publish(mPublisher)
-        contestantant1Publisher = Publisher.Builder(this)
-                .name("contestant1")
-                .build()
-        contestantant1Publisher?.setPublisherListener(this)
-        contestant1Loader1.visibility = View.INVISIBLE
-        contestant1Loader2.visibility = View.INVISIBLE
-        contestantant1PublisherView?.addView(contestantant1Publisher?.view)
-        mSession?.publish(contestantant1Publisher)
+
+
+        if(contestant == "contestant1"){
+            contestant1Publisher = Publisher.Builder(this)
+                    .name("contestant1")
+                    .build()
+            contestant1Publisher?.setPublisherListener(this)
+            contestant1Loader1.visibility = View.INVISIBLE
+            contestant1Loader2.visibility = View.INVISIBLE
+            contestant1PublisherView?.addView(contestant1Publisher?.view)
+            mSession?.publish(contestant1Publisher)
+        }
+        if(contestant == "contestant2"){
+            contestant2Publisher = Publisher.Builder(this)
+                    .name("contestant2")
+                    .build()
+            contestant2Publisher?.setPublisherListener(this)
+            contestant2Loader1.visibility = View.INVISIBLE
+            contestant2Loader2.visibility = View.INVISIBLE
+            contestant2PublisherView?.addView(contestant2Publisher?.view)
+            mSession?.publish(contestant2Publisher)
+        }
     }
 
     override fun onDisconnected(session: Session) {
@@ -93,30 +122,72 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     override fun onStreamReceived(session: Session, stream: Stream) {
         Log.i(LOG_TAG, "Stream Received")
 
-        /*if (mSubscriber == null) {
-            mSubscriber = Subscriber.Builder(this, stream).build()
-            mSession?.subscribe(mSubscriber)
-            //mSubscriberViewContainer?.addView(mSubscriber?.view)
-        }*/
-        if(commentatorSubscriber == null){
-            commentatorSubscriber = Subscriber.Builder(this,stream).build()
-            mSession!!.subscribe(commentatorSubscriber)
-            commentatorLoader1.visibility = View.INVISIBLE
-            commentatorLoader2.visibility = View.INVISIBLE
-            commentatorSubscriberView?.addView(commentatorSubscriber?.view)
+        Log.e("STREAM NAME RECEIVE: ",stream.name)
+        if(stream.name == "commentator"){
+            if(commentatorSubscriber == null){
+                commentatorSubscriber = Subscriber.Builder(this,stream).build()
+                mSession!!.subscribe(commentatorSubscriber)
+                commentatorLoader1.visibility = View.INVISIBLE
+                commentatorLoader2.visibility = View.INVISIBLE
+                commentatorLoader3.visibility = View.INVISIBLE
+                commentatorSubscriberView?.addView(commentatorSubscriber?.view)
+            }
+        }
+        if(stream.name == "contestant1"){
+            if(contestant1Subscriber == null){
+                contestant1Subscriber = Subscriber.Builder(this,stream).build()
+                mSession!!.subscribe(contestant1Subscriber)
+                contestant1Loader1.visibility = View.INVISIBLE
+                contestant1Loader2.visibility = View.INVISIBLE
+                contestant1Loader3.visibility = View.INVISIBLE
+                contestant1SubscriberView?.addView(contestant1Subscriber?.view)
+            }
+        }
+        if(stream.name == "contestant2"){
+            if(contestant2Subscriber == null){
+                contestant2Subscriber = Subscriber.Builder(this,stream).build()
+                mSession!!.subscribe(contestant2Subscriber)
+                contestant2Loader1.visibility = View.INVISIBLE
+                contestant2Loader2.visibility = View.INVISIBLE
+                contestant2Loader3.visibility = View.INVISIBLE
+                contestant2SubscriberView?.addView(contestant2Subscriber?.view)
+            }
         }
     }
 
     override fun onStreamDropped(session: Session, stream: Stream) {
         Log.i(LOG_TAG, "Stream Dropped");
 
-
-        Log.e("STREAM NAME:",stream.name)
-        if(commentatorSubscriber != null){
-            commentatorSubscriber = null
-            commentatorSubscriberView?.removeAllViews()
-            commentatorLoader2.visibility = View.VISIBLE
-            commentatorLoader2.text = R.string.commentator_disconnect.toString()
+        Log.e("STREAM NAME DROPPED: ",stream.name)
+        if(stream.name == "commentator"){
+            if(commentatorSubscriber != null){
+                commentatorSubscriber = null
+                commentatorSubscriberView?.removeAllViews()
+                commentatorLoader1.visibility = View.VISIBLE
+                commentatorLoader3.visibility = View.VISIBLE
+                commentatorSubscriberView!!.addView(commentatorLoader1)
+                commentatorSubscriberView!!.addView(commentatorLoader3)
+            }
+        }
+        if(stream.name == "contestant1"){
+            if(contestant1Subscriber != null){
+                contestant1Subscriber = null
+                contestant1SubscriberView?.removeAllViews()
+                contestant1Loader1.visibility = View.VISIBLE
+                contestant1Loader3.visibility = View.VISIBLE
+                contestant1SubscriberView!!.addView(contestant1Loader1)
+                contestant1SubscriberView!!.addView(contestant1Loader3)
+            }
+        }
+        if(stream.name == "contestant2"){
+            if(contestant2Subscriber != null){
+                contestant2Subscriber = null
+                contestant2SubscriberView?.removeAllViews()
+                contestant2Loader1.visibility = View.VISIBLE
+                contestant2Loader3.visibility = View.VISIBLE
+                contestant2SubscriberView!!.addView(contestant2Loader1)
+                contestant2SubscriberView!!.addView(contestant2Loader3)
+            }
         }
     }
 
@@ -125,7 +196,7 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     }
 
     override fun onError(p0: PublisherKit?, p1: OpentokError?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onStreamCreated(p0: PublisherKit?, p1: Stream?) {
@@ -137,7 +208,14 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     }
     override fun onBackPressed() {
         super.onBackPressed()
-        mSession!!.unpublish(contestantant1Publisher)
-        mSession!!.disconnect()
+
+        if (contestant == "contestant1") {
+            mSession!!.unpublish(contestant1Publisher)
+            mSession!!.disconnect()
+        }
+        if(contestant == "contestant2"){
+            mSession!!.unpublish(contestant2Publisher)
+            mSession!!.disconnect()
+        }
     }
 }

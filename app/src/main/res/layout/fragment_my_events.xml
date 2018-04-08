@@ -30,8 +30,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/my_event"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,12 +70,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:clickable="true"
+            android:focusable="true"
             android:text="@string/loading"
             android:textColor="@color/color_black"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/commentator_textview"
-            app:layout_constraintTop_toBottomOf="@+id/event_date_textview"
-            android:focusable="true" />
+            app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
 
         <TextView
             android:id="@+id/event_date_textview"
@@ -108,15 +108,15 @@
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
-            android:text="Details:"
+            android:text="@string/details"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commentator_textview" />
 
         <TextView
             android:id="@+id/myevent_details"
-            android:layout_width="341dp"
-            android:layout_height="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
@@ -163,49 +163,48 @@
             android:layout_width="181dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/color_red"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_button2"
             android:text="@string/start_stream"
             android:textColor="@color/color_white"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/time_remaining"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/time_remaining"
-            android:layout_width="105dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginStart="36dp"
+            android:layout_width="111dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/remaining_time"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/myevent_time"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_stream_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
 
         <TextView
             android:id="@+id/myevent_time"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="76dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="76dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="144dp"
+            android:layout_marginRight="144dp"
             android:layout_marginTop="16dp"
             android:text="@string/loading"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/time_remaining"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_stream_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

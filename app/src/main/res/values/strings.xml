@@ -75,6 +75,7 @@
     <string name="join_event">Join Event</string>
     <string name="view_entries">View Entries</string>
     <string name="start_event">Start Event</string>
+    <string name="details">Details :</string>
     <!-- APP NAME -->
     <string name="channel_showdown">Channel Showdown</string>
     <!-- EVENT FRAGMENT -->
@@ -103,4 +104,5 @@
     <string name="remaining_time">Time Remaining:</string>
     <string name="zero">0</string>
     <string name="start_stream">Start Stream</string>
+    <string name="applicants">Applicants</string>
 </resources>

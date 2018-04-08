@@ -16,8 +16,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.cf.channelsd.Activities.LiveStreamCommentatorActivity
 import com.example.cf.channelsd.Activities.LiveStreamContestantActivity
 import com.example.cf.channelsd.Activities.ViewProfileActivity
+import com.example.cf.channelsd.Data.Key
 import com.example.cf.channelsd.Data.UpcomingEvent
 import com.example.cf.channelsd.Interfaces.EventInterface
 
@@ -33,8 +35,11 @@ import java.util.*
 
 
 class MyEventsFragment : Fragment() {
+
     private val eventInterface: EventInterface = ApiUtils.apiEvent
     private var eventId : Int ?= null
+
+    // Timezone converter and timer
     var dateFormat = DateFormat.getDateTimeInstance()
     var dateTime = Calendar.getInstance()!!
     private var remainingTime:Long = 999999
@@ -44,22 +49,31 @@ class MyEventsFragment : Fragment() {
     var hours : Long = 0
     lateinit var mainTimer : TextView
     lateinit var streamButton : Button
+    lateinit var textTimer : TextView
+    private lateinit var username : String
     var canStream = false
+    var contestant: String ?= null
+
+    // Opentok keys
+    private var apiKey: String ?= null
+    private var sessionId : String ?= null
+    private var token : String ?= null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_events, container, false)
-
-
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var timer : TextView = getView()!!.findViewById(R.id.myevent_time)
-        var button : Button = getView()!!.findViewById(R.id.myevent_stream_btn)
+        val timer : TextView = getView()!!.findViewById(R.id.myevent_time)
+        val button : Button = getView()!!.findViewById(R.id.myevent_stream_btn)
+        val text : TextView = getView()!!.findViewById(R.id.time_remaining)
         mainTimer = timer
         streamButton = button
+        textTimer = text
         val preferences: SharedPreferences = this.activity!!.getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val timeZone : String = TimeZone.getDefault().id
-        val username = preferences.getString("username_pref", "")
+        username = preferences.getString("username_pref", "")
         getAcceptedEvent(username,timeZone)
 
         nomyevent_img.setOnClickListener{
@@ -70,8 +84,7 @@ class MyEventsFragment : Fragment() {
                 toastMessage("Event hasn't started yet")
             }
             if(canStream){
-                val i = Intent(context,LiveStreamContestantActivity::class.java)
-                startActivity(i)
+                getContestantKey(username,eventId!!.toInt())
             }
         }
         myevent_commentator.setOnClickListener {
@@ -81,6 +94,7 @@ class MyEventsFragment : Fragment() {
             startActivity(i)
         }
     }
+
     private fun getAcceptedEvent(username : String, timezone : String){
         eventInterface.getAcceptedEvent(username,timezone).enqueue(object : Callback<UpcomingEvent>{
             override fun onFailure(call: Call<UpcomingEvent>?, t: Throwable?) {
@@ -114,7 +128,12 @@ class MyEventsFragment : Fragment() {
                     dateTime.set(Calendar.SECOND,0)
                     myevent_date.text = dateFormat.format(dateTime.time)
                     eventDateTime = dateTime.timeInMillis
-
+                    if(myEvent.eventContestant1 == username){
+                        contestant = "contestant1"
+                    }
+                    if(myEvent.eventContestant2 == username){
+                        contestant = "contestant2"
+                    }
                     Log.e("EVENT DATE TIME:",eventDateTime.toString())
                 }else{
                     nomyevent_img.visibility = View.VISIBLE
@@ -123,7 +142,7 @@ class MyEventsFragment : Fragment() {
                     myevent_details.visibility = View.INVISIBLE
                     myevent_img.visibility = View.INVISIBLE
                     myevent_prize.visibility = View.INVISIBLE
-                    myevent_stream_btn.visibility = View.VISIBLE
+                    myevent_stream_btn.visibility = View.INVISIBLE
                     myevent_title.visibility = View.INVISIBLE
                     commentator_textview.visibility = View.INVISIBLE
                     event_date_textview.visibility = View.INVISIBLE
@@ -132,6 +151,33 @@ class MyEventsFragment : Fragment() {
                     prize_textview.visibility = View.INVISIBLE
                     myevent_time.visibility = View.INVISIBLE
                     time_remaining.visibility = View.INVISIBLE
+                }
+            }
+        })
+    }
+    private fun getContestantKey(username: String, eventId: Int){
+        eventInterface.getKeyContestant(username,eventId).enqueue(object: Callback<Key>{
+            override fun onFailure(call: Call<Key>?, t: Throwable?) {
+                if(t?.message == "unexpected end of stream"){
+                    getContestantKey(username,eventId)
+                }
+            }
+
+            override fun onResponse(call: Call<Key>?, response: Response<Key>?) {
+                if(response!!.isSuccessful){
+                    val key = response.body()
+                    apiKey = key!!.apiKey
+                    sessionId = key.sessionId
+                    token = key.token
+                    toastMessage("Live stream started")
+                    val i = Intent(context, LiveStreamContestantActivity::class.java)
+                    i.putExtra("contestant",contestant)
+                    i.putExtra("api_key",apiKey)
+                    i.putExtra("session_id",sessionId)
+                    i.putExtra("token",token)
+                    startActivity(i)
+                }else{
+                    toastMessage("Commentator has not started event yet")
                 }
             }
         })
@@ -160,13 +206,16 @@ class MyEventsFragment : Fragment() {
                     //Log.e("MINUTES:",minutes.toString())
                     //Log.e("HOURS:",hours.toString())
                     mainTimer.text = "$hours hrs $minutes mins $seconds secs"
-                    streamButton.setBackgroundColor(Color.RED)
+                    textTimer.visibility = View.VISIBLE
+                    streamButton.setBackgroundResource(R.drawable.round_button2)
 
                 }else{
                     canStream = true
-                    mainTimer.text = "0 hrs 0 mins 0 secs"
-                    streamButton.setBackgroundColor(Color.GREEN)
-
+                    mainTimer.visibility = View.INVISIBLE
+                    textTimer.visibility = View.INVISIBLE
+                    streamButton.setBackgroundResource(R.drawable.round_button3)
+                    h.removeCallbacks(runnable)
+                    Log.e("test:","WHY??")
                 }
                 remainingTime-=1000
                 //Log.e("today:",today.timeInMillis.toString())

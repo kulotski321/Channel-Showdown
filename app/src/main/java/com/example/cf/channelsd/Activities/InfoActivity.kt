@@ -54,7 +54,7 @@ class InfoActivity : AppCompatActivity() {
                 preferences.getString("profile_vid_pref",""),
                 preferences.getString("profile_thumbnail_pref","")
         )
-        val firstNameInput: EditText = this.input_first_name
+        val firstNameInput: EditText = input_first_name
         val lastNameInput: EditText = input_last_name
         val bioInput: EditText = input_bio
 

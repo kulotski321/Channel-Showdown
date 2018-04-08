@@ -15,7 +15,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:layout_marginTop="30dp"
-            android:text="APPLICANTS"
+            android:text="@string/applicants"
             android:textColor="@color/color_black"
             android:textSize="24sp" />
 

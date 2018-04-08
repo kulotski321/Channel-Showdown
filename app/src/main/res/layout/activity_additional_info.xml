@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -103,34 +104,34 @@
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="48dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/round_button"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/round_button1"
         android:text="@string/confirm"
-        android:textSize="16sp"
         android:textColor="@color/color_purple_primaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancel_btn" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_btn"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <Button
         android:id="@+id/cancel_btn"
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="48dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/round_button"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/round_button1"
         android:text="@string/cancel"
-        android:textSize="16sp"
         android:textColor="@color/color_purple_primaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/confirm_btn"
         app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/complete_profile_info"
@@ -141,10 +142,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/getting_started"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.961" />
 
 </android.support.constraint.ConstraintLayout>

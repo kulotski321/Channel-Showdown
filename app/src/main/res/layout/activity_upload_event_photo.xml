@@ -15,65 +15,62 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/empty"
         android:src="@drawable/upcoming_default"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/empty" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/upload_event_pic_btn"
         android:layout_width="181dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="148dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/round_button1"
         android:text="@string/select_picture"
-        android:textSize="16sp"
         android:textColor="@color/color_purple_primaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarEventPhoto"
-        app:layout_constraintVertical_bias="0.203" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBarEventPhoto" />
 
     <Button
         android:id="@+id/confirm_upload_event_btn"
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="48dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/round_button"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/round_button1"
         android:text="@string/upload"
-        android:textSize="16sp"
         android:textColor="@color/color_purple_primaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancel_upload_event_btn" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_upload_event_btn"
+        app:layout_constraintTop_toBottomOf="@+id/upload_event_pic_btn" />
 
     <Button
         android:id="@+id/cancel_upload_event_btn"
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="48dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/round_button"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/round_button1"
         android:text="@string/cancel"
-        android:textSize="16sp"
         android:textColor="@color/color_purple_primaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/confirm_upload_event_btn"
         app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_event_pic_btn" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
