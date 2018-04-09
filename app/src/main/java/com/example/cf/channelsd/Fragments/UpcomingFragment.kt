@@ -9,9 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EventAdapter
 import com.example.cf.channelsd.Utils.ApiUtils
-import com.example.cf.channelsd.Data.UpcomingEventList
+import com.example.cf.channelsd.Data.EventDataList
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
 import kotlinx.android.synthetic.main.fragment_upcoming.*
@@ -33,22 +34,21 @@ class UpcomingFragment : Fragment() {
         getUpcomingEventList(timeZone)
     }
     private fun getUpcomingEventList(timeZone: String){
-        eventInterface.getUpcomingEventList(timeZone).enqueue(object: Callback<UpcomingEventList>{
-            override fun onFailure(call: Call<UpcomingEventList>?, t: Throwable?) {
+        eventInterface.getUpcomingEventList(timeZone).enqueue(object: Callback<EventDataList>{
+            override fun onFailure(call: Call<EventDataList>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
                 if (t?.message == "unexpected end of stream"){
                     getUpcomingEventList(timeZone)
                 }
             }
 
-            override fun onResponse(call: Call<UpcomingEventList>?, response: Response<UpcomingEventList>?) {
+            override fun onResponse(call: Call<EventDataList>?, response: Response<EventDataList>?) {
                 if(response!!.isSuccessful){
-                    val events: UpcomingEventList? = response.body()
+                    val events: EventDataList ?= response.body()
                     Log.e(ContentValues.TAG, response.toString())
                     if(events != null){
                         val upcomingEvents = events.events
                         val eventRecyclerviewer = upcoming_event_RV
-                        Log.e(ContentValues.TAG, upcomingEvents.toString())
                         eventRecyclerviewer.layoutManager = LinearLayoutManager(context,LinearLayout.VERTICAL, false)
                         val adapter = EventAdapter(upcomingEvents!!)
                         eventRecyclerviewer.adapter = adapter
@@ -56,6 +56,9 @@ class UpcomingFragment : Fragment() {
                 }
             }
         })
+    }
+    fun toastMessage(message: String) {
+        Toast.makeText(view!!.context, message, Toast.LENGTH_LONG).show();
     }
 }// Required empty public constructor
 

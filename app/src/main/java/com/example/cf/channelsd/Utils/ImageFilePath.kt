@@ -16,7 +16,7 @@ import android.provider.MediaStore
 object ImageFilePath {
 
 
-    internal var nopath = "Select Video Only"
+    private var nopath = "Select Video Only"
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @SuppressLint("NewApi")
@@ -52,12 +52,10 @@ object ImageFilePath {
                 val type = split[0]
 
                 var contentUri: Uri? = null
-                if ("image" == type) {
-                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                } else if ("video" == type) {
-                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-                } else if ("audio" == type) {
-                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                when (type) {
+                    "image" -> contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    "video" -> contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                    "audio" -> contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
                 }
 
                 val selection = "_id=?"
@@ -80,8 +78,8 @@ object ImageFilePath {
         return nopath
     }
 
-    fun getDataColumn(context: Context, uri: Uri?,
-                      selection: String?, selectionArgs: Array<String>?): String {
+    private fun getDataColumn(context: Context, uri: Uri?,
+                              selection: String?, selectionArgs: Array<String>?): String {
 
         var cursor: Cursor? = null
         val column = "_data"
@@ -101,24 +99,24 @@ object ImageFilePath {
         return nopath
     }
 
-    fun isExternalStorageDocument(uri: Uri): Boolean {
+    private fun isExternalStorageDocument(uri: Uri): Boolean {
         return "com.android.externalstorage.documents" == uri
                 .authority
     }
 
 
-    fun isDownloadsDocument(uri: Uri): Boolean {
+    private fun isDownloadsDocument(uri: Uri): Boolean {
         return "com.android.providers.downloads.documents" == uri
                 .authority
     }
 
 
-    fun isMediaDocument(uri: Uri): Boolean {
+    private fun isMediaDocument(uri: Uri): Boolean {
         return "com.android.providers.media.documents" == uri
                 .authority
     }
 
-    fun isGooglePhotosUri(uri: Uri): Boolean {
+    private fun isGooglePhotosUri(uri: Uri): Boolean {
         return "com.google.android.apps.photos.content" == uri
                 .authority
     }

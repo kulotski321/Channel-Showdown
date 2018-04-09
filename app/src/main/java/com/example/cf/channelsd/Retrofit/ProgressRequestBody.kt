@@ -33,28 +33,20 @@ class ProgressRequestBody(val context : Context, private val mFile : File, priva
     override fun writeTo(sink: BufferedSink) {
         val fileLength = mFile.length()
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-        val inputstream = FileInputStream(mFile)
+        val inputStream = FileInputStream(mFile)
         var uploaded: Long = 0
 
-        try {
-
-
+        inputStream.use {
             do{
-                var read: Int = inputstream.read(buffer)
+                val read: Int = inputStream.read(buffer)
 
                 if(read == -1){
                     break
                 }
                 mListener.onProgressUpdate(((100 * uploaded / fileLength)))
-                /*if((100*uploaded/fileLength). == 100){
-                    mListener.onProgressUpdate(100)
-                    mListener.onFinish()
-                }*/
                 uploaded += read.toLong()
                 sink.write(buffer, 0, read)
             }while (true)
-        } finally {
-            inputstream.close()
         }
     }
 
@@ -67,7 +59,7 @@ class ProgressRequestBody(val context : Context, private val mFile : File, priva
 
     companion object {
 
-        private val DEFAULT_BUFFER_SIZE = 2048
+        private const val DEFAULT_BUFFER_SIZE = 4096
     }
 
 }

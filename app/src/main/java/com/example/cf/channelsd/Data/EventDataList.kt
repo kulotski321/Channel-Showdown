@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 
-class UpcomingEventList {
+class EventDataList {
 
     @SerializedName("events")
     val events : ArrayList<Event> ?= null

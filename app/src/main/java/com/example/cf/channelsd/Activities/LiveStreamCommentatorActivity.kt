@@ -66,7 +66,6 @@ class LiveStreamCommentatorActivity : AppCompatActivity(), Session.SessionListen
     }
     @AfterPermissionGranted(RC_VIDEO_APP_PERM)
     private fun requestPermissions() {
-
         val perms = arrayOf(Manifest.permission.INTERNET, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
         if (EasyPermissions.hasPermissions(this, *perms)) {
             // initialize view objects from your layout

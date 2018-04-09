@@ -19,6 +19,7 @@
     <string name="upload_event_photo">Upload photo</string>
     <string name="live_stream_commentator">Live Stream Commentator</string>
     <string name="live_stream_contestant">Live Stream Contestant</string>
+    <string name="live_stream_audience">Live Stream Audience</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -86,6 +87,9 @@
     <string name="waiting_for_commentator">Waiting for commentator</string>
     <string name="commentator_disconnect">Commentator disconnected</string>
     <string name="contestant_disconnect">Contestant disconnected</string>
+    <string name="commentator_title">COMMENTATOR</string>
+    <string name="contestant1_title">CONTESTANT 1</string>
+    <string name="contestant2_title">CONTESTANT 2</string>
     <!-- FOR TESTING-->
     <string name="test">Test</string>
     <string name="this_is_live">This is Live</string>
@@ -104,5 +108,6 @@
     <string name="remaining_time">Time Remaining:</string>
     <string name="zero">0</string>
     <string name="start_stream">Start Stream</string>
+    <string name="end_stream">End Stream</string>
     <string name="applicants">Applicants</string>
 </resources>

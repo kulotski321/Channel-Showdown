@@ -87,10 +87,12 @@
             <ImageView
                 android:id="@+id/view_profile_video_thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
+                android:layout_height="200dp"
                 android:layout_margin="0dp"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:background="@color/color_white"
                 android:focusable="true" />
 

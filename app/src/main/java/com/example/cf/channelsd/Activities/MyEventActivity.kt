@@ -3,21 +3,19 @@ package com.example.cf.channelsd.Activities
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Data.Key
-import com.example.cf.channelsd.Data.UpcomingEvent
+import com.example.cf.channelsd.Data.ServerResponse
+import com.example.cf.channelsd.Data.EventData
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.picasso
@@ -102,21 +100,24 @@ class MyEventActivity : AppCompatActivity() {
                 getCommentatorKey(username,eventId.toInt())
             }
         }
+        end_event_btn.setOnClickListener {
+            endEvent(eventId.toInt())
+        }
     }
 
     private fun getMyEvent(username: String,timeZone: String) {
-        eventInterface.getMyEvent(username,timeZone).enqueue(object : Callback<UpcomingEvent>{
-            override fun onFailure(call: Call<UpcomingEvent>?, t: Throwable?) {
+        eventInterface.getMyEvent(username,timeZone).enqueue(object : Callback<EventData>{
+            override fun onFailure(call: Call<EventData>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
                 if(t?.message == "unexpected end of stream"){
                     getMyEvent(username,timeZone)
                 }
             }
 
-            override fun onResponse(call: Call<UpcomingEvent>?, response: Response<UpcomingEvent>?) {
+            override fun onResponse(call: Call<EventData>?, response: Response<EventData>?) {
                 if(response!!.isSuccessful){
                     Log.e("Response:", response.toString())
-                    val event : UpcomingEvent ?= response.body()
+                    val event : EventData ?= response.body()
                     if(event != null){
                         val myEvent = event.myEvent
                         myEventMain = myEvent!!
@@ -184,6 +185,25 @@ class MyEventActivity : AppCompatActivity() {
             }
         })
     }
+    private fun endEvent(eventId: Int){
+        eventInterface.endEvent(eventId).enqueue(object: Callback<ServerResponse>{
+            override fun onFailure(call: Call<ServerResponse>?, t: Throwable?) {
+                if(t?.message == "unexpected end of stream"){
+                    endEvent(eventId)
+                }
+            }
+
+            override fun onResponse(call: Call<ServerResponse>?, response: Response<ServerResponse>?) {
+                val status = response!!.body()
+                if (status != null) {
+                    toastMessage(status.reply)
+                }
+                if(response.isSuccessful){
+                    finish()
+                }
+            }
+        })
+    }
     fun toastMessage(message: String){
         Toast.makeText(this@MyEventActivity, message, Toast.LENGTH_LONG).show();
     }
@@ -203,7 +223,7 @@ class MyEventActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun run() {
                 //do something
-                var today = Calendar.getInstance()!!
+                val today = Calendar.getInstance()!!
                 remainingTime = eventDateTime - today.timeInMillis
                 if(remainingTime > 0){
                     seconds = (remainingTime / 1000) % 60

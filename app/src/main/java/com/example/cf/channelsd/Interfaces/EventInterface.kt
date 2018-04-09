@@ -4,7 +4,6 @@ import com.example.cf.channelsd.Data.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
 
 interface EventInterface {
@@ -19,12 +18,16 @@ interface EventInterface {
 
     @FormUrlEncoded
     @POST("/event/upcomingevents/")
-    fun getUpcomingEventList(@Field("timezone")timezone: String) : Call<UpcomingEventList>
+    fun getUpcomingEventList(@Field("timezone")timezone: String) : Call<EventDataList>
+
+    @FormUrlEncoded
+    @POST("/event/ongoingevents/")
+    fun getLiveEventList(@Field("timezone")timezone: String) : Call<EventDataList>
 
     @FormUrlEncoded
     @POST("/event/creatoreventprofile/")
     fun getMyEvent(@Field("username") username:String,
-                   @Field("timezone") timezone: String) : Call<UpcomingEvent>
+                   @Field("timezone") timezone: String) : Call<EventData>
 
     @FormUrlEncoded
     @POST("/event/sendentry/")
@@ -53,7 +56,7 @@ interface EventInterface {
     @FormUrlEncoded
     @POST("/event/myevent/")
     fun getAcceptedEvent(@Field("username") username: String,
-                         @Field("timezone")timezone: String) : Call<UpcomingEvent>
+                         @Field("timezone")timezone: String) : Call<EventData>
 
     @FormUrlEncoded
     @POST("/livestream/gettokenpublisher/")
@@ -65,4 +68,12 @@ interface EventInterface {
     fun getKeyCommentator(@Field("username") username: String,
                          @Field("event_id") eventId: Int) : Call<Key>
 
+    @FormUrlEncoded
+    @POST("/livestream/gettokensubscriber/")
+    fun getKeyAudience(@Field("username") username: String,
+                       @Field("event_id") eventId: Int) : Call<Key>
+
+    @FormUrlEncoded
+    @POST("/livestream/endevent/")
+    fun endEvent(@Field("event_id") eventId: Int) : Call<ServerResponse>
 }

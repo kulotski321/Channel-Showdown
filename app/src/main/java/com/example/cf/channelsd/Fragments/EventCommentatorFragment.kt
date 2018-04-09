@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.cf.channelsd.Activities.CreateEventActivity
 import com.example.cf.channelsd.Activities.MyEventActivity
-import com.example.cf.channelsd.Data.UpcomingEvent
+import com.example.cf.channelsd.Data.EventData
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
@@ -61,14 +61,14 @@ class EventCommentatorFragment : Fragment() {
         }
     }
     private fun getMyEvent(username: String,timeZone: String) {
-        eventInterface.getMyEvent(username,timeZone).enqueue(object: Callback<UpcomingEvent>{
-            override fun onFailure(call: Call<UpcomingEvent>?, t: Throwable?) {
+        eventInterface.getMyEvent(username,timeZone).enqueue(object: Callback<EventData>{
+            override fun onFailure(call: Call<EventData>?, t: Throwable?) {
                 if (t?.message == "unexpected end of stream"){
                     getMyEvent(username,timeZone)
                 }
             }
 
-            override fun onResponse(call: Call<UpcomingEvent>?, response: Response<UpcomingEvent>?) {
+            override fun onResponse(call: Call<EventData>?, response: Response<EventData>?) {
                 if(response!!.isSuccessful){
                     val i = Intent(activity, MyEventActivity::class.java)
                     i.putExtra("username", username)

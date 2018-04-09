@@ -3,7 +3,7 @@ package com.example.cf.channelsd.Data
 import com.google.gson.annotations.SerializedName
 
 
-class UpcomingEvent {
+class EventData {
 
     @SerializedName("event")
     val myEvent : Event ?= null

@@ -22,79 +22,119 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/main"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.SplashActivity" />
         <activity
             android:name=".Activities.RegisterActivity"
             android:label="@string/register"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.InfoActivity"
             android:label="@string/info"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.DashboardActivity"
             android:label="@string/dashboard"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.ProfileActivity"
             android:label="@string/profile"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.CreateEventActivity"
             android:label="@string/create_event"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity android:name=".Activities.UpcomingEventActivity"
             android:label="@string/upcoming_event_activity"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.DashboardActivity"/>
         <activity
             android:name=".Activities.MyEventActivity"
             android:label="@string/my_event_activity"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.EntriesActivity"
             android:label="@string/entries"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.MyEventActivity"/>
         <activity
             android:name=".Activities.ViewProfileActivity"
             android:label="@string/view_profile"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.EntriesActivity" />
         <activity
             android:name=".Activities.UploadPhotoActivity"
             android:label="@string/upload_photo"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.ProfileActivity"/>
         <activity
             android:name=".Activities.UploadVideoActivity"
             android:label="@string/upload_video"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.SelectEditActivity"/>
         <activity
             android:name=".Activities.SelectEditActivity"
             android:label="@string/select_edit"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.ProfileActivity" />
         <activity
             android:name=".Activities.UploadThumbnailActivity"
             android:label="@string/upload_thumbnail"
             android:theme="@style/YesAppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.SelectEditActivity" />
         <activity
             android:name=".Activities.UploadEventPictureActivity"
             android:label="@string/upload_event_photo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.MyEventActivity" />
         <activity
             android:name=".Activities.LiveStreamCommentatorActivity"
             android:label="@string/live_stream_commentator"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.MyEventActivity" />
         <activity android:name=".Activities.LiveStreamContestantActivity"
             android:label="@string/waiting_for_contestant"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activities.DashboardActivity"/>
+        <activity
+            android:name=".Activities.LiveStreamAudienceActivity"
+            android:label="@string/live_stream_audience"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Activities.DashboardActivity" />
     </application>
 </manifest>

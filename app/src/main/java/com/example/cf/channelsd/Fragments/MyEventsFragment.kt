@@ -4,23 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.example.cf.channelsd.Activities.LiveStreamCommentatorActivity
 import com.example.cf.channelsd.Activities.LiveStreamContestantActivity
 import com.example.cf.channelsd.Activities.ViewProfileActivity
 import com.example.cf.channelsd.Data.Key
-import com.example.cf.channelsd.Data.UpcomingEvent
+import com.example.cf.channelsd.Data.EventData
 import com.example.cf.channelsd.Interfaces.EventInterface
 
 import com.example.cf.channelsd.R
@@ -59,6 +57,8 @@ class MyEventsFragment : Fragment() {
     private var sessionId : String ?= null
     private var token : String ?= null
 
+    private var noEventImage : ImageView ?= null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_events, container, false)
@@ -68,6 +68,7 @@ class MyEventsFragment : Fragment() {
         val timer : TextView = getView()!!.findViewById(R.id.myevent_time)
         val button : Button = getView()!!.findViewById(R.id.myevent_stream_btn)
         val text : TextView = getView()!!.findViewById(R.id.time_remaining)
+        noEventImage = getView()!!.findViewById(R.id.nomyevent_img)
         mainTimer = timer
         streamButton = button
         textTimer = text
@@ -96,16 +97,16 @@ class MyEventsFragment : Fragment() {
     }
 
     private fun getAcceptedEvent(username : String, timezone : String){
-        eventInterface.getAcceptedEvent(username,timezone).enqueue(object : Callback<UpcomingEvent>{
-            override fun onFailure(call: Call<UpcomingEvent>?, t: Throwable?) {
+        eventInterface.getAcceptedEvent(username,timezone).enqueue(object : Callback<EventData>{
+            override fun onFailure(call: Call<EventData>?, t: Throwable?) {
                 if(t?.message == "unexpected end of stream"){
                     getAcceptedEvent(username,timezone)
                 }
             }
 
-            override fun onResponse(call: Call<UpcomingEvent>?, response: Response<UpcomingEvent>?) {
+            override fun onResponse(call: Call<EventData>?, response: Response<EventData>?) {
                 if(response!!.isSuccessful){
-                    nomyevent_img.visibility = View.INVISIBLE
+                    noEventImage!!.visibility = View.INVISIBLE
                     val myEvent = response.body()!!.myEvent
                     myevent_title.text = myEvent?.eventName
                     myevent_commentator.text = myEvent?.eventCommentator
@@ -136,7 +137,7 @@ class MyEventsFragment : Fragment() {
                     }
                     Log.e("EVENT DATE TIME:",eventDateTime.toString())
                 }else{
-                    nomyevent_img.visibility = View.VISIBLE
+                    noEventImage!!.visibility = View.VISIBLE
                     myevent_commentator.visibility = View.INVISIBLE
                     myevent_date.visibility = View.INVISIBLE
                     myevent_details.visibility = View.INVISIBLE
@@ -196,7 +197,7 @@ class MyEventsFragment : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun run() {
                 //do something
-                var today = Calendar.getInstance()!!
+                val today = Calendar.getInstance()!!
                 remainingTime = eventDateTime - today.timeInMillis
                 if(remainingTime > 0){
                     seconds = (remainingTime / 1000) % 60
@@ -215,6 +216,7 @@ class MyEventsFragment : Fragment() {
                     textTimer.visibility = View.INVISIBLE
                     streamButton.setBackgroundResource(R.drawable.round_button3)
                     h.removeCallbacks(runnable)
+
                     Log.e("test:","WHY??")
                 }
                 remainingTime-=1000

@@ -2,16 +2,27 @@ package com.example.cf.channelsd.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import com.example.cf.channelsd.Adapters.LiveAdapter
+import com.example.cf.channelsd.Data.EventDataList
+import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.fragment_live.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class LiveFragment : Fragment() {
 
-
+    private val eventInterface: EventInterface = ApiUtils.apiEvent
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_live, container, false)
@@ -20,10 +31,36 @@ class LiveFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val timeZone : String = TimeZone.getDefault().id
+        getLiveEvents(timeZone)
     }
 
     fun toastMessage(message: String) {
         Toast.makeText(view!!.context, message, Toast.LENGTH_LONG).show();
+    }
+    private fun getLiveEvents(timeZone: String){
+        eventInterface.getLiveEventList(timeZone).enqueue(object: Callback<EventDataList>{
+            override fun onFailure(call: Call<EventDataList>?, t: Throwable?) {
+                if (t?.message == "unexpected end of stream"){
+                    getLiveEvents(timeZone)
+                }
+            }
+
+            override fun onResponse(call: Call<EventDataList>?, response: Response<EventDataList>?) {
+                if(response!!.isSuccessful){
+                    val events : EventDataList ?= response.body()
+                    if(events != null){
+                        val liveEvents = events.events
+                        val eventRecyclerviewer = live_event_RV
+                        Log.e("DATA:",liveEvents.toString())
+                        eventRecyclerviewer.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+                        val adapter = LiveAdapter(liveEvents!!)
+                        eventRecyclerviewer.adapter = adapter
+                    }
+                }else{
+
+                }
+            }
+        })
     }
 }// Required empty public constructor

@@ -11,9 +11,11 @@ import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.PageViewerAdapter
+import com.example.cf.channelsd.Data.Key
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Fragments.*
+import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.Interfaces.LogoutInterface
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.picasso
@@ -30,14 +32,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DashboardActivity : AppCompatActivity() {
-
+    private val eventInterface: EventInterface = ApiUtils.apiEvent
     private var logoutInterface: LogoutInterface = ApiUtils.apiLogout
     private var pagerAdapter: PageViewerAdapter = PageViewerAdapter(supportFragmentManager)
     private lateinit var user: User
     private var doubleBackToExitPressedOnce = false
     private var delayHandler: Handler? = null
     private val DELAY: Long = 2000 // 2 seconds
-
+    // FOR KEYS
+    private var apiKey : String ?= null
+    private var sessionId : String ?= null
+    private var token : String ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -102,6 +107,7 @@ class DashboardActivity : AppCompatActivity() {
     fun toastMessage(message: String) {
         Toast.makeText(this@DashboardActivity, message, Toast.LENGTH_LONG).show();
     }
+
 
     private fun logout(session_key: String) {
         logoutInterface.logout(session_key).enqueue(object : Callback<String> {

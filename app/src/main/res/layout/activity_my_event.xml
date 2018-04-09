@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp">
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -35,8 +36,7 @@
             android:textColor="@color/color_black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/event_picture"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/event_picture" />
 
         <TextView
             android:id="@+id/event_date_upcoming_commentator"
@@ -47,8 +47,7 @@
             android:textColor="@color/color_red"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator" />
 
         <TextView
             android:id="@+id/textView12"
@@ -168,17 +167,36 @@
             android:layout_width="179dp"
             android:layout_height="46dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/round_button2"
             android:padding="2dp"
             android:text="@string/start_stream"
             android:textColor="@color/color_white"
             android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/end_event_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_remaining2" />
+
+        <Button
+            android:id="@+id/end_event_btn"
+            android:layout_width="179dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_button2"
+            android:padding="2dp"
+            android:text="@string/end_stream"
+            android:textColor="@color/color_white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_commentator_time" />
+            app:layout_constraintTop_toBottomOf="@+id/start_event_btn"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/view_entries_btn"
@@ -188,8 +206,8 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/round_button1"
             android:text="@string/view_entries"
-            android:textSize="16sp"
             android:textColor="@color/color_purple_primaryDark"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/upload_myevent_pic_btn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -205,8 +223,8 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/round_button1"
             android:text="@string/upload_event_photo"
-            android:textSize="16sp"
             android:textColor="@color/color_purple_primaryDark"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/view_entries_btn"

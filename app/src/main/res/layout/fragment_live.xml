@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.cf.channelsd.Fragments.LiveFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/live_event_RV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp">
+    </android.support.v7.widget.RecyclerView>
 
 
 </FrameLayout>

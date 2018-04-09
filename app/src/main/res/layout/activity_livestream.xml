@@ -1,123 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="5">
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_height="0dp"
-        android:baselineAligned="false">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/color_black"
+        android:orientation="vertical"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:id="@+id/contestant1Publisher"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/contestant1Publisher"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="2dp"
+                tools:ignore="NestedWeights">
+
+                <ProgressBar
+                    android:id="@+id/contestant1Loader1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/contestant1Loader2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/waiting_for_contestant"
+                    android:textColor="@color/color_white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/contestant1Loader3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/contestant_disconnect"
+                    android:textColor="@color/color_white"
+                    android:textSize="12sp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contestant2Publisher"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <ProgressBar
+                    android:id="@+id/contestant2Loader1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/contestant2Loader2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/waiting_for_contestant"
+                    android:textColor="@color/color_white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/contestant2Loader3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/contestant_disconnect"
+                    android:textColor="@color/color_white"
+                    android:textSize="12sp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/commentatorPublisher"
+            android:layout_width="176dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="2"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_black"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="2dp"
-            tools:ignore="NestedWeights">
-            <ProgressBar
-                android:id="@+id/contestant1Loader1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:id="@+id/contestant1Loader2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/waiting_for_contestant"
-                android:textColor="@color/color_white"
-                android:gravity="center"
-                android:textSize="12sp"/>
-            <TextView
-                android:id="@+id/contestant1Loader3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/contestant_disconnect"
-                android:textColor="@color/color_white"
-                android:gravity="center"
-                android:textSize="12sp"
-                android:visibility="invisible"/>
-        </LinearLayout>
+            android:scaleType="centerCrop">
 
-        <LinearLayout
-            android:id="@+id/contestant2Publisher"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_black"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="2dp">
             <ProgressBar
-                android:id="@+id/contestant2Loader1"
+                android:id="@+id/commentatorLoader1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
+
             <TextView
-                android:id="@+id/contestant2Loader2"
+                android:id="@+id/commentatorLoader2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/waiting_for_contestant"
-                android:textColor="@color/color_white"
                 android:gravity="center"
-                android:textSize="12sp"/>
+                android:text="@string/waiting_for_commentator"
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
+
             <TextView
-                android:id="@+id/contestant2Loader3"
+                android:id="@+id/commentatorLoader3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/contestant_disconnect"
-                android:textColor="@color/color_white"
                 android:gravity="center"
+                android:text="@string/commentator_disconnect"
+                android:textColor="@color/color_white"
                 android:textSize="12sp"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/commentator_title"
+        android:textColor="@color/color_white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:gravity="center"
-        android:background="@color/color_black"
-        android:padding="2dp"
-        android:id="@+id/commentatorPublisher"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        >
-        <ProgressBar
-            android:id="@+id/commentatorLoader1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:id="@+id/commentatorLoader2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/waiting_for_commentator"
-            android:textColor="@color/color_white"
-            android:gravity="center"
-            android:textSize="12sp"/>
-        <TextView
-            android:id="@+id/commentatorLoader3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/commentator_disconnect"
-            android:textColor="@color/color_white"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:visibility="invisible"/>
-    </LinearLayout>
-</LinearLayout>
+        android:text="@string/contestant1_title"
+        android:textColor="@color/color_white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="@string/contestant2_title"
+        android:textColor="@color/color_white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

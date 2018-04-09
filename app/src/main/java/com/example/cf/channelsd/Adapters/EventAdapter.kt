@@ -2,6 +2,7 @@ package com.example.cf.channelsd.Adapters
 
 import android.content.ContentValues
 import android.content.Intent
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,8 +36,8 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var dateFormat = DateFormat.getDateTimeInstance()
-        var dateTime = Calendar.getInstance()!!
+        val dateFormat = DateFormat.getDateTimeInstance()
+        val dateTime = Calendar.getInstance()!!
         val year : String = eventList[position].eventDate.substring(0,4)
         val month : String = eventList[position].eventDate.substring(5,7)
         val day : String = eventList[position].eventDate.substring(8,10)
@@ -50,12 +51,12 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         dateTime.set(Calendar.SECOND,0)
         val realTime : String = dateFormat.format(dateTime.time)
         holder.eventName.text = eventList[position].eventName
-        holder.eventDate.text = realTime// eventList[position].eventDate
+        holder.eventDate.text = realTime
         holder.eventDescription.text = eventList[position].eventDescription
         holder.eventPrize.text = eventList[position].prize
         holder.eventConstant1.text = eventList[position].eventContestant1
         holder.eventConstant2.text = eventList[position].eventContestant2
-        holder.eventCommentor.text = eventList[position].eventCommentator
+        holder.eventCommentator.text = eventList[position].eventCommentator
         holder.eventId.text = eventList[position].eventId.toString()
         holder.eventURL.text = eventList[position].eventImage
         holder.context.picasso.load(ApiUtils.BASE_URL + holder.eventURL.text).into(holder.eventImage)
@@ -68,7 +69,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
             contestant2 = "Empty Slot"
         }
         Log.e(ContentValues.TAG, holder.eventConstant1.text.toString())
-        holder.item?.setOnClickListener {
+        holder.item.setOnClickListener {
             val i = Intent(holder.context, UpcomingEventActivity::class.java)
             val event = Event(
                     "username",
@@ -78,7 +79,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
                     holder.eventDate.text.toString(),
                     contestant1,
                     contestant2,
-                    holder.eventCommentor.text.toString(),
+                    holder.eventCommentator.text.toString(),
                     holder.eventId.text.toString().toInt(),
                     holder.eventURL.text.toString()
 
@@ -93,11 +94,11 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         val eventDate = itemView.findViewById<TextView>(R.id.event_date)!!
         val eventPrize = itemView.findViewById<TextView>(R.id.event_prize)!!
         val eventDescription = itemView.findViewById<TextView>(R.id.event_description)!!
-        val item: LinearLayout? = itemView.findViewById<LinearLayout>(R.id.upcoming_event_item)
+        val item: CardView = itemView.findViewById(R.id.upcoming_event_item)
         val context = itemView.context!!
         val eventConstant1 = itemView.findViewById<TextView>(R.id.event_contestant1)!!
         val eventConstant2 = itemView.findViewById<TextView>(R.id.event_contestant2)!!
-        val eventCommentor = itemView.findViewById<TextView>(R.id.event_commentator)!!
+        val eventCommentator = itemView.findViewById<TextView>(R.id.event_commentator)!!
         val eventId = itemView.findViewById<TextView>(R.id.event_id)!!
         val eventImage = itemView.findViewById<ImageView>(R.id.event_image)!!
         val eventURL = itemView.findViewById<TextView>(R.id.event_url)!!
