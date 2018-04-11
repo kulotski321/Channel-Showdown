@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +40,7 @@ class MyEventsFragment : Fragment() {
     private var eventId : Int ?= null
 
     // Timezone converter and timer
-    var dateFormat = DateFormat.getDateTimeInstance()
+    var dateFormat = DateFormat.getDateTimeInstance()!!
     var dateTime = Calendar.getInstance()!!
     private var remainingTime:Long = 999999
     private var eventDateTime: Long = 0
@@ -58,13 +60,18 @@ class MyEventsFragment : Fragment() {
     private var token : String ?= null
 
     private var noEventImage : ImageView ?= null
-
+    private var myEventCommentator : TextView ?= null
+    private var myEventDate: TextView ?= null
+    private var myEventDetails : TextView ?= null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_events, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        myEventCommentator = getView()!!.findViewById(R.id.myevent_commentator)
+        myEventDate = getView()!!.findViewById(R.id.myevent_date)
+        myEventDetails = getView()!!.findViewById(R.id.myevent_details)
         val timer : TextView = getView()!!.findViewById(R.id.myevent_time)
         val button : Button = getView()!!.findViewById(R.id.myevent_stream_btn)
         val text : TextView = getView()!!.findViewById(R.id.time_remaining)
@@ -138,8 +145,8 @@ class MyEventsFragment : Fragment() {
                     Log.e("EVENT DATE TIME:",eventDateTime.toString())
                 }else{
                     noEventImage!!.visibility = View.VISIBLE
-                    myevent_commentator.visibility = View.INVISIBLE
-                    myevent_date.visibility = View.INVISIBLE
+                    myEventCommentator!!.visibility = View.INVISIBLE
+                    myEventDate!!.visibility = View.INVISIBLE
                     myevent_details.visibility = View.INVISIBLE
                     myevent_img.visibility = View.INVISIBLE
                     myevent_prize.visibility = View.INVISIBLE
@@ -152,6 +159,7 @@ class MyEventsFragment : Fragment() {
                     prize_textview.visibility = View.INVISIBLE
                     myevent_time.visibility = View.INVISIBLE
                     time_remaining.visibility = View.INVISIBLE
+
                 }
             }
         })
@@ -184,7 +192,16 @@ class MyEventsFragment : Fragment() {
         })
     }
     fun toastMessage(message: String) {
-        Toast.makeText(view!!.context, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(view!!.context,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     var h = Handler()

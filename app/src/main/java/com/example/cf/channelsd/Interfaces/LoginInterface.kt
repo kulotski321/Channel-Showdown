@@ -9,5 +9,6 @@ interface LoginInterface {
     @FormUrlEncoded
     @POST("/user/login/")
     fun sendUserInfo(@Field("username") username: String,
-                     @Field("password") password: String): Call<User>
+                     @Field("password") password: String,
+                     @Field("device_id")deviceId: String): Call<User>
 }

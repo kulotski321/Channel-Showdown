@@ -18,21 +18,31 @@ import android.app.Activity
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.cf.channelsd.Data.Constants.Perms.Companion.LOG_TAG
 import com.example.cf.channelsd.Data.Constants.Perms.Companion.RC_VIDEO_APP_PERM
+import com.example.cf.channelsd.Data.ServerResponse
+import com.example.cf.channelsd.Interfaces.EventInterface
+import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.activity_livestream.*
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.find
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
+import pl.droidsonroids.gif.GifImageView
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LiveStreamCommentatorActivity : AppCompatActivity(), Session.SessionListener , PublisherKit.PublisherListener{
+    private val eventInterface: EventInterface = ApiUtils.apiEvent
     // SESSION
     private var mSession: Session? = null
-
     // FOR COMMENTATOR
     private var commentatorPublisherView : LinearLayout ?= null
     private var commentatorPublisher: Publisher ?= null
@@ -48,17 +58,29 @@ class LiveStreamCommentatorActivity : AppCompatActivity(), Session.SessionListen
     private var sessionId : String ?= null
     private var token : String ?= null
 
+    private var eventId : String ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livestream)
-
-        val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        //val editor: SharedPreferences.Editor = preferences.edit()
+        val btn1 : Button = findViewById(R.id.vote_btn)
+        val btn2 : Button = findViewById(R.id.vote_contestant1_btn)
+        val btn3 : Button = findViewById(R.id.vote_contestant2_btn)
+        val btn4 : Button = findViewById(R.id.cycle_btn)
+        val r1 : GifImageView = findViewById(R.id.recording1)
+        val r2 : TextView = findViewById(R.id.recording2)
+        r1.visibility = View.VISIBLE
+        r2.visibility = View.VISIBLE
+        btn1.visibility = View.INVISIBLE
+        btn2.visibility = View.INVISIBLE
+        btn3.visibility = View.INVISIBLE
         apiKey = intent.getStringExtra("api_key")
         sessionId = intent.getStringExtra("session_id")
         token = intent.getStringExtra("token")
+        eventId = intent.getStringExtra("event_id")
         requestPermissions()
-
+        btn4.setOnClickListener {
+            commentatorPublisher!!.cycleCamera()
+        }
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -81,6 +103,21 @@ class LiveStreamCommentatorActivity : AppCompatActivity(), Session.SessionListen
             EasyPermissions.requestPermissions(this, "This app needs access to your camera and mic to make video calls", RC_VIDEO_APP_PERM, *perms)
         }
     }
+    private fun startArchive(eventId: Int){
+        eventInterface.startArchive(eventId).enqueue(object : Callback<ServerResponse>{
+            override fun onFailure(call: Call<ServerResponse>?, t: Throwable?) {
+                if(t?.message == "unexpected end of stream"){
+                    startArchive(eventId)
+                }
+            }
+
+            override fun onResponse(call: Call<ServerResponse>?, response: Response<ServerResponse>?) {
+                if(response!!.isSuccessful){
+                }else{
+                }
+            }
+        })
+    }
     override fun onConnected(session: Session) {
         Log.i(LOG_TAG, "Session Connected")
 
@@ -91,6 +128,7 @@ class LiveStreamCommentatorActivity : AppCompatActivity(), Session.SessionListen
         mSession?.publish(commentatorPublisher)
         commentatorLoader1.visibility = View.INVISIBLE
         commentatorLoader2.visibility = View.INVISIBLE
+        startArchive(eventId!!.toInt())
     }
 
     override fun onDisconnected(session: Session) {
@@ -157,7 +195,7 @@ class LiveStreamCommentatorActivity : AppCompatActivity(), Session.SessionListen
 
     }
 
-    override fun onStreamCreated(p0: PublisherKit?, p1: Stream?) {
+    override fun onStreamCreated(p0: PublisherKit?, stream: Stream) {
 
     }
 

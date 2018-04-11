@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.cf.channelsd.Fragments.LiveFragment">
 
+    <ImageView
+        android:id="@+id/no_live_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:contentDescription="@string/logo"
+        android:focusable="true"
+        android:src="@drawable/logo"
+        android:visibility="gone" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/live_event_RV"
         android:layout_width="match_parent"

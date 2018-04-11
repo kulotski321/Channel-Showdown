@@ -3,11 +3,15 @@ package com.example.cf.channelsd.Activities
 import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EntriesAdapter
 import com.example.cf.channelsd.Utils.ApiUtils
@@ -25,8 +29,6 @@ class EntriesActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entries)
 
-        val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        //val editor: SharedPreferences.Editor = preferences.edit()
         val eventId : String = intent.getStringExtra("eventId")
         getEntries(eventId.toInt())
     }
@@ -56,7 +58,16 @@ class EntriesActivity: AppCompatActivity() {
         })
     }
     fun toastMessage(message: String){
-        Toast.makeText(this@EntriesActivity, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     override fun onResume() {

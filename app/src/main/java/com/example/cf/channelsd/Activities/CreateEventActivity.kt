@@ -6,11 +6,15 @@ import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.icu.text.TimeZoneNames
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Interfaces.EventInterface
@@ -26,21 +30,20 @@ import java.util.*
 
 class CreateEventActivity : AppCompatActivity() {
     private var eventInterface: EventInterface = ApiUtils.apiEvent
-    var formatDateTime = DateFormat.getDateTimeInstance()
-    var dateTime = Calendar.getInstance()
-    var realDate : String = ""
-    var realTime : String = ""
+    private var formatDateTime = DateFormat.getDateTimeInstance()
+    private var dateTime = Calendar.getInstance()
+    private var realDate : String = ""
+    private var realTime : String = ""
     // for date
-    var rYear : Int ?= null
-    var rMonth : Int ?= null
-    var rDay : Int ?= null
+    private var rYear : Int ?= null
+    private var rMonth : Int ?= null
+    private var rDay : Int ?= null
     // for time
-    var rHour : Int ?= null
-    var rMinute: Int ?= null
+    private var rHour : Int ?= null
+    private var rMinute: Int ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_create_event)
-        // requestWindowFeature(FEATURE_ACTION_BAR)
         val timezoneID : String? = TimeZone.getDefault().id
         Log.e("TIMEZONE", timezoneID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
@@ -64,12 +67,20 @@ class CreateEventActivity : AppCompatActivity() {
             updateTime()
         }
         updateTextLabel()
-
         //Log.e("DATE TIME",)
     }
 
     fun toastMessage(message: String) {
-        Toast.makeText(this@CreateEventActivity, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     private fun editTextLength(editText: EditText): Int {
@@ -127,25 +138,24 @@ class CreateEventActivity : AppCompatActivity() {
         TimePickerDialog(this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true).show()
     }
 
-    var d: DatePickerDialog.OnDateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+    var d: DatePickerDialog.OnDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
         dateTime.set(Calendar.YEAR, year)
         dateTime.set(Calendar.MONTH, monthOfYear)
         dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         rYear = year
         rMonth = monthOfYear + 1
         rDay = dayOfMonth
-        val strDate: String
-        if(rMonth!! < 10){
+        val strDate: String = if(rMonth!! < 10){
             if(rDay!! < 10){
-                strDate = "$rYear-0$rMonth-0$rDay"
+                "$rYear-0$rMonth-0$rDay"
             }else{
-                strDate = "$rYear-0$rMonth-$rDay"
+                "$rYear-0$rMonth-$rDay"
             }
         }else{
             if(rDay!! < 10){
-                strDate = "$rYear-$rMonth-0$rDay"
+                "$rYear-$rMonth-0$rDay"
             }else{
-                strDate = "$rYear-$rMonth-$rDay"
+                "$rYear-$rMonth-$rDay"
             }
         }
         Log.e("DATE: ",strDate)
@@ -153,23 +163,22 @@ class CreateEventActivity : AppCompatActivity() {
         updateTextLabel()
     }
 
-    var t: TimePickerDialog.OnTimeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+    var t: TimePickerDialog.OnTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
         dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
         dateTime.set(Calendar.MINUTE, minute)
         rHour = hourOfDay
         rMinute = minute
-        val strTime: String
-        if (rHour!! < 10){
+        val strTime: String = if (rHour!! < 10){
             if(rMinute!! < 10){
-                strTime = "0$rHour:0$rMinute:00"
+                "0$rHour:0$rMinute:00"
             }else{
-                strTime = "0$rHour:$rMinute:00"
+                "0$rHour:$rMinute:00"
             }
         }else{
             if(rMinute!! < 10){
-                strTime = "$rHour:0$rMinute:00"
+                "$rHour:0$rMinute:00"
             }else{
-                strTime = "$rHour:$rMinute:00"
+                "$rHour:$rMinute:00"
             }
         }
         Log.e("TIME: ",strTime)

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_black"
     android:orientation="vertical">
 
     <LinearLayout
@@ -57,7 +58,7 @@
                     android:gravity="center"
                     android:text="@string/waiting_for_contestant"
                     android:textColor="@color/color_white"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/contestant1Loader3"
@@ -66,8 +67,10 @@
                     android:gravity="center"
                     android:text="@string/contestant_disconnect"
                     android:textColor="@color/color_white"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:visibility="invisible" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -91,7 +94,7 @@
                     android:gravity="center"
                     android:text="@string/waiting_for_contestant"
                     android:textColor="@color/color_white"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/contestant2Loader3"
@@ -100,22 +103,21 @@
                     android:gravity="center"
                     android:text="@string/contestant_disconnect"
                     android:textColor="@color/color_white"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:visibility="invisible" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/commentatorPublisher"
-            android:layout_width="176dp"
+            android:layout_width="213dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="2"
             android:adjustViewBounds="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="2dp"
-            android:scaleType="centerCrop">
+            android:padding="2dp">
 
             <ProgressBar
                 android:id="@+id/commentatorLoader1"
@@ -129,7 +131,7 @@
                 android:gravity="center"
                 android:text="@string/waiting_for_commentator"
                 android:textColor="@color/color_white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/commentatorLoader3"
@@ -138,7 +140,7 @@
                 android:gravity="center"
                 android:text="@string/commentator_disconnect"
                 android:textColor="@color/color_white"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
@@ -168,18 +170,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="@string/contestant1_title"
         android:textColor="@color/color_white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.0" />
@@ -190,7 +192,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="@string/contestant2_title"
@@ -198,7 +202,128 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/vote_contestant2_btn"
+        android:layout_width="105dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_button3"
+        android:text="VOTE ME"
+        android:textColor="@color/color_purple_primaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554" />
+
+    <Button
+        android:id="@+id/vote_contestant1_btn"
+        android:layout_width="105dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_button3"
+        android:text="VOTE ME"
+        android:textColor="@color/color_purple_primaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554" />
+
+    <ToggleButton
+        android:id="@+id/vote_btn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/vote_btn"
+        android:text=""
+        android:textColor="@color/color_purple_primaryDark"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.966" />
+
+    <Button
+        android:id="@+id/cycle_btn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/cycle_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.966" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/recording1"
+        android:layout_width="22dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/recording"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/recording2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/recording"
+        android:textColor="@color/color_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
 
 </android.support.constraint.ConstraintLayout>

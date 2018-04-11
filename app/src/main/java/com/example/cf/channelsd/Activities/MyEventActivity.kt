@@ -3,10 +3,12 @@ package com.example.cf.channelsd.Activities
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -32,19 +34,19 @@ import java.util.*
 class MyEventActivity : AppCompatActivity() {
     private val eventInterface: EventInterface = ApiUtils.apiEvent
     private lateinit var myEventMain: Event
-    var dateFormat = DateFormat.getDateTimeInstance()
-    var dateTime = Calendar.getInstance()!!
+    private var dateFormat = DateFormat.getDateTimeInstance()
+    private var dateTime = Calendar.getInstance()!!
     private lateinit var eventId : String
     private lateinit var eventPic: String
     private var remainingTime:Long = 999999
     private var eventDateTime: Long = 0
-    var seconds : Long = 0
-    var minutes : Long = 0
-    var hours : Long = 0
+    private var seconds : Long = 0
+    private var minutes : Long = 0
+    private var hours : Long = 0
     lateinit var timer : TextView
     lateinit var streamButton : Button
     lateinit var textTimer : TextView
-    var canStream = false
+    private var canStream = false
     // Opentok keys
     private var apiKey: String ?= null
     private var sessionId : String ?= null
@@ -70,6 +72,7 @@ class MyEventActivity : AppCompatActivity() {
                 val i = Intent(this,ViewProfileActivity::class.java)
                 i.putExtra("username",usernameContestant)
                 i.putExtra("from_link","true")
+                i.putExtra("entry_id","blank")
                 startActivity(i)
             }else{
                 toastMessage("No contestant yet")
@@ -81,6 +84,7 @@ class MyEventActivity : AppCompatActivity() {
                 val i = Intent(this,ViewProfileActivity::class.java)
                 i.putExtra("username",usernameContestant)
                 i.putExtra("from_link","true")
+                i.putExtra("entry_id","blank")
                 startActivity(i)
             }else{
                 toastMessage("No contestant yet")
@@ -178,6 +182,7 @@ class MyEventActivity : AppCompatActivity() {
                     i.putExtra("api_key",apiKey)
                     i.putExtra("session_id",sessionId)
                     i.putExtra("token",token)
+                    i.putExtra("event_id",eventId.toString())
                     startActivity(i)
                 }else{
                     toastMessage("Live stream failed to start")
@@ -205,7 +210,16 @@ class MyEventActivity : AppCompatActivity() {
         })
     }
     fun toastMessage(message: String){
-        Toast.makeText(this@MyEventActivity, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     var h = Handler()

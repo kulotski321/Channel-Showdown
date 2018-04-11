@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cf.channelsd">
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -135,6 +136,27 @@
             android:label="@string/live_stream_audience"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.HistoryResultActivity"
+            android:label="@string/history_result"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/YesAppTheme"
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.ResultActivity"
+            android:label="@string/result"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/YesAppTheme"
+            android:parentActivityName=".Activities.HistoryResultActivity" />
+        <activity
+            android:name=".Activities.EpisodeActivity"
+            android:label="@string/episode"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.DashboardActivity" />
     </application>
 </manifest>

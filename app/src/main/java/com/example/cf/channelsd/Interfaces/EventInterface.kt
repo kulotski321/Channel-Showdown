@@ -14,15 +14,25 @@ interface EventInterface {
                     @Field("eventDescription") eventDescription: String,
                     @Field("prize") prize: String,
                     @Field("eventDate") eventDate: String,
-                    @Field("timezone")timeZone: String): Call<Event>
+                    @Field("timezone") timeZone: String): Call<Event>
 
     @FormUrlEncoded
     @POST("/event/upcomingevents/")
-    fun getUpcomingEventList(@Field("timezone")timezone: String) : Call<EventDataList>
+    fun getUpcomingEventList(@Field("timezone") timezone: String) : Call<EventDataList>
 
     @FormUrlEncoded
     @POST("/event/ongoingevents/")
-    fun getLiveEventList(@Field("timezone")timezone: String) : Call<EventDataList>
+    fun getLiveEventList(@Field("timezone") timezone: String) : Call<EventDataList>
+
+    @FormUrlEncoded
+    @POST("/event/history/")
+    fun getHistoryList(@Field("username") username: String,
+                       @Field("timezone") timezone: String) : Call<EventDataList>
+
+    @FormUrlEncoded
+    @POST("/event/finishedevents/")
+    fun getEpisodeList(@Field("username") username: String,
+                       @Field("timezone") timezone: String) : Call<EventDataList>
 
     @FormUrlEncoded
     @POST("/event/creatoreventprofile/")
@@ -56,7 +66,7 @@ interface EventInterface {
     @FormUrlEncoded
     @POST("/event/myevent/")
     fun getAcceptedEvent(@Field("username") username: String,
-                         @Field("timezone")timezone: String) : Call<EventData>
+                         @Field("timezone") timezone: String) : Call<EventData>
 
     @FormUrlEncoded
     @POST("/livestream/gettokenpublisher/")
@@ -76,4 +86,22 @@ interface EventInterface {
     @FormUrlEncoded
     @POST("/livestream/endevent/")
     fun endEvent(@Field("event_id") eventId: Int) : Call<ServerResponse>
+
+    @FormUrlEncoded
+    @POST("/livestream/vote/")
+    fun voteContestant(@Field("username") username: String,
+                       @Field("contestant") contestant: String,
+                       @Field("event_id") eventId : Int): Call<ServerResponse>
+
+    @FormUrlEncoded
+    @POST("/livestream/startarchive/")
+    fun startArchive(@Field("event_id") eventId: Int) : Call<ServerResponse>
+
+    @FormUrlEncoded
+    @POST("/event/result/")
+    fun viewResult(@Field("event_id") eventId : Int) : Call<Result>
+
+    @FormUrlEncoded
+    @POST("/livestream/savedvideo/")
+    fun savedVideo(@Field("event_id")eventId : Int) : Call<Video>
 }

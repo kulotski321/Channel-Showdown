@@ -2,10 +2,14 @@ package com.example.cf.channelsd.Activities
 
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
@@ -30,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
                 val username: String = input_username_register.text.toString()
                 val email: String = input_email_register.text.toString()
                 val password1: String = input_password_register.text.toString()
-                val password2 = password1;
+                val password2 = password1
                 val userType: String = if (input_commentator_Btn.isChecked) {
                     "commentator"
                 } else {
@@ -54,7 +58,16 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun toastMessage(message: String) {
-        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     private fun sendPost(username: String, email: String, password1: String,password2:String, userType: String) {
@@ -77,7 +90,6 @@ class RegisterActivity : AppCompatActivity() {
                     startActivity(i)
                     finish()
                 } else {
-                    val user = response.body()
                     toastMessage("Register failed")
                 }
             }

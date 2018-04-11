@@ -14,13 +14,8 @@
             android:id="@+id/event_picture"
             android:layout_width="fill_parent"
             android:layout_height="210dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,19 +40,19 @@
             android:layout_marginTop="5dp"
             android:text="@string/loading"
             android:textColor="@color/color_red"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator" />
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="73dp"
-            android:layout_height="21dp"
+            android:layout_width="84dp"
+            android:layout_height="22dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:text="@string/event_date_start"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/event_name_upcoming_commentator"
             tools:text="Event Date :" />
@@ -70,7 +65,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:text="Details:"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -84,81 +79,81 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:text="@string/loading"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/details_textview" />
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="79dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:text="@string/contestant1"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <TextView
             android:id="@+id/textView15"
-            android:layout_width="78dp"
-            android:layout_height="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:text="@string/contestant2"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <TextView
             android:id="@+id/event_contestant2_upcoming_commentator"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/loading"
             android:textColor="@color/color_black"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/event_contestant1_upcoming_commentator" />
 
         <TextView
             android:id="@+id/event_contestant1_upcoming_commentator"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/loading"
             android:textColor="@color/color_black"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/event_date_upcoming_commentator" />
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_width="40dp"
-            android:layout_height="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/prize"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/event_description_upcoming_commentator" />
 
         <TextView
             android:id="@+id/event_prize_upcoming_commentator"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/event_prize"
             android:textColor="@color/color_green_primary"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/event_description_upcoming_commentator" />
 
@@ -200,10 +195,10 @@
 
         <Button
             android:id="@+id/view_entries_btn"
-            android:layout_width="125dp"
-            android:layout_height="46dp"
+            android:layout_width="144dp"
+            android:layout_height="49dp"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_button1"
             android:text="@string/view_entries"
             android:textColor="@color/color_purple_primaryDark"
@@ -215,13 +210,14 @@
 
         <Button
             android:id="@+id/upload_myevent_pic_btn"
-            android:layout_width="125dp"
-            android:layout_height="46dp"
+            android:layout_width="144dp"
+            android:layout_height="49dp"
             android:layout_gravity="center"
             android:layout_marginLeft="36dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_button1"
+            android:padding="3dp"
             android:text="@string/upload_event_photo"
             android:textColor="@color/color_purple_primaryDark"
             android:textSize="16sp"
@@ -233,7 +229,7 @@
         <TextView
             android:id="@+id/time_remaining2"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="52dp"
             android:layout_marginStart="52dp"
             android:layout_marginTop="8dp"
@@ -244,7 +240,7 @@
         <TextView
             android:id="@+id/myevent_commentator_time"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"

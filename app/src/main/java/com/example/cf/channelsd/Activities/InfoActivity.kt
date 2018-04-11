@@ -1,16 +1,20 @@
 package com.example.cf.channelsd.Activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent.getActivity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -36,12 +40,12 @@ class InfoActivity : AppCompatActivity() {
 
     private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private var user: User? = null
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_additional_info)
-
+        val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
                 preferences.getString("session_key_pref", ""),
                 preferences.getString("username_pref", ""),
@@ -50,6 +54,7 @@ class InfoActivity : AppCompatActivity() {
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
                 preferences.getString("bio_pref", ""),
+                androidId,
                 preferences.getString("profile_pic_pref",""),
                 preferences.getString("profile_vid_pref",""),
                 preferences.getString("profile_thumbnail_pref","")
@@ -85,7 +90,16 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        Toast.makeText(this@InfoActivity, message, Toast.LENGTH_LONG).show()
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     private fun checkTextFields(): Int {

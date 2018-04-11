@@ -9,7 +9,7 @@ import com.example.cf.channelsd.R
 class SplashActivity : AppCompatActivity() {
 
     private var delayHandler: Handler? = null
-    private val DELAY: Long = 3000 //3 seconds
+    private val delay: Long = 3000 //3 seconds
 
     private val runnable: Runnable = Runnable {
         if (!isFinishing) {
@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
         // Initialize the Handler
         delayHandler = Handler()
         // Navigate with delay
-        delayHandler!!.postDelayed(runnable, DELAY)
+        delayHandler!!.postDelayed(runnable, delay)
     }
 
     public override fun onDestroy() {

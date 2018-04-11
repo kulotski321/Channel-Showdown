@@ -4,11 +4,14 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Reply
@@ -28,14 +31,15 @@ class ViewProfileActivity : AppCompatActivity(){
     private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private val eventInterface: EventInterface = ApiUtils.apiEvent
     private lateinit var userMain: User
+    private lateinit var mEntryId : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_profile)
 
-        val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val username = intent.getStringExtra("username")
         val entryId = intent.getStringExtra("entry_id")
         val fromLink = intent.getStringExtra("from_link")
+        mEntryId = entryId
         viewProfileApplicant(username)
         view_profile_video_thumbnail.setOnClickListener{
             val videoUri: Uri = Uri.parse(ApiUtils.BASE_URL + userMain.profileVideo)
@@ -130,6 +134,16 @@ class ViewProfileActivity : AppCompatActivity(){
         })
     }
     fun toastMessage(message: String){
-        Toast.makeText(this@ViewProfileActivity, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
+
 }

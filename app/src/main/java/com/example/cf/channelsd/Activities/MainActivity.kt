@@ -1,13 +1,18 @@
 package com.example.cf.channelsd.Activities
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
@@ -18,18 +23,19 @@ import org.parceler.Parcels
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.provider.Settings.Secure
 
 class MainActivity : AppCompatActivity() {
 
     private var user: User? = null
     private var loginInterface: LoginInterface  = ApiUtils.apiLogin
 
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        val androidIdMain = Secure.getString(contentResolver,Secure.ANDROID_ID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = preferences.edit()
         //editor.clear()
         //editor.apply()
         val usernamePref: String = preferences.getString("username_pref", "")
@@ -38,11 +44,11 @@ class MainActivity : AppCompatActivity() {
                 if (checkTextFields() == 2) {
                     val username = input_username_user.text.toString()
                     val password = input_password_user.text.toString()
-                    sendPost(username, password)
+                    sendPost(username, password,androidIdMain)
                 }
             }
         } else {
-            val userInfo = User(
+            user = User(
                     preferences.getString("session_key_pref", ""),
                     preferences.getString("username_pref", ""),
                     preferences.getString("email_pref", ""),
@@ -50,12 +56,13 @@ class MainActivity : AppCompatActivity() {
                     preferences.getString("firstName_pref", ""),
                     preferences.getString("lastName_pref", ""),
                     preferences.getString("bio_pref", ""),
+                    androidIdMain,
                     preferences.getString("profile_pic_pref",""),
                     preferences.getString("profile_vid_pref",""),
                     preferences.getString("profile_thumbnail_pref","")
             )
             val i = Intent(this, DashboardActivity::class.java)
-            i.putExtra("user", Parcels.wrap(userInfo))
+            i.putExtra("user", Parcels.wrap(user))
             startActivity(i)
             finish()
         }
@@ -69,7 +76,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        Toast.makeText(this@MainActivity,message, Toast.LENGTH_LONG).show()
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
     private fun editTextLength(editText: EditText): Int {
@@ -91,12 +107,12 @@ class MainActivity : AppCompatActivity() {
         return checked
     }
 
-    private fun sendPost(username: String, password: String) {
-        loginInterface.sendUserInfo(username, password).enqueue(object : Callback<User> {
+    private fun sendPost(username: String, password: String,androidId: String) {
+        loginInterface.sendUserInfo(username, password,androidId).enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
                 if (t?.message == "unexpected end of stream") {
-                    sendPost(username, password)
+                    sendPost(username, password,androidId)
                 }else{
                     toastMessage("Check your internet connection")
                 }

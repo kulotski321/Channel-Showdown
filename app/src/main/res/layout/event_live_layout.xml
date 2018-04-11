@@ -96,15 +96,15 @@
             </LinearLayout>
 
             <pl.droidsonroids.gif.GifImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/live_small"
+                android:layout_width="62dp"
+                android:layout_height="29dp"
+                android:src="@drawable/live"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
-                app:layout_constraintHorizontal_bias="0.205"
+                app:layout_constraintHorizontal_bias="0.179"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout3"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-                app:layout_constraintVertical_bias="0.762" />
+                app:layout_constraintVertical_bias="0.783" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

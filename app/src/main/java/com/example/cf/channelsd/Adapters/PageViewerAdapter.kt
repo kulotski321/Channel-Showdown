@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter
 
 class PageViewerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
-    var fragmentManager = fragmentManager
-    var fragmentItems: ArrayList<Fragment> = ArrayList()
-    var fragmentTitles: ArrayList<String> = ArrayList()
+    private var fragmentManager = fragmentManager
+    private var fragmentItems: ArrayList<Fragment> = ArrayList()
+    private var fragmentTitles: ArrayList<String> = ArrayList()
 
     fun addFragments(fragmentItem: Fragment, fragmentTitle: String) {
         fragmentItems.add(fragmentItem)

@@ -24,11 +24,6 @@
             android:id="@+id/myevent_img"
             android:layout_width="fill_parent"
             android:layout_height="215dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/my_event"
             android:scaleType="centerCrop"
@@ -53,12 +48,12 @@
         <TextView
             android:id="@+id/commentator_textview"
             android:layout_width="wrap_content"
-            android:layout_height="17dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:text="@string/commentator"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
 
@@ -73,7 +68,7 @@
             android:focusable="true"
             android:text="@string/loading"
             android:textColor="@color/color_black"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/commentator_textview"
             app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
 
@@ -85,7 +80,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/event_date_start"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myevent_title" />
 
@@ -97,7 +92,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/loading"
             android:textColor="@color/color_red"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/event_date_textview"
             app:layout_constraintTop_toTopOf="@+id/event_date_textview" />
 
@@ -109,7 +104,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:text="@string/details"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commentator_textview" />
 
@@ -123,7 +118,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:text="@string/loading"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,14 +132,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:text="@string/prize"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myevent_details" />
 
         <TextView
             android:id="@+id/myevent_prize"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -152,7 +147,7 @@
             android:layout_marginTop="6dp"
             android:text="@string/loading"
             android:textColor="@color/color_green_primary"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/prize_textview"
@@ -182,27 +177,23 @@
 
         <TextView
             android:id="@+id/time_remaining"
-            android:layout_width="111dp"
-            android:layout_height="21dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:text="@string/remaining_time"
-            app:layout_constraintEnd_toStartOf="@+id/myevent_time"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
 
         <TextView
             android:id="@+id/myevent_time"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginEnd="144dp"
-            android:layout_marginRight="144dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/loading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/time_remaining"
             app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
     </android.support.constraint.ConstraintLayout>

@@ -1,14 +1,21 @@
 package com.example.cf.channelsd.Activities
 
+import android.annotation.SuppressLint
+import android.app.FragmentTransaction
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.view.Window
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.PageViewerAdapter
 import com.example.cf.channelsd.Data.Key
@@ -32,23 +39,20 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DashboardActivity : AppCompatActivity() {
-    private val eventInterface: EventInterface = ApiUtils.apiEvent
     private var logoutInterface: LogoutInterface = ApiUtils.apiLogout
     private var pagerAdapter: PageViewerAdapter = PageViewerAdapter(supportFragmentManager)
     private lateinit var user: User
     private var doubleBackToExitPressedOnce = false
     private var delayHandler: Handler? = null
     private val DELAY: Long = 2000 // 2 seconds
-    // FOR KEYS
-    private var apiKey : String ?= null
-    private var sessionId : String ?= null
-    private var token : String ?= null
+ 
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar_main)
-
+        val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
@@ -59,6 +63,7 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
                 preferences.getString("bio_pref", ""),
+                androidId,
                 preferences.getString("profile_pic_pref",""),
                 preferences.getString("profile_vid_pref",""),
                 preferences.getString("profile_thumbnail_pref","")
@@ -81,6 +86,7 @@ class DashboardActivity : AppCompatActivity() {
             }
             else -> finish()
         }
+
         custom_viewPager.adapter = pagerAdapter
         custom_tabLayout.setupWithViewPager(custom_viewPager)
 
@@ -105,7 +111,16 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     fun toastMessage(message: String) {
-        Toast.makeText(this@DashboardActivity, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 
 

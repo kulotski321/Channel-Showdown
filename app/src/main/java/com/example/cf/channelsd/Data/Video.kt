@@ -2,9 +2,7 @@ package com.example.cf.channelsd.Data
 
 import com.google.gson.annotations.SerializedName
 
-class AcceptedEvent {
-
-    @SerializedName("event")
-    val myEvent : Event ?= null
-
-}
+data class Video(
+        @SerializedName("video")
+        val video: String
+)

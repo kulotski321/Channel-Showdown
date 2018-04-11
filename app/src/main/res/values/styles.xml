@@ -15,4 +15,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.YellowAccent">
+        <item name="colorAccent">@color/color_yellow_primary</item> <!-- Whatever color you want-->
+    </style>
+
 </resources>

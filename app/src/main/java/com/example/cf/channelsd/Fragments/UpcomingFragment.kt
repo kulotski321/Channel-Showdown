@@ -1,14 +1,18 @@
 package com.example.cf.channelsd.Fragments
 
 import android.content.ContentValues
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EventAdapter
 import com.example.cf.channelsd.Utils.ApiUtils
@@ -23,6 +27,7 @@ import java.util.*
 
 class UpcomingFragment : Fragment() {
     private val eventInterface: EventInterface = ApiUtils.apiEvent
+    private var eventRecyclerviewer : RecyclerView ?= null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
@@ -31,6 +36,7 @@ class UpcomingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val timeZone : String = TimeZone.getDefault().id
+        eventRecyclerviewer = upcoming_event_RV
         getUpcomingEventList(timeZone)
     }
     private fun getUpcomingEventList(timeZone: String){
@@ -48,17 +54,25 @@ class UpcomingFragment : Fragment() {
                     Log.e(ContentValues.TAG, response.toString())
                     if(events != null){
                         val upcomingEvents = events.events
-                        val eventRecyclerviewer = upcoming_event_RV
-                        eventRecyclerviewer.layoutManager = LinearLayoutManager(context,LinearLayout.VERTICAL, false)
+                        eventRecyclerviewer!!.layoutManager = LinearLayoutManager(context,LinearLayout.VERTICAL, false)
                         val adapter = EventAdapter(upcomingEvents!!)
-                        eventRecyclerviewer.adapter = adapter
+                        eventRecyclerviewer!!.adapter = adapter
                     }
                 }
             }
         })
     }
     fun toastMessage(message: String) {
-        Toast.makeText(view!!.context, message, Toast.LENGTH_LONG).show();
+        val toast: Toast = Toast.makeText(view!!.context,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
 }// Required empty public constructor
 

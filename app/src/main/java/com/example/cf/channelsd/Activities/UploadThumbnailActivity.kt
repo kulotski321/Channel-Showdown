@@ -5,13 +5,16 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Data.Reply
 import com.example.cf.channelsd.Interfaces.ProfileInterface
@@ -31,7 +34,7 @@ import java.io.File
 
 class UploadThumbnailActivity : AppCompatActivity() , ProgressRequestBody.UploadCallbacks{
 
-    var progressBar: ProgressBar? = null
+    private var progressBar: ProgressBar? = null
     private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private val RESULT_LOAD_IMAGE = 1
     private lateinit var filePartImage: RequestBody
@@ -121,7 +124,16 @@ class UploadThumbnailActivity : AppCompatActivity() , ProgressRequestBody.Upload
         }
     }
     private fun toastMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
+        val toastView : View = toast.view
+        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 16F
+        toastMessage.setPadding(2,2,2,2)
+        toastMessage.setTextColor(Color.parseColor("#790e8b"))
+        toastMessage.gravity = Gravity.CENTER
+        toastView.setBackgroundColor(Color.YELLOW)
+        toastView.setBackgroundResource(R.drawable.round_button1)
+        toast.show()
     }
     override fun onProgressUpdate(percentage: Long) {
         progressBar!!.progress = percentage.toInt()

@@ -10,30 +10,6 @@ class Entry (
         val entryId: Int,
         @SerializedName("entry_status")
         val status: Int
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readInt(),
-            parcel.readInt()) {
-    }
+) {
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(username)
-        parcel.writeInt(entryId)
-        parcel.writeInt(status)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Entry> {
-        override fun createFromParcel(parcel: Parcel): Entry {
-            return Entry(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Entry?> {
-            return arrayOfNulls(size)
-        }
-    }
 }

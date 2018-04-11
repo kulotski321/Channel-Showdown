@@ -20,6 +20,9 @@
     <string name="live_stream_commentator">Live Stream Commentator</string>
     <string name="live_stream_contestant">Live Stream Contestant</string>
     <string name="live_stream_audience">Live Stream Audience</string>
+    <string name="history_result">Event History</string>
+    <string name="result">Result</string>
+    <string name="episode">Episode</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -82,6 +85,10 @@
     <!-- EVENT FRAGMENT -->
     <string name="create_an_event">Create an event</string>
     <string name="my_event">My Event</string>
+    <!-- HISTORY FRAGMENT -->
+    <string name="click_to_view">Click image to view details</string>
+    <string name="show_event_results">View Event Results</string>
+    <string name="voting_results">Voting results</string>
     <!-- LIVE STREAM -->
     <string name="waiting_for_contestant">Waiting for contestant</string>
     <string name="waiting_for_commentator">Waiting for commentator</string>
@@ -90,6 +97,9 @@
     <string name="commentator_title">COMMENTATOR</string>
     <string name="contestant1_title">CONTESTANT 1</string>
     <string name="contestant2_title">CONTESTANT 2</string>
+    <string name="recording">Recording</string>
+    <!-- EPISODE FRAGMENT -->
+    <string name="replay">Replay Event</string>
     <!-- FOR TESTING-->
     <string name="test">Test</string>
     <string name="this_is_live">This is Live</string>

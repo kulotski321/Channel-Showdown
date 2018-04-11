@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        android:id="@+id/history_event_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:baselineAligned="false">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/history_event_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_weight="3"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/history_event_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_white"
+                    android:padding="5dp"
+                    android:text="@string/loading"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:padding="5dp"
+                    android:text="@string/click_to_view"/>
+
+                <TextView
+                    android:id="@+id/history_event_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_white"
+                    android:padding="5dp"
+                    android:text="@string/loading"
+                    android:textColor="@color/color_red"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/history_event_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/loading"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/history_event_prize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/color_green_primaryLight"
+                    android:gravity="center"
+                    android:text="@string/loading"
+                    android:textColor="@color/color_black"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/history_event_contestant1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/history_event_contestant2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/history_event_commentator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/history_event_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/history_event_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+                <TextView
+                    android:id="@+id/history_event_votes1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+                <TextView
+                    android:id="@+id/history_event_votes2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

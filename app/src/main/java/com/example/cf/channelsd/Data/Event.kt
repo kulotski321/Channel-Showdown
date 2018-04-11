@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import org.parceler.Parcel
 @Parcel
-
 data class Event(
         val username: String,
         @SerializedName("event_name")
@@ -23,7 +22,11 @@ data class Event(
         @SerializedName("id")
         val eventId : Int,
         @SerializedName("event_image")
-        val eventImage : String
+        val eventImage : String,
+        @SerializedName("votes_contestant1")
+        val votesContestant1 : Int,
+        @SerializedName("votes_contestant2")
+        val votesContestant2 : Int
 ) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
             parcel.readString(),
@@ -35,7 +38,9 @@ data class Event(
             parcel.readString(),
             parcel.readString(),
             parcel.readInt(),
-            parcel.readString()) {
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: android.os.Parcel, flags: Int) {
@@ -49,6 +54,8 @@ data class Event(
         parcel.writeString(eventCommentator)
         parcel.writeInt(eventId)
         parcel.writeString(eventImage)
+        parcel.writeInt(votesContestant1)
+        parcel.writeInt(votesContestant2)
     }
 
     override fun describeContents(): Int {
@@ -64,5 +71,4 @@ data class Event(
             return arrayOfNulls(size)
         }
     }
-
 }

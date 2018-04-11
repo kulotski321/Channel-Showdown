@@ -15,18 +15,18 @@ import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
 import java.util.ArrayList
 
-class LiveAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapter<LiveAdapter.ViewHolder>()  {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveAdapter.ViewHolder {
+class LiveAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapter<LiveAdapter.ViewHolderLive>()  {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveAdapter.ViewHolderLive {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.event_live_layout, parent, false)
 
-        return LiveAdapter.ViewHolder(v)
+        return LiveAdapter.ViewHolderLive(v)
     }
 
     override fun getItemCount(): Int {
         return eventList.size
     }
 
-    override fun onBindViewHolder(holder: LiveAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: LiveAdapter.ViewHolderLive, position: Int) {
         holder.eventTitle.text = eventList[position].eventName
         holder.eventId.text = eventList[position].eventId.toString()
         holder.eventUrl.text = eventList[position].eventImage
@@ -41,7 +41,7 @@ class LiveAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapte
             holder.context.startActivity(i)
         }
     }
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolderLive(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val item: CardView = itemView.findViewById(R.id.live_event_item)
         val context = itemView.context!!
         val eventTitle : TextView = itemView.findViewById(R.id.live_event_title)

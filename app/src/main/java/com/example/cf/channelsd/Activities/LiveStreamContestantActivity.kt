@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.cf.channelsd.Data.Constants.Perms.Companion.LOG_TAG
 import com.example.cf.channelsd.Data.Constants.Perms.Companion.RC_VIDEO_APP_PERM
 import com.example.cf.channelsd.R
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_livestream.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
+import pl.droidsonroids.gif.GifImageView
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -49,15 +52,30 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livestream)
-
-        val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        //val editor: SharedPreferences.Editor = preferences.edit()
+        val btn1 : Button = findViewById(R.id.vote_btn)
+        val btn2 : Button = findViewById(R.id.vote_contestant1_btn)
+        val btn3 : Button = findViewById(R.id.vote_contestant2_btn)
+        val btn4 : Button = findViewById(R.id.cycle_btn)
+        val r1 : GifImageView = findViewById(R.id.recording1)
+        val r2 : TextView = findViewById(R.id.recording2)
+        r1.visibility = View.VISIBLE
+        r2.visibility = View.VISIBLE
+        btn1.visibility = View.INVISIBLE
+        btn2.visibility = View.INVISIBLE
+        btn3.visibility = View.INVISIBLE
         contestant = intent.getStringExtra("contestant")
+        Log.e("--->>>>contestant^",contestant)
         apiKey = intent.getStringExtra("api_key")
         sessionId = intent.getStringExtra("session_id")
         token = intent.getStringExtra("token")
         requestPermissions()
-
+        btn4.setOnClickListener {
+            if(contestant == "contestant1"){
+                contestant1Publisher!!.cycleCamera()
+            }else{
+                contestant2Publisher!!.cycleCamera()
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -102,6 +120,7 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
             contestant1Loader2.visibility = View.INVISIBLE
             contestant1PublisherView?.addView(contestant1Publisher?.view)
             mSession?.publish(contestant1Publisher)
+            Log.e("NAME : ",contestant1Publisher!!.name)
         }
         if(contestant == "contestant2"){
             contestant2Publisher = Publisher.Builder(this)
@@ -112,7 +131,9 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
             contestant2Loader2.visibility = View.INVISIBLE
             contestant2PublisherView?.addView(contestant2Publisher?.view)
             mSession?.publish(contestant2Publisher)
+            Log.e("NAME : ",contestant2Publisher!!.name)
         }
+
     }
 
     override fun onDisconnected(session: Session) {
