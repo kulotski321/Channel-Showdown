@@ -127,8 +127,9 @@ class MyEventsFragment : Fragment() {
             override fun onResponse(call: Call<EventData>?, response: Response<EventData>?) {
                 if (response!!.isSuccessful) {
                     noEventImage!!.visibility = View.INVISIBLE
-                    myEvent!!.visibility = View.INVISIBLE
+                    myEvent!!.visibility = View.VISIBLE
                     val myEvent = response.body()!!.myEvent
+                    Log.e("Myevent:",myEvent.toString())
                     myEventTitle!!.text = myEvent?.eventName
                     myEventCommentator!!.text = myEvent?.eventCommentator
                     myEventDetails!!.text = myEvent?.eventDescription

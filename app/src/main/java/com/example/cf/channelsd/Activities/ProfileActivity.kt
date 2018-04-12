@@ -56,12 +56,12 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         // set profile picture
         Log.e("profpic url:", ApiUtils.BASE_URL + user.profilePicture)
-        picasso.load(ApiUtils.BASE_URL + user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture)
+        picasso.load(ApiUtils.BASE_URL + user.profilePicture).into(profile_picture)
         // set profile full name
         val fullName: String = user.firstName + " " + user.lastName
         // set profile video
         Log.e("thumbnail url:", ApiUtils.BASE_URL + user.profileThumbNail)
-        picasso.load(ApiUtils.BASE_URL + user.profileThumbNail).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_video_thumbnail)
+        picasso.load(ApiUtils.BASE_URL + user.profileThumbNail).into(profile_video_thumbnail)
         if (user.firstName.isEmpty() || user.lastName.isEmpty()) {
             val default = "Full Name"
             profile_full_name.text = default

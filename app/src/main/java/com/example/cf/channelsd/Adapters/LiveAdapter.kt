@@ -13,6 +13,8 @@ import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import java.util.ArrayList
 
 class LiveAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapter<LiveAdapter.ViewHolderLive>()  {
@@ -32,7 +34,7 @@ class LiveAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapte
         holder.eventUrl.text = eventList[position].eventImage
         holder.contestant1.text = eventList[position].eventContestant1
         holder.contestant2.text = eventList[position].eventContestant2
-        holder.context.picasso.load(ApiUtils.BASE_URL + holder.eventUrl.text).into(holder.eventImage)
+        holder.context.picasso.load(ApiUtils.BASE_URL + holder.eventUrl.text).resize(50,50).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.eventImage)
         holder.item.setOnClickListener {
             val i  = Intent(holder.context,LiveStreamAudienceActivity::class.java)
             i.putExtra("event_id",holder.eventId.text.toString())

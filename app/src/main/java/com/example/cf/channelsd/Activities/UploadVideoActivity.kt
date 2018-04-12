@@ -54,7 +54,6 @@ class UploadVideoActivity : AppCompatActivity(), ProgressRequestBody.UploadCallb
 
 
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
-        //val editor: SharedPreferences.Editor = preferences.edit()
         val username: String = preferences.getString("username_pref", "")
 
         select_video_btn.setOnClickListener {

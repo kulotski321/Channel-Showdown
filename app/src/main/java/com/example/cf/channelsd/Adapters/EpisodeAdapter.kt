@@ -15,6 +15,9 @@ import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
+import kotlinx.android.synthetic.main.activity_profile.*
 import org.parceler.Parcels
 import java.util.ArrayList
 
@@ -44,7 +47,7 @@ class EpisodeAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         holder.votes2EA.text = eventList[position].votesContestant2.toString()
         val numViews = eventList[position].eventViews.toString()
         holder.eventWatchViewsEA.text = " $numViews"
-        holder.contextEA.picasso.load(ApiUtils.BASE_URL + holder.eventUrlEA.text).into(holder.eventImageEA)
+        holder.contextEA.picasso.load(ApiUtils.BASE_URL + holder.eventUrlEA.text).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.eventImageEA)
         holder.eventImageEA.setOnClickListener{
             val i = Intent(holder.contextEA, EpisodeActivity::class.java)
             val sendEvent = Event(

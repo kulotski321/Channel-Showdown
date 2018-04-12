@@ -11,6 +11,8 @@ import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_result.*
 import org.parceler.Parcels
@@ -45,8 +47,8 @@ class ResultActivity : AppCompatActivity() {
                     val result = response.body()
                     Log.e("result:", result.toString())
                     if (result != null) {
-                        picasso.load(ApiUtils.BASE_URL + result.contestant1Image).into(c1)
-                        picasso.load(ApiUtils.BASE_URL + result.contestant2Image).into(c2)
+                        picasso.load(ApiUtils.BASE_URL + result.contestant1Image).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(c1)
+                        picasso.load(ApiUtils.BASE_URL + result.contestant2Image).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(c2)
                         contestant1Name.text = result.contestant1
                         contestant2Name.text = result.contestant2
                         val total: Float = (result.votes1 + result.votes2).toFloat()
@@ -93,9 +95,6 @@ class ResultActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val i = Intent(this, HistoryResultActivity::class.java)
-        i.putExtra("eventDetails", Parcels.wrap(eventDetails))
-        startActivity(i)
         finish()
     }
 }

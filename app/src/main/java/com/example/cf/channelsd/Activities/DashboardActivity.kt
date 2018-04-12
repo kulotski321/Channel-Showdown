@@ -49,7 +49,6 @@ class DashboardActivity : AppCompatActivity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar_main)
-        val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
         user = User(
@@ -66,7 +65,7 @@ class DashboardActivity : AppCompatActivity() {
         )
 
         profile_name.text = user.username
-        picasso.load(ApiUtils.BASE_URL + user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
+        picasso.load(ApiUtils.BASE_URL + user.profilePicture).resize(50,50).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
         when {
             user.userType == "0" -> {
                 pagerAdapter.addFragments(LiveFragment(), "Live")
@@ -85,7 +84,6 @@ class DashboardActivity : AppCompatActivity() {
 
         custom_viewPager.adapter = pagerAdapter
         custom_tabLayout.setupWithViewPager(custom_viewPager)
-
         profile_picture_dashboard.setOnClickListener {
             val i = Intent(this, ProfileActivity::class.java)
             startActivity(i)

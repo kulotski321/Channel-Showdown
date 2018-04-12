@@ -153,7 +153,7 @@ class MyEventActivity : AppCompatActivity() {
                         dateTime.set(Calendar.HOUR_OF_DAY, hour.toInt())
                         dateTime.set(Calendar.MINUTE, minute.toInt())
                         dateTime.set(Calendar.SECOND, 0)
-                        picasso.load(ApiUtils.BASE_URL + myEvent.eventImage).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(event_picture)
+                        picasso.load(ApiUtils.BASE_URL + myEvent.eventImage).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(event_picture)
                         event_date_upcoming_commentator.text = dateFormat.format(dateTime.time)
                         eventDateTime = dateTime.timeInMillis
                     }

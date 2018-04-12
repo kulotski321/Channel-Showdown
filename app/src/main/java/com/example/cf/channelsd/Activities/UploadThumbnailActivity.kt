@@ -23,6 +23,8 @@ import com.example.cf.channelsd.Retrofit.ProgressRequestBody
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.ImageFilePath
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_upload_thumbnail.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -50,7 +52,7 @@ class UploadThumbnailActivity : AppCompatActivity(), ProgressRequestBody.UploadC
         //val editor: SharedPreferences.Editor = preferences.edit()
         val username: String = preferences.getString("username_pref", "")
         val profileThumbNail: String = preferences.getString("profile_thumbnail_pref", "")
-        picasso.load(ApiUtils.BASE_URL + profileThumbNail).into(profile_video_upload_thumbnail)
+        picasso.load(ApiUtils.BASE_URL + profileThumbNail).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_video_upload_thumbnail)
 
         select_thumbnail_btn.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

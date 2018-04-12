@@ -79,6 +79,7 @@
             android:label="@string/entries"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
+            android:theme="@style/YesAppTheme"
             android:parentActivityName=".Activities.MyEventActivity"/>
         <activity
             android:name=".Activities.ViewProfileActivity"

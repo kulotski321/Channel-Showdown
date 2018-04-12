@@ -7,6 +7,8 @@ import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_history_result.*
 import org.parceler.Parcels
 import java.text.DateFormat
@@ -37,7 +39,7 @@ class HistoryResultActivity : AppCompatActivity() {
         dateTime.set(Calendar.MINUTE, minute.toInt())
         dateTime.set(Calendar.SECOND, 0)
         history_result_date.text = dateFormat.format(dateTime.time)
-        picasso.load(ApiUtils.BASE_URL + event.eventImage).into(history_result_image)
+        picasso.load(ApiUtils.BASE_URL + event.eventImage).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(history_result_image)
         show_result_btn.setOnClickListener {
             val i = Intent(this, ResultActivity::class.java)
             i.putExtra("event_id", event.eventId.toString())

@@ -15,6 +15,8 @@ import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_episode.*
 import org.parceler.Parcels
 import retrofit2.Call
@@ -50,7 +52,7 @@ class EpisodeActivity : AppCompatActivity() {
         dateTime.set(Calendar.MINUTE, minute.toInt())
         dateTime.set(Calendar.SECOND, 0)
         episode_result_date.text = dateFormat.format(dateTime.time)
-        picasso.load(ApiUtils.BASE_URL + event.eventImage).into(episode_result_image)
+        picasso.load(ApiUtils.BASE_URL + event.eventImage).resize(75,75).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(episode_result_image)
         show_result_btn.setOnClickListener {
             val i = Intent(this, ResultActivity::class.java)
             i.putExtra("event_id", event.eventId.toString())

@@ -17,6 +17,8 @@ import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import org.parceler.Parcels
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import java.text.DateFormat
 import java.util.*
 
@@ -65,7 +67,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
         holder.eventCommentatorEA.text = eventList[position].eventCommentator
         holder.eventIdEA.text = eventList[position].eventId.toString()
         holder.eventURLEA.text = eventList[position].eventImage
-        holder.contextEA.picasso.load(ApiUtils.BASE_URL + holder.eventURLEA.text).into(holder.eventImageEA)
+        holder.contextEA.picasso.load(ApiUtils.BASE_URL + holder.eventURLEA.text).resize(50,50).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.eventImageEA)
         var contestant1 = holder.eventConstant1EA.text.toString()
         var contestant2 = holder.eventConstant2EA.text.toString()
         if (contestant1 == "") {

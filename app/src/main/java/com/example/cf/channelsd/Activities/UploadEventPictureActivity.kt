@@ -21,6 +21,8 @@ import com.example.cf.channelsd.Retrofit.ProgressRequestBody
 import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.ImageFilePath
 import com.example.cf.channelsd.Utils.picasso
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import kotlinx.android.synthetic.main.activity_upload_event_photo.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -45,7 +47,7 @@ class UploadEventPictureActivity : AppCompatActivity(), ProgressRequestBody.Uplo
         progressBar!!.visibility = View.INVISIBLE
         val eventImage: String = intent.getStringExtra("event_image")
         val eventId: String = intent.getStringExtra("event_id")
-        picasso.load(ApiUtils.BASE_URL + eventImage).into(upload_event_pic)
+        picasso.load(ApiUtils.BASE_URL + eventImage).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(upload_event_pic)
         upload_event_pic_btn.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             galleryIntent.type = "image/*"
