@@ -1,7 +1,6 @@
 package com.example.cf.channelsd.Activities
 
 import android.annotation.SuppressLint
-import android.app.FragmentTransaction
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -18,13 +17,11 @@ import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.PageViewerAdapter
-import com.example.cf.channelsd.Data.Key
-import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Fragments.*
-import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.Interfaces.LogoutInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
@@ -45,7 +42,7 @@ class DashboardActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
     private var delayHandler: Handler? = null
     private val DELAY: Long = 2000 // 2 seconds
- 
+
     @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,14 +60,13 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
                 preferences.getString("bio_pref", ""),
-                androidId,
-                preferences.getString("profile_pic_pref",""),
-                preferences.getString("profile_vid_pref",""),
-                preferences.getString("profile_thumbnail_pref","")
+                preferences.getString("profile_pic_pref", ""),
+                preferences.getString("profile_vid_pref", ""),
+                preferences.getString("profile_thumbnail_pref", "")
         )
 
         profile_name.text = user.username
-        picasso.load(ApiUtils.BASE_URL+user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
+        picasso.load(ApiUtils.BASE_URL + user.profilePicture).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
         when {
             user.userType == "0" -> {
                 pagerAdapter.addFragments(LiveFragment(), "Live")
@@ -110,12 +106,12 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+    private fun toastMessage(message: String) {
+        val toast: Toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)

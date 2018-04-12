@@ -7,7 +7,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.icu.text.TimeZoneNames
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -32,19 +31,19 @@ class CreateEventActivity : AppCompatActivity() {
     private var eventInterface: EventInterface = ApiUtils.apiEvent
     private var formatDateTime = DateFormat.getDateTimeInstance()
     private var dateTime = Calendar.getInstance()
-    private var realDate : String = ""
-    private var realTime : String = ""
+    private var realDate: String = ""
+    private var realTime: String = ""
     // for date
-    private var rYear : Int ?= null
-    private var rMonth : Int ?= null
-    private var rDay : Int ?= null
+    private var rYear: Int? = null
+    private var rMonth: Int? = null
+    private var rDay: Int? = null
     // for time
-    private var rHour : Int ?= null
-    private var rMinute: Int ?= null
+    private var rHour: Int? = null
+    private var rMinute: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_create_event)
-        val timezoneID : String? = TimeZone.getDefault().id
+        val timezoneID: String? = TimeZone.getDefault().id
         Log.e("TIMEZONE", timezoneID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         //val editor: SharedPreferences.Editor = preferences.edit()
@@ -52,11 +51,11 @@ class CreateEventActivity : AppCompatActivity() {
             if (checkTextFields() == 3 && realDate != "" && realTime != "") {
                 val eventName = input_event_name.text.toString()
                 val eventDateTime = "$realDate $realTime"
-                val timeZone : String = TimeZone.getDefault().id
+                val timeZone: String = TimeZone.getDefault().id
                 val eventPrize = input_event_prize.text.toString()
                 val eventDescription = input_event_description.text.toString()
                 val username = preferences.getString("username_pref", "")
-                sendEvent(username,eventName,eventDescription,eventPrize,eventDateTime,timeZone)
+                sendEvent(username, eventName, eventDescription, eventPrize, eventDateTime, timeZone)
             }
         }
         datePicker_btn.setOnClickListener {
@@ -70,12 +69,12 @@ class CreateEventActivity : AppCompatActivity() {
         //Log.e("DATE TIME",)
     }
 
-    fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+    private fun toastMessage(message: String) {
+        val toast: Toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)
@@ -111,8 +110,8 @@ class CreateEventActivity : AppCompatActivity() {
         return checked
     }
 
-    private fun sendEvent(username: String, eventName: String, eventDescription: String, eventPrize: String, eventDate: String,timezone: String) {
-        eventInterface.createEvent(username, eventName, eventDescription, eventPrize, eventDate,timezone).enqueue(object : Callback<Event> {
+    private fun sendEvent(username: String, eventName: String, eventDescription: String, eventPrize: String, eventDate: String, timezone: String) {
+        eventInterface.createEvent(username, eventName, eventDescription, eventPrize, eventDate, timezone).enqueue(object : Callback<Event> {
             override fun onFailure(call: Call<Event>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
             }
@@ -145,20 +144,20 @@ class CreateEventActivity : AppCompatActivity() {
         rYear = year
         rMonth = monthOfYear + 1
         rDay = dayOfMonth
-        val strDate: String = if(rMonth!! < 10){
-            if(rDay!! < 10){
+        val strDate: String = if (rMonth!! < 10) {
+            if (rDay!! < 10) {
                 "$rYear-0$rMonth-0$rDay"
-            }else{
+            } else {
                 "$rYear-0$rMonth-$rDay"
             }
-        }else{
-            if(rDay!! < 10){
+        } else {
+            if (rDay!! < 10) {
                 "$rYear-$rMonth-0$rDay"
-            }else{
+            } else {
                 "$rYear-$rMonth-$rDay"
             }
         }
-        Log.e("DATE: ",strDate)
+        Log.e("DATE: ", strDate)
         realDate = strDate
         updateTextLabel()
     }
@@ -168,20 +167,20 @@ class CreateEventActivity : AppCompatActivity() {
         dateTime.set(Calendar.MINUTE, minute)
         rHour = hourOfDay
         rMinute = minute
-        val strTime: String = if (rHour!! < 10){
-            if(rMinute!! < 10){
+        val strTime: String = if (rHour!! < 10) {
+            if (rMinute!! < 10) {
                 "0$rHour:0$rMinute:00"
-            }else{
+            } else {
                 "0$rHour:$rMinute:00"
             }
-        }else{
-            if(rMinute!! < 10){
+        } else {
+            if (rMinute!! < 10) {
                 "$rHour:0$rMinute:00"
-            }else{
+            } else {
                 "$rHour:$rMinute:00"
             }
         }
-        Log.e("TIME: ",strTime)
+        Log.e("TIME: ", strTime)
         realTime = strTime
         updateTextLabel()
     }

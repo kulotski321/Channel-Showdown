@@ -13,11 +13,11 @@ import android.view.View
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
-import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.Entry
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Utils.picasso
 import kotlinx.android.synthetic.main.activity_upcoming_details.*
 import org.jetbrains.anko.alert
@@ -55,77 +55,79 @@ class UpcomingEventActivity : AppCompatActivity() {
         event_id_upcoming.text = event.eventId.toString()
 
         join_event_btn.setOnClickListener {
-            if(firstName != "" && lastName != "" && bio != ""){
-                if(profVid != "/media/profile_video/default_video.mp4"){
-                    alert ("Are  you sure you want to join this event?"){
-                        yesButton { sendEntry(preferences.getString("username_pref", ""), event.eventId)}
+            if (firstName != "" && lastName != "" && bio != "") {
+                if (profVid != "/media/profile_video/default_video.mp4") {
+                    alert("Are  you sure you want to join this event?") {
+                        yesButton { sendEntry(preferences.getString("username_pref", ""), event.eventId) }
                         noButton { }
                     }.show()
-                }else{
+                } else {
                     toastMessage("Please upload a profile video to start joining events")
                 }
-            }else{
+            } else {
                 toastMessage("Please complete your personal info")
             }
 
         }
         event_contestant1_upcoming.setOnClickListener {
             val username = event_contestant1_upcoming.text
-            if(username != "Empty Slot"){
-                val i = Intent(this,ViewProfileActivity::class.java)
-                i.putExtra("username",username)
-                i.putExtra("from_link","true")
-                i.putExtra("entry_id","blank")
+            if (username != "Empty Slot") {
+                val i = Intent(this, ViewProfileActivity::class.java)
+                i.putExtra("username", username)
+                i.putExtra("from_link", "true")
+                i.putExtra("entry_id", "blank")
                 startActivity(i)
-            }else{
+            } else {
                 toastMessage("No contestant yet")
             }
         }
         event_contestant2_upcoming.setOnClickListener {
             val username = event_contestant2_upcoming.text
-            if(username != "Empty Slot"){
-                val i = Intent(this,ViewProfileActivity::class.java)
-                i.putExtra("username",username)
-                i.putExtra("from_link","true")
-                i.putExtra("entry_id","blank")
+            if (username != "Empty Slot") {
+                val i = Intent(this, ViewProfileActivity::class.java)
+                i.putExtra("username", username)
+                i.putExtra("from_link", "true")
+                i.putExtra("entry_id", "blank")
                 startActivity(i)
-            }else{
+            } else {
                 toastMessage("No contestant yet")
             }
         }
         event_commentator_upcoming.setOnClickListener {
             val username = event_commentator_upcoming.text
-            val i = Intent(this,ViewProfileActivity::class.java)
-            i.putExtra("username",username)
-            i.putExtra("from_link","true")
-            i.putExtra("entry_id","blank")
+            val i = Intent(this, ViewProfileActivity::class.java)
+            i.putExtra("username", username)
+            i.putExtra("from_link", "true")
+            i.putExtra("entry_id", "blank")
             startActivity(i)
         }
     }
-    private fun sendEntry(username: String, eventId: Int){
-        eventInterface.sendEntry(username,eventId).enqueue(object: Callback<Entry>{
+
+    private fun sendEntry(username: String, eventId: Int) {
+        eventInterface.sendEntry(username, eventId).enqueue(object : Callback<Entry> {
             override fun onFailure(call: Call<Entry>?, t: Throwable?) {
-                Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
-                if(t?.message == "unexpected end of stream"){
-                    sendEntry(username,eventId)
+                Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
+                if (t?.message == "unexpected end of stream") {
+                    sendEntry(username, eventId)
                 }
             }
 
             override fun onResponse(call: Call<Entry>?, response: Response<Entry>?) {
-                if(response!!.isSuccessful){
+                if (response!!.isSuccessful) {
                     toastMessage("Entry sent")
-                }else{
+                } else {
                     toastMessage("You already sent an entry")
                 }
             }
         })
     }
-    fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+
+    private fun toastMessage(message: String) {
+        val toast: Toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)

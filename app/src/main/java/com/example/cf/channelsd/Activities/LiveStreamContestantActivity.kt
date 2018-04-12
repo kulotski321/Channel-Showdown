@@ -1,8 +1,6 @@
 package com.example.cf.channelsd.Activities
 
 import android.Manifest
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -15,64 +13,59 @@ import com.example.cf.channelsd.Data.Constants.Perms.Companion.RC_VIDEO_APP_PERM
 import com.example.cf.channelsd.R
 import com.opentok.android.*
 import kotlinx.android.synthetic.main.activity_livestream.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.yesButton
 import pl.droidsonroids.gif.GifImageView
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
 
-
-
-class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListener , PublisherKit.PublisherListener{
+class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListener, PublisherKit.PublisherListener {
 
     private var mSession: Session? = null
 
     // FOR CONTESTANT PUBLISHER
-    private var contestant1PublisherView : LinearLayout ?= null
-    private var contestant1Publisher: Publisher ?= null
-    private var contestant2PublisherView : LinearLayout ?= null
-    private var contestant2Publisher: Publisher ?= null
+    private var contestant1PublisherView: LinearLayout? = null
+    private var contestant1Publisher: Publisher? = null
+    private var contestant2PublisherView: LinearLayout? = null
+    private var contestant2Publisher: Publisher? = null
     // FOR CONTESTANT SUBSCRIBER
-    private var contestant1SubscriberView : LinearLayout ?= null
-    private var contestant1Subscriber : Subscriber ?= null
-    private var contestant2SubscriberView : LinearLayout ?= null
-    private var contestant2Subscriber : Subscriber ?= null
+    private var contestant1SubscriberView: LinearLayout? = null
+    private var contestant1Subscriber: Subscriber? = null
+    private var contestant2SubscriberView: LinearLayout? = null
+    private var contestant2Subscriber: Subscriber? = null
     // FOR COMMENTATOR SUBSCRIBER
-    private var commentatorSubscriberView : LinearLayout ?= null
-    private var commentatorSubscriber : Subscriber ?= null
+    private var commentatorSubscriberView: LinearLayout? = null
+    private var commentatorSubscriber: Subscriber? = null
 
     // FOR KEYS
-    private var apiKey : String ?= null
-    private var sessionId : String ?= null
-    private var token : String ?= null
-    private var contestant: String ?= null
+    private var apiKey: String? = null
+    private var sessionId: String? = null
+    private var token: String? = null
+    private var contestant: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livestream)
-        val btn1 : Button = findViewById(R.id.vote_btn)
-        val btn2 : Button = findViewById(R.id.vote_contestant1_btn)
-        val btn3 : Button = findViewById(R.id.vote_contestant2_btn)
-        val btn4 : Button = findViewById(R.id.cycle_btn)
-        val r1 : GifImageView = findViewById(R.id.recording1)
-        val r2 : TextView = findViewById(R.id.recording2)
+        val btn1: Button = findViewById(R.id.vote_btn)
+        val btn2: Button = findViewById(R.id.vote_contestant1_btn)
+        val btn3: Button = findViewById(R.id.vote_contestant2_btn)
+        val btn4: Button = findViewById(R.id.cycle_btn)
+        val r1: GifImageView = findViewById(R.id.recording1)
+        val r2: TextView = findViewById(R.id.recording2)
         r1.visibility = View.VISIBLE
         r2.visibility = View.VISIBLE
         btn1.visibility = View.INVISIBLE
         btn2.visibility = View.INVISIBLE
         btn3.visibility = View.INVISIBLE
         contestant = intent.getStringExtra("contestant")
-        Log.e("--->>>>contestant^",contestant)
+        Log.e("--->>>>contestant^", contestant)
         apiKey = intent.getStringExtra("api_key")
         sessionId = intent.getStringExtra("session_id")
         token = intent.getStringExtra("token")
         requestPermissions()
         btn4.setOnClickListener {
-            if(contestant == "contestant1"){
+            if (contestant == "contestant1") {
                 contestant1Publisher!!.cycleCamera()
-            }else{
+            } else {
                 contestant2Publisher!!.cycleCamera()
             }
         }
@@ -83,16 +76,17 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
+
     @AfterPermissionGranted(RC_VIDEO_APP_PERM)
     private fun requestPermissions() {
         val perms = arrayOf(Manifest.permission.INTERNET, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
         if (EasyPermissions.hasPermissions(this, *perms)) {
             // initialize view objects from your layout
-            if(contestant == "contestant1"){
+            if (contestant == "contestant1") {
                 contestant1PublisherView = findViewById(R.id.contestant1Publisher)
                 contestant2SubscriberView = findViewById(R.id.contestant2Publisher)
             }
-            if(contestant == "contestant2"){
+            if (contestant == "contestant2") {
                 contestant2PublisherView = findViewById(R.id.contestant2Publisher)
                 contestant1SubscriberView = findViewById(R.id.contestant1Publisher)
             }
@@ -107,11 +101,12 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
             EasyPermissions.requestPermissions(this, "This app needs access to your camera and mic to make video calls", RC_VIDEO_APP_PERM, *perms)
         }
     }
+
     override fun onConnected(session: Session) {
         Log.i(LOG_TAG, "Session Connected")
 
 
-        if(contestant == "contestant1"){
+        if (contestant == "contestant1") {
             contestant1Publisher = Publisher.Builder(this)
                     .name("contestant1")
                     .build()
@@ -120,9 +115,9 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
             contestant1Loader2.visibility = View.INVISIBLE
             contestant1PublisherView?.addView(contestant1Publisher?.view)
             mSession?.publish(contestant1Publisher)
-            Log.e("NAME : ",contestant1Publisher!!.name)
+            Log.e("NAME : ", contestant1Publisher!!.name)
         }
-        if(contestant == "contestant2"){
+        if (contestant == "contestant2") {
             contestant2Publisher = Publisher.Builder(this)
                     .name("contestant2")
                     .build()
@@ -131,7 +126,7 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
             contestant2Loader2.visibility = View.INVISIBLE
             contestant2PublisherView?.addView(contestant2Publisher?.view)
             mSession?.publish(contestant2Publisher)
-            Log.e("NAME : ",contestant2Publisher!!.name)
+            Log.e("NAME : ", contestant2Publisher!!.name)
         }
 
     }
@@ -143,10 +138,10 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     override fun onStreamReceived(session: Session, stream: Stream) {
         Log.i(LOG_TAG, "Stream Received")
 
-        Log.e("STREAM NAME RECEIVE: ",stream.name)
-        if(stream.name == "commentator"){
-            if(commentatorSubscriber == null){
-                commentatorSubscriber = Subscriber.Builder(this,stream).build()
+        Log.e("STREAM NAME RECEIVE: ", stream.name)
+        if (stream.name == "commentator") {
+            if (commentatorSubscriber == null) {
+                commentatorSubscriber = Subscriber.Builder(this, stream).build()
                 mSession!!.subscribe(commentatorSubscriber)
                 commentatorLoader1.visibility = View.INVISIBLE
                 commentatorLoader2.visibility = View.INVISIBLE
@@ -154,9 +149,9 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
                 commentatorSubscriberView?.addView(commentatorSubscriber?.view)
             }
         }
-        if(stream.name == "contestant1"){
-            if(contestant1Subscriber == null){
-                contestant1Subscriber = Subscriber.Builder(this,stream).build()
+        if (stream.name == "contestant1") {
+            if (contestant1Subscriber == null) {
+                contestant1Subscriber = Subscriber.Builder(this, stream).build()
                 mSession!!.subscribe(contestant1Subscriber)
                 contestant1Loader1.visibility = View.INVISIBLE
                 contestant1Loader2.visibility = View.INVISIBLE
@@ -164,9 +159,9 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
                 contestant1SubscriberView?.addView(contestant1Subscriber?.view)
             }
         }
-        if(stream.name == "contestant2"){
-            if(contestant2Subscriber == null){
-                contestant2Subscriber = Subscriber.Builder(this,stream).build()
+        if (stream.name == "contestant2") {
+            if (contestant2Subscriber == null) {
+                contestant2Subscriber = Subscriber.Builder(this, stream).build()
                 mSession!!.subscribe(contestant2Subscriber)
                 contestant2Loader1.visibility = View.INVISIBLE
                 contestant2Loader2.visibility = View.INVISIBLE
@@ -179,9 +174,9 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     override fun onStreamDropped(session: Session, stream: Stream) {
         Log.i(LOG_TAG, "Stream Dropped");
 
-        Log.e("STREAM NAME DROPPED: ",stream.name)
-        if(stream.name == "commentator"){
-            if(commentatorSubscriber != null){
+        Log.e("STREAM NAME DROPPED: ", stream.name)
+        if (stream.name == "commentator") {
+            if (commentatorSubscriber != null) {
                 commentatorSubscriber = null
                 commentatorSubscriberView?.removeAllViews()
                 commentatorLoader1.visibility = View.VISIBLE
@@ -190,8 +185,8 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
                 commentatorSubscriberView!!.addView(commentatorLoader3)
             }
         }
-        if(stream.name == "contestant1"){
-            if(contestant1Subscriber != null){
+        if (stream.name == "contestant1") {
+            if (contestant1Subscriber != null) {
                 contestant1Subscriber = null
                 contestant1SubscriberView?.removeAllViews()
                 contestant1Loader1.visibility = View.VISIBLE
@@ -200,8 +195,8 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
                 contestant1SubscriberView!!.addView(contestant1Loader3)
             }
         }
-        if(stream.name == "contestant2"){
-            if(contestant2Subscriber != null){
+        if (stream.name == "contestant2") {
+            if (contestant2Subscriber != null) {
                 contestant2Subscriber = null
                 contestant2SubscriberView?.removeAllViews()
                 contestant2Loader1.visibility = View.VISIBLE
@@ -227,6 +222,7 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
     override fun onStreamDestroyed(p0: PublisherKit?, p1: Stream?) {
 
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
 
@@ -234,7 +230,7 @@ class LiveStreamContestantActivity : AppCompatActivity(), Session.SessionListene
             mSession!!.unpublish(contestant1Publisher)
             mSession!!.disconnect()
         }
-        if(contestant == "contestant2"){
+        if (contestant == "contestant2") {
             mSession!!.unpublish(contestant2Publisher)
             mSession!!.disconnect()
         }

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.Settings.Secure
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
@@ -14,27 +15,26 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.LoginInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.activity_login.*
 import org.parceler.Parcels
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.provider.Settings.Secure
 
 class MainActivity : AppCompatActivity() {
 
     private var user: User? = null
-    private var loginInterface: LoginInterface  = ApiUtils.apiLogin
+    private var loginInterface: LoginInterface = ApiUtils.apiLogin
 
     @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val androidIdMain = Secure.getString(contentResolver,Secure.ANDROID_ID)
+        val androidIdMain = Secure.getString(contentResolver, Secure.ANDROID_ID)
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         //editor.clear()
         //editor.apply()
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 if (checkTextFields() == 2) {
                     val username = input_username_user.text.toString()
                     val password = input_password_user.text.toString()
-                    sendPost(username, password,androidIdMain)
+                    sendPost(username, password, androidIdMain)
                 }
             }
         } else {
@@ -56,10 +56,9 @@ class MainActivity : AppCompatActivity() {
                     preferences.getString("firstName_pref", ""),
                     preferences.getString("lastName_pref", ""),
                     preferences.getString("bio_pref", ""),
-                    androidIdMain,
-                    preferences.getString("profile_pic_pref",""),
-                    preferences.getString("profile_vid_pref",""),
-                    preferences.getString("profile_thumbnail_pref","")
+                    preferences.getString("profile_pic_pref", ""),
+                    preferences.getString("profile_vid_pref", ""),
+                    preferences.getString("profile_thumbnail_pref", "")
             )
             val i = Intent(this, DashboardActivity::class.java)
             i.putExtra("user", Parcels.wrap(user))
@@ -76,11 +75,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+        val toast: Toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)
@@ -107,21 +106,21 @@ class MainActivity : AppCompatActivity() {
         return checked
     }
 
-    private fun sendPost(username: String, password: String,androidId: String) {
-        loginInterface.sendUserInfo(username, password,androidId).enqueue(object : Callback<User> {
+    private fun sendPost(username: String, password: String, androidId: String) {
+        loginInterface.sendUserInfo(username, password, androidId).enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
                 if (t?.message == "unexpected end of stream") {
-                    sendPost(username, password,androidId)
-                }else{
+                    sendPost(username, password, androidId)
+                } else {
                     toastMessage("Check your internet connection")
                 }
             }
 
-            override fun onResponse(call: Call<User>?, response: Response<User>?){
+            override fun onResponse(call: Call<User>?, response: Response<User>?) {
                 if (response!!.isSuccessful) {
                     val userResponse = response.body()
-                    Log.e("USER:",userResponse.toString())
+                    Log.e("USER:", userResponse.toString())
                     val usernameR = userResponse?.username
                     val sessionKey = userResponse?.session_key
                     val email = userResponse?.email
@@ -141,9 +140,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("firstName_pref", firstName.toString())
                     editor.putString("lastName_pref", lastName.toString())
                     editor.putString("bio_pref", bio.toString())
-                    editor.putString("profile_pic_pref",profilePic.toString())
-                    editor.putString("profile_vid_pref",profileVid.toString())
-                    editor.putString("profile_thumbnail_pref",profileThumbNail.toString())
+                    editor.putString("profile_pic_pref", profilePic.toString())
+                    editor.putString("profile_vid_pref", profileVid.toString())
+                    editor.putString("profile_thumbnail_pref", profileThumbNail.toString())
                     editor.apply()
                     //Log.e(ContentValues.TAG, userType)
                     val i = Intent(this@MainActivity, DashboardActivity::class.java)

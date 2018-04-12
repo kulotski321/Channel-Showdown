@@ -11,14 +11,15 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EventAdapter
-import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.EventDataList
 import com.example.cf.channelsd.Interfaces.EventInterface
 import com.example.cf.channelsd.R
+import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.fragment_upcoming.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,47 +28,59 @@ import java.util.*
 
 class UpcomingFragment : Fragment() {
     private val eventInterface: EventInterface = ApiUtils.apiEvent
-    private var eventRecyclerviewer : RecyclerView ?= null
+    private var eventRecyclerviewer: RecyclerView? = null
+    private var noEventImage: ImageView? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_upcoming, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val timeZone : String = TimeZone.getDefault().id
+        val timeZone: String = TimeZone.getDefault().id
+        noEventImage = no_upcoming_img
         eventRecyclerviewer = upcoming_event_RV
         getUpcomingEventList(timeZone)
     }
-    private fun getUpcomingEventList(timeZone: String){
-        eventInterface.getUpcomingEventList(timeZone).enqueue(object: Callback<EventDataList>{
+
+    private fun getUpcomingEventList(timeZone: String) {
+        eventInterface.getUpcomingEventList(timeZone).enqueue(object : Callback<EventDataList> {
             override fun onFailure(call: Call<EventDataList>?, t: Throwable?) {
-                Log.e(ContentValues.TAG, "Unable to get to API."+t?.message)
-                if (t?.message == "unexpected end of stream"){
+                Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
+                if (t?.message == "unexpected end of stream") {
                     getUpcomingEventList(timeZone)
                 }
             }
 
             override fun onResponse(call: Call<EventDataList>?, response: Response<EventDataList>?) {
-                if(response!!.isSuccessful){
-                    val events: EventDataList ?= response.body()
+                if (response!!.isSuccessful) {
+                    val events: EventDataList? = response.body()
                     Log.e(ContentValues.TAG, response.toString())
-                    if(events != null){
+                    if (events != null) {
                         val upcomingEvents = events.events
-                        eventRecyclerviewer!!.layoutManager = LinearLayoutManager(context,LinearLayout.VERTICAL, false)
-                        val adapter = EventAdapter(upcomingEvents!!)
-                        eventRecyclerviewer!!.adapter = adapter
+                        if (upcomingEvents!!.isNotEmpty()) {
+                            eventRecyclerviewer!!.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+                            val adapter = EventAdapter(upcomingEvents)
+                            eventRecyclerviewer!!.adapter = adapter
+                        } else {
+                            noEventImage!!.visibility = View.VISIBLE
+                            noEventImage!!.setOnClickListener {
+                                toastMessage("There are no upcoming events yet.")
+                            }
+                        }
                     }
                 }
             }
         })
     }
+
     fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(view!!.context,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+        val toast: Toast = Toast.makeText(view!!.context, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)

@@ -50,5 +50,6 @@ class LiveAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapte
         val eventImage = itemView.findViewById<ImageView>(R.id.live_event_image)!!
         val contestant1 : TextView = itemView.findViewById(R.id.live_contestant1)
         val contestant2 : TextView = itemView.findViewById(R.id.live_contestant2)
+
     }
 }

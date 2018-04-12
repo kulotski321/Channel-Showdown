@@ -23,6 +23,7 @@
     <string name="history_result">Event History</string>
     <string name="result">Result</string>
     <string name="episode">Episode</string>
+    <string name="video_player">Video Play</string>
     <!-- LOGIN LAYOUT -->
     <string name="email">Email</string>
     <string name="username">Username</string>

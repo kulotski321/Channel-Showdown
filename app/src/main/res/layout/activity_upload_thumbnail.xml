@@ -1,82 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_purple_primaryDark">
 
-    <ImageView
-        android:id="@+id/profile_video_upload_thumbnail"
-        android:layout_width="300dp"
-        android:layout_height="175dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:background="@color/color_white"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/select_thumbnail_btn"
-        android:layout_width="181dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/round_button1"
-        android:text="@string/select_thumbnail"
-        android:textSize="16sp"
-        android:textColor="@color/color_purple_primaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarThumbnail" />
-
-    <Button
-        android:id="@+id/upload_video_thumbnail_btn"
-        android:layout_width="125dp"
-        android:layout_height="46dp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="84dp"
-        android:background="@drawable/round_button1"
-        android:text="@string/upload"
-        android:textColor="@color/color_purple_primaryDark"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancel_thumbnail_upload_video_btn"
-        app:layout_constraintTop_toBottomOf="@+id/select_thumbnail_btn" />
-
-    <Button
-        android:id="@+id/cancel_thumbnail_upload_video_btn"
-        android:layout_width="125dp"
-        android:layout_height="46dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
-        android:background="@drawable/round_button1"
-        android:text="@string/cancel"
-        android:textColor="@color/color_purple_primaryDark"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/upload_video_thumbnail_btn"
-        app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_thumbnail_btn" />
-
-    <ProgressBar
-        android:id="@+id/progressBarThumbnail"
-        style="?android:attr/progressBarStyleHorizontal"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_video_upload_thumbnail" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/profile_video_upload_thumbnail"
+            android:layout_width="300dp"
+            android:layout_height="175dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@color/color_white"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/select_thumbnail_btn"
+            android:layout_width="181dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_button1"
+            android:text="@string/select_thumbnail"
+            android:textSize="16sp"
+            android:textColor="@color/color_purple_primaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarThumbnail" />
+
+        <Button
+            android:id="@+id/upload_video_thumbnail_btn"
+            android:layout_width="125dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="84dp"
+            android:background="@drawable/round_button1"
+            android:text="@string/upload"
+            android:textColor="@color/color_purple_primaryDark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cancel_thumbnail_upload_video_btn"
+            app:layout_constraintTop_toBottomOf="@+id/select_thumbnail_btn" />
+
+        <Button
+            android:id="@+id/cancel_thumbnail_upload_video_btn"
+            android:layout_width="125dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="84dp"
+            android:background="@drawable/round_button1"
+            android:text="@string/cancel"
+            android:textColor="@color/color_purple_primaryDark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/upload_video_thumbnail_btn"
+            app:layout_constraintHorizontal_bias="0.294"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/select_thumbnail_btn" />
+
+        <ProgressBar
+            android:id="@+id/progressBarThumbnail"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_video_upload_thumbnail" />
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

@@ -26,7 +26,9 @@ data class Event(
         @SerializedName("votes_contestant1")
         val votesContestant1 : Int,
         @SerializedName("votes_contestant2")
-        val votesContestant2 : Int
+        val votesContestant2 : Int,
+        @SerializedName("views")
+        val eventViews : Int
 ) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
             parcel.readString(),
@@ -39,6 +41,7 @@ data class Event(
             parcel.readString(),
             parcel.readInt(),
             parcel.readString(),
+            parcel.readInt(),
             parcel.readInt(),
             parcel.readInt()) {
     }
@@ -56,6 +59,7 @@ data class Event(
         parcel.writeString(eventImage)
         parcel.writeInt(votesContestant1)
         parcel.writeInt(votesContestant2)
+        parcel.writeInt(eventViews)
     }
 
     override fun describeContents(): Int {

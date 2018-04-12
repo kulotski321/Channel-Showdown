@@ -1,5 +1,6 @@
 package com.example.cf.channelsd.Adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.cf.channelsd.Activities.HistoryResultActivity
+import com.example.cf.channelsd.Activities.ViewProfileActivity
 import com.example.cf.channelsd.Data.Event
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
@@ -27,6 +29,7 @@ class HistoryAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         return eventList.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolderHistory, position: Int) {
         holder.eventTitleHA.text = eventList[position].eventName
         holder.eventIdHA.text = eventList[position].eventId.toString()
@@ -38,6 +41,8 @@ class HistoryAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         holder.contestant2HA.text = eventList[position].eventContestant2
         holder.votes1HA.text = eventList[position].votesContestant1.toString()
         holder.votes2HA.text = eventList[position].votesContestant2.toString()
+        val numViews = eventList[position].eventViews.toString()
+        holder.eventWatchViewsHA.text = " $numViews"
         holder.contextHA.picasso.load(ApiUtils.BASE_URL + holder.eventUrlHA.text).into(holder.eventImageHA)
         holder.eventImageHA.setOnClickListener{
             val i = Intent(holder.contextHA, HistoryResultActivity::class.java)
@@ -53,7 +58,8 @@ class HistoryAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
                     holder.eventIdHA.text.toString().toInt(),
                     holder.eventUrlHA.text.toString(),
                     holder.votes1HA.text.toString().toInt(),
-                    holder.votes2HA.text.toString().toInt()
+                    holder.votes2HA.text.toString().toInt(),
+                    numViews.toInt()
             )
             i.putExtra("eventDetails", Parcels.wrap(sendEvent))
             holder.contextHA.startActivity(i)
@@ -74,5 +80,6 @@ class HistoryAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         val votes2HA : TextView = itemView.findViewById(R.id.history_event_votes2)
         val eventDescriptionHA : TextView = itemView.findViewById(R.id.history_event_description)
         val eventDateHA : TextView = itemView.findViewById(R.id.history_event_date)
+        val eventWatchViewsHA : TextView = itemView.findViewById(R.id.history_watch_views)
     }
 }

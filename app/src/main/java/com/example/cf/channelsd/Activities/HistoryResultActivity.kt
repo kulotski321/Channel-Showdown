@@ -12,7 +12,7 @@ import org.parceler.Parcels
 import java.text.DateFormat
 import java.util.*
 
-class HistoryResultActivity: AppCompatActivity() {
+class HistoryResultActivity : AppCompatActivity() {
     private var dateFormat = DateFormat.getDateTimeInstance()
     private var dateTime = Calendar.getInstance()!!
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,24 +24,40 @@ class HistoryResultActivity: AppCompatActivity() {
         history_result_contestant2.text = event.eventContestant2
         history_result_prize.text = event.prize
         history_result_description.text = event.eventDescription
-        val year : String = event.eventDate.substring(0,4)
-        val month : String = event.eventDate.substring(5,7)
-        val day : String = event.eventDate.substring(8,10)
-        val hour : String = event.eventDate.substring(11,13)
-        val minute : String = event.eventDate.substring(14,16)
+        val year: String = event.eventDate.substring(0, 4)
+        val month: String = event.eventDate.substring(5, 7)
+        val day: String = event.eventDate.substring(8, 10)
+        val hour: String = event.eventDate.substring(11, 13)
+        val minute: String = event.eventDate.substring(14, 16)
 
-        dateTime.set(Calendar.YEAR,year.toInt())
-        dateTime.set(Calendar.MONTH,month.toInt()-1)
-        dateTime.set(Calendar.DAY_OF_MONTH,day.toInt())
-        dateTime.set(Calendar.HOUR_OF_DAY,hour.toInt())
-        dateTime.set(Calendar.MINUTE,minute.toInt())
-        dateTime.set(Calendar.SECOND,0)
+        dateTime.set(Calendar.YEAR, year.toInt())
+        dateTime.set(Calendar.MONTH, month.toInt() - 1)
+        dateTime.set(Calendar.DAY_OF_MONTH, day.toInt())
+        dateTime.set(Calendar.HOUR_OF_DAY, hour.toInt())
+        dateTime.set(Calendar.MINUTE, minute.toInt())
+        dateTime.set(Calendar.SECOND, 0)
         history_result_date.text = dateFormat.format(dateTime.time)
         picasso.load(ApiUtils.BASE_URL + event.eventImage).into(history_result_image)
         show_result_btn.setOnClickListener {
-            val i = Intent(this,ResultActivity::class.java)
-            i.putExtra("event_id",event.eventId.toString())
+            val i = Intent(this, ResultActivity::class.java)
+            i.putExtra("event_id", event.eventId.toString())
+            i.putExtra("eventDetails", Parcels.wrap(event))
             startActivity(i)
         }
+        history_result_contestant2.setOnClickListener {
+            val i = Intent(this, ViewProfileActivity::class.java)
+            i.putExtra("username", event.eventContestant2)
+            i.putExtra("entry_id", "blank")
+            i.putExtra("from_link", "true")
+            startActivity(i)
+        }
+        history_result_contestant1.setOnClickListener {
+            val i = Intent(this, ViewProfileActivity::class.java)
+            i.putExtra("username", event.eventContestant1)
+            i.putExtra("entry_id", "blank")
+            i.putExtra("from_link", "true")
+            startActivity(i)
+        }
+
     }
 }

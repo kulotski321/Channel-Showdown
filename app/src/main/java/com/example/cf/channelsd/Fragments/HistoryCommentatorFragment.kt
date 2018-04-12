@@ -18,10 +18,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.HistoryAdapter
-import com.example.cf.channelsd.Adapters.LiveAdapter
 import com.example.cf.channelsd.Data.EventDataList
 import com.example.cf.channelsd.Interfaces.EventInterface
-
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.fragment_history_commentator.*
@@ -51,14 +49,15 @@ class HistoryCommentatorFragment : Fragment() {
         eventRecyclerviewer = history_event_RV
         val timeZone: String = TimeZone.getDefault().id
         getHistoryList(username, timeZone)
+
     }
 
-    fun toastMessage(message: String) {
+    private fun toastMessage(message: String) {
         val toast: Toast = Toast.makeText(view!!.context, message, Toast.LENGTH_LONG)
         val toastView: View = toast.view
         val toastMessage: TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2, 2, 2, 2)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)
@@ -86,8 +85,12 @@ class HistoryCommentatorFragment : Fragment() {
                                 val adapter = HistoryAdapter(historyEvents)
                                 eventRecyclerviewer!!.adapter = adapter
                                 noEventImage!!.visibility = View.GONE
+
                             } else {
                                 noEventImage!!.visibility = View.VISIBLE
+                                noEventImage!!.setOnClickListener {
+                                    toastMessage("You have not created any events yet.")
+                                }
                             }
                         }
                     }

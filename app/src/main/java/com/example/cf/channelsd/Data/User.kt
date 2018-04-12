@@ -13,8 +13,6 @@ data class User(
         val firstName: String,
         val lastName: String,
         val bio: String,
-        @SerializedName("device_id")
-        val mDeviceId: String,
         @SerializedName("profile_pic")
         val profilePicture: String,
         @SerializedName("user_video")
@@ -22,7 +20,6 @@ data class User(
         @SerializedName("video_thumbnail")
         val profileThumbNail: String) : Parcelable {
         constructor(parcel: android.os.Parcel) : this(
-                parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
@@ -43,7 +40,6 @@ data class User(
                 parcel.writeString(firstName)
                 parcel.writeString(lastName)
                 parcel.writeString(bio)
-                parcel.writeString(mDeviceId)
                 parcel.writeString(profilePicture)
                 parcel.writeString(profileVideo)
                 parcel.writeString(profileThumbNail)

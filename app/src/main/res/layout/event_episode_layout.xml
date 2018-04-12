@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <android.support.v7.widget.CardView
         android:id="@+id/episode_event_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -15,38 +16,43 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:weightSum="4"
-            android:baselineAligned="false">
+            android:weightSum="4">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                android:weightSum="2"
-                android:layout_weight="1">
+                android:weightSum="2">
 
                 <ImageView
                     android:id="@+id/episode_event_image"
                     android:layout_width="match_parent"
                     android:layout_height="78dp"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
                     android:clickable="true"
-                    android:focusable="true"/>
+                    android:focusable="true"
+                    android:scaleType="centerCrop" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2"
                 android:layout_weight="3"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="2">
+
                 <TextView
                     android:id="@+id/episode_event_title"
                     android:layout_width="match_parent"
@@ -59,9 +65,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:drawableStart="@drawable/watch_icon"
+                    android:drawableLeft="@drawable/watch_icon"
+                    android:id="@+id/episode_watch_views"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/click_to_view"/>
+                    android:text="@string/click_to_view"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/episode_event_date"
@@ -72,7 +86,8 @@
                     android:text="@string/loading"
                     android:textColor="@color/color_red"
                     android:textSize="12sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/episode_event_description"
                     android:layout_width="match_parent"
@@ -132,6 +147,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/empty"
                     android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/episode_event_votes1"
                     android:layout_width="match_parent"
@@ -139,6 +155,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/empty"
                     android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/episode_event_votes2"
                     android:layout_width="match_parent"

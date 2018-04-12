@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.cf.channelsd.Fragments.MyEventsFragment"
     android:layout_margin="10dp">
 
@@ -19,183 +19,187 @@
             android:focusable="true"
             android:src="@drawable/logo"
             android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/myevent_img"
-            android:layout_width="fill_parent"
-            android:layout_height="215dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/my_event"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/myevent_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/loading"
-            android:textColor="@color/color_black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_img"
-            tools:text="TITLE" />
-
-        <TextView
-            android:id="@+id/commentator_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/commentator"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
-
-        <TextView
-            android:id="@+id/myevent_commentator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="6dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/loading"
-            android:textColor="@color/color_black"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/commentator_textview"
-            app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
-
-        <TextView
-            android:id="@+id/event_date_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/event_date_start"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_title" />
-
-        <TextView
-            android:id="@+id/myevent_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/loading"
-            android:textColor="@color/color_red"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/event_date_textview"
-            app:layout_constraintTop_toTopOf="@+id/event_date_textview" />
-
-        <TextView
-            android:id="@+id/details_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/details"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/commentator_textview" />
-
-        <TextView
-            android:id="@+id/myevent_details"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/my_event_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/loading"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details_textview" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/myevent_img"
+                android:layout_width="fill_parent"
+                android:layout_height="215dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/my_event"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/prize_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/prize"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_details" />
+            <TextView
+                android:id="@+id/myevent_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/loading"
+                android:textColor="@color/color_black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myevent_img"
+                tools:text="TITLE" />
 
-        <TextView
-            android:id="@+id/myevent_prize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/loading"
-            android:textColor="@color/color_green_primary"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/prize_textview"
-            app:layout_constraintTop_toBottomOf="@+id/myevent_details" />
+            <TextView
+                android:id="@+id/commentator_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/commentator"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
 
-        <Button
-            android:id="@+id/myevent_stream_btn"
-            android:layout_width="181dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/round_button2"
-            android:text="@string/start_stream"
-            android:textColor="@color/color_white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time_remaining"
-            app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/myevent_commentator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/loading"
+                android:textColor="@color/color_black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/commentator_textview"
+                app:layout_constraintTop_toBottomOf="@+id/event_date_textview" />
 
-        <TextView
-            android:id="@+id/time_remaining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/remaining_time"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
+            <TextView
+                android:id="@+id/event_date_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/event_date_start"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myevent_title" />
 
-        <TextView
-            android:id="@+id/myevent_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/loading"
-            app:layout_constraintStart_toEndOf="@+id/time_remaining"
-            app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
+            <TextView
+                android:id="@+id/myevent_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/loading"
+                android:textColor="@color/color_red"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/event_date_textview"
+                app:layout_constraintTop_toTopOf="@+id/event_date_textview" />
+
+            <TextView
+                android:id="@+id/details_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/details"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/commentator_textview" />
+
+            <TextView
+                android:id="@+id/myevent_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details_textview" />
+
+            <TextView
+                android:id="@+id/prize_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/prize"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myevent_details" />
+
+            <TextView
+                android:id="@+id/myevent_prize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/loading"
+                android:textColor="@color/color_green_primary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/prize_textview"
+                app:layout_constraintTop_toBottomOf="@+id/myevent_details" />
+
+            <Button
+                android:id="@+id/myevent_stream_btn"
+                android:layout_width="181dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_button2"
+                android:text="@string/start_stream"
+                android:textColor="@color/color_white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_remaining"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/time_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/remaining_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
+
+            <TextView
+                android:id="@+id/myevent_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/loading"
+                app:layout_constraintStart_toEndOf="@+id/time_remaining"
+                app:layout_constraintTop_toBottomOf="@+id/prize_textview" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

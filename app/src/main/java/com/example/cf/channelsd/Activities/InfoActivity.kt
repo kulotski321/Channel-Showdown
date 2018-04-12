@@ -1,16 +1,12 @@
 package com.example.cf.channelsd.Activities
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -19,21 +15,14 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.cf.channelsd.Data.Reply
-import com.example.cf.channelsd.Utils.ApiUtils
 import com.example.cf.channelsd.Data.User
 import com.example.cf.channelsd.Interfaces.ProfileInterface
 import com.example.cf.channelsd.R
-import com.example.cf.channelsd.Utils.picasso
+import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.activity_additional_info.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import com.example.cf.channelsd.Utils.ImageFilePath
 
 
 class InfoActivity : AppCompatActivity() {
@@ -54,18 +43,17 @@ class InfoActivity : AppCompatActivity() {
                 preferences.getString("firstName_pref", ""),
                 preferences.getString("lastName_pref", ""),
                 preferences.getString("bio_pref", ""),
-                androidId,
-                preferences.getString("profile_pic_pref",""),
-                preferences.getString("profile_vid_pref",""),
-                preferences.getString("profile_thumbnail_pref","")
+                preferences.getString("profile_pic_pref", ""),
+                preferences.getString("profile_vid_pref", ""),
+                preferences.getString("profile_thumbnail_pref", "")
         )
         val firstNameInput: EditText = input_first_name
         val lastNameInput: EditText = input_last_name
         val bioInput: EditText = input_bio
 
-        if(user!!.firstName == "" && user!!.lastName == "" && user!!.bio == ""){
+        if (user!!.firstName == "" && user!!.lastName == "" && user!!.bio == "") {
             complete_profile_info.visibility = View.VISIBLE
-        }else{
+        } else {
             complete_profile_info.visibility = View.INVISIBLE
         }
         firstNameInput.setText(user?.firstName, TextView.BufferType.EDITABLE)
@@ -90,11 +78,11 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+        val toast: Toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)

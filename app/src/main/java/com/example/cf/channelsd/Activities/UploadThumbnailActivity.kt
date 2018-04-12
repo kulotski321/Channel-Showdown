@@ -32,13 +32,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class UploadThumbnailActivity : AppCompatActivity() , ProgressRequestBody.UploadCallbacks{
+class UploadThumbnailActivity : AppCompatActivity(), ProgressRequestBody.UploadCallbacks {
 
     private var progressBar: ProgressBar? = null
     private val profileInterface: ProfileInterface = ApiUtils.apiProfile
     private val RESULT_LOAD_IMAGE = 1
     private lateinit var filePartImage: RequestBody
-    private var fileImage : MultipartBody.Part ?= null
+    private var fileImage: MultipartBody.Part? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +61,7 @@ class UploadThumbnailActivity : AppCompatActivity() , ProgressRequestBody.Upload
             if (fileImage != null) {
                 progressBar!!.visibility = View.VISIBLE
                 val usernameRB: RequestBody = RequestBody.create(MediaType.parse("text/plain"), username)
-                uploadThumbnail(usernameRB,fileImage!!)
+                uploadThumbnail(usernameRB, fileImage!!)
                 //toastMessage("Upload successful")
                 //finish()
             } else {
@@ -74,16 +74,17 @@ class UploadThumbnailActivity : AppCompatActivity() , ProgressRequestBody.Upload
         select_thumbnail_btn.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             galleryIntent.type = "image/*"
-            startActivityForResult(galleryIntent,RESULT_LOAD_IMAGE)
+            startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
         }
     }
-    private fun uploadThumbnail(username: RequestBody,image: MultipartBody.Part){
-        profileInterface.uploadThumbNail(username,image).enqueue(object: Callback<Reply> {
+
+    private fun uploadThumbnail(username: RequestBody, image: MultipartBody.Part) {
+        profileInterface.uploadThumbNail(username, image).enqueue(object : Callback<Reply> {
             override fun onFailure(call: Call<Reply>?, t: Throwable?) {
                 Log.e(ContentValues.TAG, "Unable to get to API." + t?.message)
-                if (t?.message == "unexpected end of steam") {
-                    uploadThumbnail(username,image)
-                }else{
+                if (t?.message == "unexpected end of stream") {
+                    uploadThumbnail(username, image)
+                } else {
                     toastMessage("Check your internet connection")
                     progressBar!!.visibility = View.INVISIBLE
                     progressBar!!.progress = 0
@@ -91,53 +92,56 @@ class UploadThumbnailActivity : AppCompatActivity() , ProgressRequestBody.Upload
             }
 
             override fun onResponse(call: Call<Reply>?, response: Response<Reply>?) {
-                if(response!!.isSuccessful){
+                if (response!!.isSuccessful) {
                     val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
                     val editor: SharedPreferences.Editor = preferences.edit()
                     val replyResponse = response.body()
                     val thumbnail = replyResponse?.thumbNail
-                    Log.e("profile response",replyResponse.toString())
-                    editor.putString("profile_thumbnail_pref",thumbnail.toString())
+                    Log.e("profile response", replyResponse.toString())
+                    editor.putString("profile_thumbnail_pref", thumbnail.toString())
                     editor.apply()
                     finish()
                     toastMessage("Thumbnail Uploaded")
-                }else{
+                } else {
                     toastMessage("Upload failed")
                 }
             }
         })
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null){
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImage: Uri = data.data
 
-            val realPath = ImageFilePath.getPath(this@UploadThumbnailActivity,data.data)
+            val realPath = ImageFilePath.getPath(this@UploadThumbnailActivity, data.data)
             val originalFile = File(realPath)
 
-            Log.e("image path:",realPath)
+            Log.e("image path:", realPath)
 
             profile_video_upload_thumbnail.setImageURI(selectedImage) // Set thumbnail picture
 
-            filePartImage = ProgressRequestBody(this, originalFile,this,selectedImage)
-            fileImage = MultipartBody.Part.createFormData("image",originalFile.name,filePartImage)
+            filePartImage = ProgressRequestBody(this, originalFile, this, selectedImage)
+            fileImage = MultipartBody.Part.createFormData("image", originalFile.name, filePartImage)
         }
     }
+
     private fun toastMessage(message: String) {
-        val toast: Toast = Toast.makeText(this,message,Toast.LENGTH_LONG)
-        val toastView : View = toast.view
-        val toastMessage : TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2,2,2,2)
+        val toast: Toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
+        val toastView: View = toast.view
+        val toastMessage: TextView = toastView.findViewById(android.R.id.message)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)
         toastView.setBackgroundResource(R.drawable.round_button1)
         toast.show()
     }
+
     override fun onProgressUpdate(percentage: Long) {
         progressBar!!.progress = percentage.toInt()
-        Log.e("percentage:",percentage.toString())
+        Log.e("percentage:", percentage.toString())
     }
 
     override fun onError() {

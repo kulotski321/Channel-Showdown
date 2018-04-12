@@ -1,6 +1,5 @@
 package com.example.cf.channelsd.Fragments
 
-import android.app.FragmentTransaction
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -18,10 +17,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.cf.channelsd.Adapters.EpisodeAdapter
-import com.example.cf.channelsd.Adapters.HistoryAdapter
 import com.example.cf.channelsd.Data.EventDataList
 import com.example.cf.channelsd.Interfaces.EventInterface
-
 import com.example.cf.channelsd.R
 import com.example.cf.channelsd.Utils.ApiUtils
 import kotlinx.android.synthetic.main.fragment_episodes.*
@@ -31,6 +28,7 @@ import retrofit2.Response
 import java.util.*
 
 class EpisodesFragment : Fragment() {
+
     private val eventInterface: EventInterface = ApiUtils.apiEvent
     private var eventRecyclerviewer: RecyclerView? = null
     private var noEventImage: ImageView? = null
@@ -41,6 +39,7 @@ class EpisodesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val preferences: SharedPreferences = context!!.getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         val username: String = preferences.getString("username_pref", "")
         noEventImage = no_episode_img
@@ -50,12 +49,13 @@ class EpisodesFragment : Fragment() {
 
 
     }
-    fun toastMessage(message: String) {
+
+    private fun toastMessage(message: String) {
         val toast: Toast = Toast.makeText(view!!.context, message, Toast.LENGTH_LONG)
         val toastView: View = toast.view
         val toastMessage: TextView = toastView.findViewById(android.R.id.message)
-        toastMessage.textSize = 16F
-        toastMessage.setPadding(2, 2, 2, 2)
+        toastMessage.textSize = 20F
+        toastMessage.setPadding(4, 4, 4, 4)
         toastMessage.setTextColor(Color.parseColor("#790e8b"))
         toastMessage.gravity = Gravity.CENTER
         toastView.setBackgroundColor(Color.YELLOW)
@@ -86,16 +86,17 @@ class EpisodesFragment : Fragment() {
                             } else {
                                 noEventImage!!.visibility = View.VISIBLE
                                 noEventImage!!.setOnClickListener {
-                                    toastMessage("There are no episodes available")
+                                    toastMessage("There are no episodes available.")
                                 }
                             }
                         }
                     }
-                }else{
+                } else {
 
                 }
             }
         })
     }
+
 
 }// Required empty public constructor

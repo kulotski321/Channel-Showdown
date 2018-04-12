@@ -1,5 +1,6 @@
 package com.example.cf.channelsd.Adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -28,6 +29,7 @@ class EpisodeAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         return eventList.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder:ViewHolderEpisode, position: Int) {
         holder.eventTitleEA.text = eventList[position].eventName
         holder.eventIdEA.text = eventList[position].eventId.toString()
@@ -40,6 +42,8 @@ class EpisodeAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         holder.eventCommentatorEA.text = eventList[position].eventCommentator
         holder.votes1EA.text = eventList[position].votesContestant1.toString()
         holder.votes2EA.text = eventList[position].votesContestant2.toString()
+        val numViews = eventList[position].eventViews.toString()
+        holder.eventWatchViewsEA.text = " $numViews"
         holder.contextEA.picasso.load(ApiUtils.BASE_URL + holder.eventUrlEA.text).into(holder.eventImageEA)
         holder.eventImageEA.setOnClickListener{
             val i = Intent(holder.contextEA, EpisodeActivity::class.java)
@@ -55,7 +59,8 @@ class EpisodeAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
                     holder.eventIdEA.text.toString().toInt(),
                     holder.eventUrlEA.text.toString(),
                     holder.votes1EA.text.toString().toInt(),
-                    holder.votes2EA.text.toString().toInt()
+                    holder.votes2EA.text.toString().toInt(),
+                    numViews.toInt()
             )
             i.putExtra("eventDetails", Parcels.wrap(sendEvent))
             holder.contextEA.startActivity(i)
@@ -76,6 +81,7 @@ class EpisodeAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         val eventDescriptionEA : TextView = itemView.findViewById(R.id.episode_event_description)
         val eventDateEA : TextView = itemView.findViewById(R.id.episode_event_date)
         val eventCommentatorEA : TextView = itemView.findViewById(R.id.episode_event_commentator)
+        val eventWatchViewsEA : TextView = itemView.findViewById(R.id.episode_watch_views)
 
     }
 

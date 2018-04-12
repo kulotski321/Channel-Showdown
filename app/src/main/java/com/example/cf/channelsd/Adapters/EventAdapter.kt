@@ -89,6 +89,7 @@ class EventAdapter(private val eventList: ArrayList<Event>) : RecyclerView.Adapt
                     holder.eventIdEA.text.toString().toInt(),
                     holder.eventURLEA.text.toString(),
                     0,
+                    0,
                     0
             )
             i.putExtra("eventDetails", Parcels.wrap(event))
