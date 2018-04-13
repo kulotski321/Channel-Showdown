@@ -52,7 +52,7 @@ class UploadThumbnailActivity : AppCompatActivity(), ProgressRequestBody.UploadC
         //val editor: SharedPreferences.Editor = preferences.edit()
         val username: String = preferences.getString("username_pref", "")
         val profileThumbNail: String = preferences.getString("profile_thumbnail_pref", "")
-        picasso.load(ApiUtils.BASE_URL + profileThumbNail).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_video_upload_thumbnail)
+        picasso.load(ApiUtils.BASE_URL + profileThumbNail).placeholder(R.drawable.logo).resize(90,90).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_video_upload_thumbnail)
 
         select_thumbnail_btn.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

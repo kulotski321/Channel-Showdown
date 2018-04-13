@@ -45,7 +45,7 @@ class HistoryAdapter (private val eventList: ArrayList<Event>) : RecyclerView.Ad
         holder.votes2HA.text = eventList[position].votesContestant2.toString()
         val numViews = eventList[position].eventViews.toString()
         holder.eventWatchViewsHA.text = " $numViews"
-        holder.contextHA.picasso.load(ApiUtils.BASE_URL + holder.eventUrlHA.text).resize(50,50).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.eventImageHA)
+        holder.contextHA.picasso.load(ApiUtils.BASE_URL + holder.eventUrlHA.text).placeholder(R.drawable.logo).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.eventImageHA)
         holder.eventImageHA.setOnClickListener{
             val i = Intent(holder.contextHA, HistoryResultActivity::class.java)
             val sendEvent = Event(

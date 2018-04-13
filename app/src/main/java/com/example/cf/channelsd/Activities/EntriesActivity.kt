@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -74,5 +75,19 @@ class EntriesActivity : AppCompatActivity() {
         super.onResume()
         val eventId: String = intent.getStringExtra("eventId")
         getEntries(eventId.toInt())
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

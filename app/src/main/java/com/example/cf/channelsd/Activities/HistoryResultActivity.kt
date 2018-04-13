@@ -39,7 +39,7 @@ class HistoryResultActivity : AppCompatActivity() {
         dateTime.set(Calendar.MINUTE, minute.toInt())
         dateTime.set(Calendar.SECOND, 0)
         history_result_date.text = dateFormat.format(dateTime.time)
-        picasso.load(ApiUtils.BASE_URL + event.eventImage).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(history_result_image)
+        picasso.load(ApiUtils.BASE_URL + event.eventImage).placeholder(R.drawable.logo).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(history_result_image)
         show_result_btn.setOnClickListener {
             val i = Intent(this, ResultActivity::class.java)
             i.putExtra("event_id", event.eventId.toString())

@@ -52,7 +52,7 @@ class UploadPhotoActivity : AppCompatActivity(), UploadCallbacks {
         val preferences: SharedPreferences = getSharedPreferences("MYPREFS", Context.MODE_PRIVATE)
         //val editor: SharedPreferences.Editor = preferences.edit()
         val profilePic = preferences.getString("profile_pic_pref", "")
-        picasso.load(ApiUtils.BASE_URL + profilePic).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(upload_profile_pic)
+        picasso.load(ApiUtils.BASE_URL + profilePic).placeholder(R.drawable.user_profile_pic).resize(90,90).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(upload_profile_pic)
 
         confirm_upload_btn.setOnClickListener {
             val username: String = preferences.getString("username_pref", "")

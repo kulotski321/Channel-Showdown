@@ -46,7 +46,7 @@ class UpcomingEventActivity : AppCompatActivity() {
         val bio = preferences.getString("bio_pref", "")
         val profVid = preferences.getString("profile_vid_pref", "")
         val event: Event = unwrap(intent.getParcelableExtra("eventDetails"))
-        picasso.load(ApiUtils.BASE_URL + event.eventImage).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(event_image_upcoming)
+        picasso.load(ApiUtils.BASE_URL + event.eventImage).placeholder(R.drawable.logo).resize(90,90).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(event_image_upcoming)
         event_name_upcoming.text = event.eventName
         event_date_upcoming.text = event.eventDate
         event_description_upcoming.text = event.eventDescription

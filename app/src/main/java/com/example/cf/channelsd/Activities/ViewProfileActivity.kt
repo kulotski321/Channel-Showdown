@@ -88,8 +88,8 @@ class ViewProfileActivity : AppCompatActivity() {
                     } else {
                         view_profile_bio.text = R.string.no_description.toString()
                     }
-                    picasso.load(ApiUtils.BASE_URL + user.profilePicture).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(view_profile_picture)
-                    picasso.load(ApiUtils.BASE_URL + user.profileThumbNail).resize(75,75).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(view_profile_video_thumbnail)
+                    picasso.load(ApiUtils.BASE_URL + user.profilePicture).placeholder(R.drawable.user_profile_pic).resize(90,90).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(view_profile_picture)
+                    picasso.load(ApiUtils.BASE_URL + user.profileThumbNail).placeholder(R.drawable.user_profile_pic).resize(90,90).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(view_profile_video_thumbnail)
                 }
             }
         })

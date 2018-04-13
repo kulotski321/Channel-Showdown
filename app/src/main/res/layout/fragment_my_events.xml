@@ -6,19 +6,19 @@
     tools:context="com.example.cf.channelsd.Fragments.MyEventsFragment"
     android:layout_margin="10dp">
 
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/nomyevent_img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:contentDescription="@string/logo"
-            android:focusable="true"
-            android:src="@drawable/logo"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/nomyevent_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/logo"
+        android:focusable="true"
+        android:src="@drawable/logo"
+        android:visibility="gone" />
         <android.support.constraint.ConstraintLayout
             android:id="@+id/my_event_details"
             android:layout_width="match_parent"

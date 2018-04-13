@@ -65,7 +65,7 @@ class DashboardActivity : AppCompatActivity() {
         )
 
         profile_name.text = user.username
-        picasso.load(ApiUtils.BASE_URL + user.profilePicture).resize(50,50).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
+        picasso.load(ApiUtils.BASE_URL + user.profilePicture).placeholder(R.drawable.user_profile_pic).resize(50,50).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(profile_picture_dashboard)
         when {
             user.userType == "0" -> {
                 pagerAdapter.addFragments(LiveFragment(), "Live")

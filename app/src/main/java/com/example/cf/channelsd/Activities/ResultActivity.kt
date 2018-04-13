@@ -47,8 +47,8 @@ class ResultActivity : AppCompatActivity() {
                     val result = response.body()
                     Log.e("result:", result.toString())
                     if (result != null) {
-                        picasso.load(ApiUtils.BASE_URL + result.contestant1Image).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(c1)
-                        picasso.load(ApiUtils.BASE_URL + result.contestant2Image).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(c2)
+                        picasso.load(ApiUtils.BASE_URL + result.contestant1Image).placeholder(R.drawable.user_profile_pic).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(c1)
+                        picasso.load(ApiUtils.BASE_URL + result.contestant2Image).placeholder(R.drawable.user_profile_pic).resize(80,80).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(c2)
                         contestant1Name.text = result.contestant1
                         contestant2Name.text = result.contestant2
                         val total: Float = (result.votes1 + result.votes2).toFloat()
